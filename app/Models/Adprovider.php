@@ -25,4 +25,12 @@ class Adprovider extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    //function for creating the relationship among the tables
+
+    // profile relationship
+    public function profile()   
+    {
+        return $this->hasOne('App\Models\Profile');
+    }
 }

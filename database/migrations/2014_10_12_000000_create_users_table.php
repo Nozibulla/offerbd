@@ -261,6 +261,19 @@ class CreateUsersTable extends Migration {
 
 		});
 
+		Schema::create('subscriptions', function (Blueprint $table) {
+            
+            $table->increments('id');
+
+            $table->string('mobile_no')->unique();
+
+            $table->integer('advertisement_id')->unsigned();
+
+            $table->foreign('advertisement_id')->references('id')->on('advertisements')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->timestamps();
+        });
+
 	}
 
 	/**
@@ -299,6 +312,9 @@ class CreateUsersTable extends Migration {
 		Schema::dropIfExists('watchlists');
 
 		Schema::dropIfExists('viewcounters');
+
+		Schema::dropIfExists('subscriptions');
+
 
 	}
 }

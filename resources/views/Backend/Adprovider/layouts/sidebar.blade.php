@@ -26,16 +26,16 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="#">Post</a>
+                        <a href="/adprovider/advertisements/post-ad">Post</a>
                     </li>
                     <li>
-                        <a href="#">Approved</a>
+                        <a href="/adprovider/advertisements/pending-ad">Pending</a>
                     </li>
                     <li>
-                        <a href="#">Pending</a>
+                        <a href="/adprovider/advertisements/approved-ad">Approved</a>
                     </li>
                     <li>
-                        <a href="#">Archived</a>
+                        <a href="/adprovider/advertisements/archived-ad">Archived</a>
                     </li>
                 </ul>
                 <!-- < /.nav-second-level > -->
@@ -48,13 +48,13 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="#">Add</a>
+                        <a href="/adprovider/products/add-product">Add</a>
                     </li>
                     <li>
-                        <a href="#">Approved</a>
+                        <a href="/adprovider/products/pending-product">Pending</a>
                     </li>
                     <li>
-                        <a href="#">Pending</a>
+                        <a href="/adprovider/products/approved-product">Approved</a>
                     </li>
                 </ul>
                 <!-- < /.nav-second-level > -->
@@ -67,13 +67,13 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="#">Add</a>
+                        <a href="/adprovider/category/add-category">Add</a>
                     </li>
                     <li>
-                        <a href="#">Approved</a>
+                        <a href="/adprovider/category/pending-category">Pending</a>
                     </li>
                     <li>
-                        <a href="#">Pending</a>
+                        <a href="/adprovider/category/approved-category">Approved</a>
                     </li>
                 </ul>
                 <!-- < /.nav-second-level > -->
@@ -86,13 +86,13 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="#">Add</a>
+                        <a href="/adprovider/branch/add-branch">Add</a>
                     </li>
                     <li>
-                        <a href="#">Approved</a>
+                        <a href="/adprovider/branch/pending-branch">Pending</a>
                     </li>
                     <li>
-                        <a href="#">Pending</a>
+                        <a href="/adprovider/branch/approved-branch">Approved</a>
                     </li>
                 </ul>
                 <!-- < /.nav-second-level > -->
@@ -105,29 +105,23 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="#">Add</a>
+                        <a href="/adprovider/brands/add-brand">Add</a>
                     </li>
                     <li>
-                        <a href="#">Approved</a>
+                        <a href="/adprovider/brands/pending-brand">Pending</a>
                     </li>
                     <li>
-                        <a href="#">Pending</a>
+                        <a href="/adprovider/brands/approved-brand">Approved</a>
                     </li>
                 </ul>
                 <!-- < /.nav-second-level > -->
             </li>
             <li>
-                <a href="#">
-                    <i class="fa fa-sitemap fa-fw"></i> 
+                <a href="/adprovider/subscriptions/list">
+                    <!-- <i class="fa fa-sitemap fa-fw"></i>  -->
                     Subscriptions
-                    <span class="fa arrow"></span>
+                    <!-- <span class="fa arrow"></span> -->
                 </a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="#">List</a>
-                    </li>
-                </ul>
-                <!-- < /.nav-second-level > -->
             </li>
         </ul>
     </div>

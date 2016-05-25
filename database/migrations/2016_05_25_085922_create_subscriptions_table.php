@@ -18,6 +18,10 @@ class CreateSubscriptionsTable extends Migration
 
             $table->string('mobile_no')->unique();
 
+            $table->integer('advertisement_id')->unsigned();
+
+            $table->foreign('advertisement_id')->references('id')->on('advertisements')->onDelete('cascade')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }
