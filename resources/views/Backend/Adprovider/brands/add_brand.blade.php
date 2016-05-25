@@ -26,7 +26,7 @@
 		
 		<div class="col-md-12">
 			
-			{!! Form::open(['method' => 'POST', 'url' => '/addnewbrand', 'name' => 'addBrandForm','novalidate','data-remote'=>'data-remote', 'data-remote-success' => 'Brand Added Successfully']) !!}
+			{!! Form::open(['method' => 'POST', 'url' => '/adprovider/addnewbrand', 'name' => 'addBrandForm','novalidate','data-remote'=>'data-remote', 'data-remote-success' => 'Brand Added Successfully']) !!}
 
 			<div class="form-group {{ $errors->has('brand_name') ? ' has-error' : '' }}">
 				{!! Form::label('brand_name', 'Brand Name') !!}

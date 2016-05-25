@@ -162,20 +162,18 @@ Route::group(['middleware' => 'adProvider'], function () {
 	Route::post('/adprovider/registration','Backend\adprovider\AuthController@postRegister');
 	Route::get('/adprovider/logout','Backend\adprovider\AuthController@getLogout');
 
-	Route::get('/adprovider/dashboard','Backend\adprovider\DashboardController@showDashboard');
+	Route::get('/adprovider/dashboard','Backend\Adprovider\DashboardController@showDashboard');
 
-	Route::get('/adprovider/profile', 'Backend\adprovider\ProfileController@showProfile');
+	Route::get('/adprovider/profile', 'Backend\Adprovider\ProfileController@showProfile');
 
 	//updating info
-	Route::post('/SAdPI','Backend\adprovider\ProfileController@updateProfileInfo');
+	Route::post('/SAdPI','Backend\Adprovider\ProfileController@updateProfileInfo');
 
-	//brands options
+	// brands options
 	Route::get('/adprovider/brands/add-brand', 'Backend\Adprovider\BrandController@addBrand');
-	Route::post('/addnewbrand','Backend\Adprovider\BrandController@addBrandProcess');
+	Route::post('/adprovider/addnewbrand', 'Backend\Adprovider\BrandController@addBrandProcess');
 	// Route::get('/adprovider/brands/pending-brand', 'Backend\Adprovider\BrandController@pendingBrandList');
 	// Route::get('/adprovider/brands/approved-brand', 'Backend\Adprovider\BrandController@approvedBrandList');
-
-	
 
 });
 
