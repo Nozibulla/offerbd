@@ -170,10 +170,10 @@ Route::group(['middleware' => 'adProvider'], function () {
 	Route::post('/SAdPI','Backend\Adprovider\ProfileController@updateProfileInfo');
 
 	// brands options
-	Route::get('/adprovider/brands/add-brand', 'Backend\Adprovider\BrandController@addBrand');
-	Route::post('/adprovider/addnewbrand', 'Backend\Adprovider\BrandController@addBrandProcess');
-	// Route::get('/adprovider/brands/pending-brand', 'Backend\Adprovider\BrandController@pendingBrandList');
-	// Route::get('/adprovider/brands/approved-brand', 'Backend\Adprovider\BrandController@approvedBrandList');
+	Route::get('/adprovider/brands/add-brand', 'Backend\Adprovider\APBrandController@addBrand');
+	Route::post('/adprovider/addnewbrand', 'Backend\Adprovider\APBrandController@addBrandProcess');
+	Route::get('/adprovider/brands/pending-brand', 'Backend\Adprovider\APBrandController@pendingBrandList');
+	Route::get('/adprovider/brands/approved-brand', 'Backend\Adprovider\APBrandController@approvedBrandList');
 
 });
 
