@@ -60,5 +60,11 @@ class Profile extends Model
 		return $this->hasMany('App\Models\Advertisement');
 	}
 
+	// relationship with adprovider
+	public function adprovider()
+	{
+		return $this->belongsTo('App\Models\Adprovider');
+	}
+
 
 }

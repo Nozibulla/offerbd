@@ -28,7 +28,6 @@ class Admin extends Authenticatable
 
 
     //function for creating the relationship among the tables
-
     public function profile()   
     {
         return $this->hasOne('App\Models\Profile');

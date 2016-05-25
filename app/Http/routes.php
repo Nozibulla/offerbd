@@ -157,13 +157,9 @@ Route::group(['middleware' => 'admin'], function () {
 Route::group(['middleware' => 'adProvider'], function () {
 
 	Route::get('/adprovider/login','Backend\adprovider\AuthController@getLogin');
-
 	Route::post('/adprovider/login','Backend\adprovider\AuthController@postLogin');
-
 	Route::get('/adprovider/registration','Backend\adprovider\AuthController@getRegister');
-
 	Route::post('/adprovider/registration','Backend\adprovider\AuthController@postRegister');
-
 	Route::get('/adprovider/logout','Backend\adprovider\AuthController@getLogout');
 
 	Route::get('/adprovider/dashboard','Backend\adprovider\DashboardController@showDashboard');
@@ -172,6 +168,14 @@ Route::group(['middleware' => 'adProvider'], function () {
 
 	//updating info
 	Route::post('/SAdPI','Backend\adprovider\ProfileController@updateProfileInfo');
+
+	//brands options
+	Route::get('/adprovider/brands/add-brand', 'Backend\Adprovider\BrandController@addBrand');
+	Route::post('/addnewbrand','Backend\Adprovider\BrandController@addBrandProcess');
+	// Route::get('/adprovider/brands/pending-brand', 'Backend\Adprovider\BrandController@pendingBrandList');
+	// Route::get('/adprovider/brands/approved-brand', 'Backend\Adprovider\BrandController@approvedBrandList');
+
+	
 
 });
 
