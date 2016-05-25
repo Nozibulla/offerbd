@@ -46,11 +46,11 @@ class AdvertisementController extends Controller
 
 		$ad_image = $request->ad_image->getClientOriginalName();
 
-		$store_image = $request->ad_image->move('advertisement_images', $ad_image);
+		$store_image = $request->ad_image->move('offer_images', $ad_image);
 
 		if ($store_image) {
 
-			$destinationPath = '/advertisement_images/' . $ad_image;
+			$destinationPath = '/offer_images/' . $ad_image;
 			
 			$advertisement->ad_image = $destinationPath;
 
@@ -143,9 +143,9 @@ class AdvertisementController extends Controller
 
 			$ad_image = $request->ad_image->getClientOriginalName();
 
-			$store_image = $request->ad_image->move('advertisement_images', $ad_image);
+			$store_image = $request->ad_image->move('offer_images', $ad_image);
 
-			$destinationPath = '/advertisement_images/' . $ad_image;
+			$destinationPath = '/offer_images/' . $ad_image;
 
 			$find_advertisement->ad_image = $destinationPath;
 		}
