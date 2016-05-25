@@ -31,7 +31,7 @@
 		<div class="row">
 			<div class="col-md-6">Product Name: {{ $product_info->product_name }}</div>
 			<div class="col-md-6">
-				<?php $product_owner = $product_info->profile ?>
+				@define $product_owner = $product_info->profile
 				<strong>Product Owner</strong>
 				<div class="owner_name">Owner Name: 
 					{{ $product_owner->first_name." ".$product_owner->last_name }}

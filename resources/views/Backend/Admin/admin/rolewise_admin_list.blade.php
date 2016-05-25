@@ -39,9 +39,9 @@
 			</thead>
 			<tbody>
 
-				<?php foreach ($adminList as $key => $admin): ?>
+				@foreach ($adminList as $key => $admin)
 
-					<?php $adminInfo = $admin->profile ?>
+				@define $adminInfo = $admin->profile
 
 					<tr>
 						<td>{{ $key+1 }}</td>
@@ -77,7 +77,7 @@
 						</td>					
 					</tr>
 
-				<?php endforeach ?>
+				@endforeach
 
 			</tbody>
 		</table>

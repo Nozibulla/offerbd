@@ -46,7 +46,7 @@
 			</thead>
 			<tbody>
 
-				<?php foreach ($pending_advertisements as $key => $advertisement): ?>
+				@foreach ($pending_advertisements as $key => $advertisement)
 
 					<tr>
 						<td>{{ $key+1 }}</td>
@@ -71,7 +71,7 @@
 							</a>
 						</td>
 					</tr>
-				<?php endforeach ?>
+				@endforeach
 
 			</tbody>
 		</table>

@@ -46,7 +46,7 @@
 			</thead>
 			<tbody>
 
-				<?php foreach ($pending_category as $key => $category): ?>
+				@foreach ($pending_category as $key => $category)
 
 					<tr>
 						<td>{{ $key+1 }}</td>
@@ -69,7 +69,7 @@
 							</a>
 						</td>
 					</tr>
-				<?php endforeach ?>
+				@endforeach
 
 			</tbody>
 		</table>

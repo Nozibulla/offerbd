@@ -50,7 +50,7 @@
 					
 				</div>
 				<div class="col-md-6">
-					<?php $advertisement_owner = $advertisement_info->profile ?>
+					@define $advertisement_owner = $advertisement_info->profile
 					<strong>Advertisement Owner</strong>
 					<div class="owner_name">
 						Owner Name: 

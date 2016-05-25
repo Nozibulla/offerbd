@@ -43,7 +43,7 @@
 			</thead>
 			<tbody>
 
-				<?php foreach ($approved_advertisements as $key => $advertisement): ?>
+				@foreach ($approved_advertisements as $key => $advertisement)
 
 					<tr>
 						<td>{{ $key+1 }}</td>
@@ -63,7 +63,7 @@
 							</a>
 						</td>						
 					</tr>
-				<?php endforeach ?>
+				@endforeach
 
 			</tbody>
 		</table>

@@ -19,8 +19,11 @@
 				<div class="col-lg-12">
 
 					<h3 class="page-header">
+
 						Brand Name : {{ $brand_info->brand_name }}
+
 						<small>{{ ($brand_info->status == 0)? "Pending" : "Approved" }}</small>
+
 					</h3>
 
 				</div>
@@ -31,11 +34,13 @@
 			<!-- /.row -->
 
 			<div class="row">
+
 				<div class="col-md-6">
 					Brand Name: {{ $brand_info->brand_name }}
 				</div>
+
 				<div class="col-md-6">
-					<?php $brand_owner = $brand_info->profile ?>
+					@define $brand_owner = $brand_info->profile
 					<strong>Brand Owner</strong>
 					<div class="owner_name">
 						Owner Name: 

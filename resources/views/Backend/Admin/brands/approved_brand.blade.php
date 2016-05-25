@@ -43,7 +43,7 @@
 			</thead>
 			<tbody>
 
-				<?php foreach ($approved_brands as $key => $brand): ?>
+				@foreach ($approved_brands as $key => $brand)
 
 					<tr>
 						<td>{{ $key+1 }}</td>
@@ -61,7 +61,7 @@
 							</a>
 						</td>						
 					</tr>
-				<?php endforeach ?>
+				@endforeach
 
 			</tbody>
 		</table>

@@ -47,50 +47,50 @@
 			</thead>
 			<tbody>
 
-				<?php foreach ($approved_admin as $key => $admin): ?>
+				@foreach ($approved_admin as $key => $admin)
 
-					<?php $adminInfo = $admin->profile ?>
+				@define $adminInfo = $admin->profile
 
-					<tr>
-						<td>{{ $key+1 }}</td>
-						<td>
-							@if ($admin->id != auth()->guard('admin')->user()->id)
-							<a href="/admin/admin-list/details/{{$admin->id}}" title="click to see the detail page" target="_blank">
-								<!-- checking whether name is set or not -->
-								{{ (!empty($adminInfo->first_name) || !empty($adminInfo->last_name)) ? $adminInfo->first_name." ".$adminInfo->last_name : "See Profile" }}
-							</a>
+				<tr>
+					<td>{{ $key+1 }}</td>
+					<td>
+						@if ($admin->id != auth()->guard('admin')->user()->id)
+						<a href="/admin/admin-list/details/{{$admin->id}}" title="click to see the detail page" target="_blank">
+							<!-- checking whether name is set or not -->
+							{{ (!empty($adminInfo->first_name) || !empty($adminInfo->last_name)) ? $adminInfo->first_name." ".$adminInfo->last_name : "See Profile" }}
+						</a>
 
-							@else
-
-							<!-- printing my name -->
-							{{ $adminInfo->first_name." ".$adminInfo->last_name }} (you)
-							@endif
-						</td>
-						<td>
-							@foreach ($admin->role as $roleKey => $role)
-							{{ $role->role_name }}
-							@if ($roleKey < count($admin->role)-1)
-							,
-							@endif
-							@endforeach
-						</td>
-						<td>{{ ($admin->status == 1) ? "Active" : "Pending" }}</td>
-						<!-- disabling the delete option if admin is an owner -->
-						@if (!$admin->hasRole('owner'))
-						<td class="remove_admin">		
-							<a href="#" title="click to delete" id="{{$admin->id}}">
-								<i class="glyphicon glyphicon-remove"></i>
-							</a>
-						</td>
-						<td class="change_privilege">
-							<a href="#" title="click to change the privilege" id="{{$admin->id}}">change</a>
-						</td>
 						@else
-						<td>---</td>
-						<td>---</td>
+
+						<!-- printing my name -->
+						{{ $adminInfo->first_name." ".$adminInfo->last_name }} (you)
 						@endif
-					</tr>
-				<?php endforeach ?>
+					</td>
+					<td>
+						@foreach ($admin->role as $roleKey => $role)
+						{{ $role->role_name }}
+						@if ($roleKey < count($admin->role)-1)
+						,
+						@endif
+						@endforeach
+					</td>
+					<td>{{ ($admin->status == 1) ? "Active" : "Pending" }}</td>
+					<!-- disabling the delete option if admin is an owner -->
+					@if (!$admin->hasRole('owner'))
+					<td class="remove_admin">		
+						<a href="#" title="click to delete" id="{{$admin->id}}">
+							<i class="glyphicon glyphicon-remove"></i>
+						</a>
+					</td>
+					<td class="change_privilege">
+						<a href="#" title="click to change the privilege" id="{{$admin->id}}">change</a>
+					</td>
+					@else
+					<td>---</td>
+					<td>---</td>
+					@endif
+				</tr>
+				@endforeach
 
 			</tbody>
 		</table>

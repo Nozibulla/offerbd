@@ -31,40 +31,47 @@
 				</tr>
 			</thead>
 			<tbody>
-				<?php foreach ($pending_admin as $key => $admin): ?>
-					<?php $adminInfo = $admin->profile ?>
-					<tr>
-						<td>{{ $key+1 }}</td>
-						<td>
-							<a href="/admin/admin-list/details/{{$admin->id}}" title="click to see the detail page" target="_blank">
-								<!-- checking whether name is set or not -->
-								{{ (!empty($adminInfo->first_name) || !empty($adminInfo->last_name)) ? $adminInfo->first_name." ".$adminInfo->last_name : "See Profile" }}
-							</a>
-						</td>
-						<td>
-							@foreach ($admin->role as $roleKey => $role)
-							{{ $role->role_name }}
-							@if ($roleKey < count($admin->role)-1)
-							,
-							@endif
-							@endforeach
-						</td>
-						<td class="approve_admin">
-							<a href="#" title="click to approve" id="{{$admin->id}}">
-								<i class="glyphicon glyphicon-ok"></i>
-							</a>
-						</td>
-						<td class="remove_admin">
-							<!-- disabling the delete option if admin is an owner -->
-							@if (!$admin->hasRole('owner'))
-							<a href="#" title="click to delete" id="{{$admin->id}}">
-								<i class="glyphicon glyphicon-remove"></i>
-							</a>
-							@endif
-						</td>
-					</tr>
-				<?php endforeach ?>
+				@foreach ($pending_admin as $key => $admin)
+
+				@define $adminInfo = $admin->profile
+
+				<tr>
+					<td>{{ $key+1 }}</td>
+					<td>
+						<a href="/admin/admin-list/details/{{$admin->id}}" title="click to see the detail page" target="_blank">
+							<!-- checking whether name is set or not -->
+							{{ (!empty($adminInfo->first_name) || !empty($adminInfo->last_name)) ? $adminInfo->first_name." ".$adminInfo->last_name : "See Profile" }}
+						</a>
+					</td>
+					<td>
+						@foreach ($admin->role as $roleKey => $role)
+						{{ $role->role_name }}
+						@if ($roleKey < count($admin->role)-1)
+						,
+						@endif
+						@endforeach
+					</td>
+					<td class="approve_admin">
+						<a href="#" title="click to approve" id="{{$admin->id}}">
+							<i class="glyphicon glyphicon-ok"></i>
+						</a>
+					</td>
+					<td class="remove_admin">
+						<!-- disabling the delete option if admin is an owner -->
+						@if (!$admin->hasRole('owner'))
+						<a href="#" title="click to delete" id="{{$admin->id}}">
+							<i class="glyphicon glyphicon-remove"></i>
+						</a>
+						@endif
+
+					</td>
+
+				</tr>
+
+				@endforeach
+
 			</tbody>
+
 		</table>
 
 		@else
@@ -72,6 +79,7 @@
 		<strong>No pending admin request available right now.</strong>
 
 		@endif
+		
 	</div>
 </div>
 <!-- /#page-wrapper -->
