@@ -146,7 +146,8 @@ Route::group(['middleware' => 'admin'], function () {
 	// save advertisement after editing
 	Route::post('/saveeditedadvertisement','Backend\Admin\AdvertisementController@saveEditedAdvertisement');
 
-
+	// subscriptions list
+	Route::get('/admin/subscriptions/list', 'Backend\Admin\SubscriptionController@subscriptionList');
 });
 
 

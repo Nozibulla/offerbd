@@ -138,17 +138,11 @@
                 <!-- < /.nav-second-level > -->
             </li>
             <li>
-                <a href="#">
-                    <i class="fa fa-sitemap fa-fw"></i> 
+                <a href="/admin/subscriptions/list">
+                    <!-- <i class="fa fa-sitemap fa-fw"></i>  -->
                     Subscriptions
-                    <span class="fa arrow"></span>
+                    <!-- <span class="fa arrow"></span> -->
                 </a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="#">List</a>
-                    </li>
-                </ul>
-                <!-- < /.nav-second-level > -->
             </li>
         </ul>
     </div>
