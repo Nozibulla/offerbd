@@ -14,23 +14,23 @@ use App\Models\Brand;
 
 class BrandController extends Controller
 {
-	public function __construct()
-	{
-		$this->middleware('adProviderAccess');
-	}
+    function __construct()
+    {
+    	$this->middleware('adProviderAccess');
+    }
 
-    //adding new brand page
-	public function addBrand()
-	{
-		return view('Backend.Adprovider.brands.add_brand');
-	}
+    // ad brand page
+    public function addBrand()
+    {
+    	return view('Backend.Adprovider.brands.add_brand');
+    }
 
-	//adding a new brand
+    //adding a new brand
 	public function addBrandProcess(addBrandRequest $request)
 	{
 		$brand = new Brand;
 
-    	//finding the profile id of the currently logged in adprovider
+    	//finding the profile id of the currently logged in admin
 		$profile_id = auth()->guard('adProvider')->user()->profile->id;
 
 		$brand->brand_name = $request->brand_name;
@@ -41,4 +41,20 @@ class BrandController extends Controller
 
 	}
 
+	// public function pendingBrandList()
+	// {
+
+	// 	$profile_id = auth()->guard('adProvider')->user()->profile->id;
+
+	// 	$pending_brands = Brand::wherestatus(0)->whereprofile_id($profile_id)->get();
+
+	// 	return view('Backend.Adprovider.brands.pending_brand',compact('pending_brands'));
+	// }
+
+	// public function approvedBrandList()
+	// {
+	// 	$approved_brands = Brand::wherestatus(1)->whereprofile_id($profile_id)->get();
+
+	// 	return view('Backend.Adprovider.brands.approved_brand',compact('approved_brands'));
+	// }
 }
