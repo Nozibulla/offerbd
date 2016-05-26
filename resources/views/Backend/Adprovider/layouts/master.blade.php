@@ -16,7 +16,7 @@
 
     <meta name="csrf-token" content="{!! csrf_token() !!}">
 
-    <title>Admin | OfferBD</title>
+    @yield('title')
 
     @yield('sectionJS')
 
@@ -69,6 +69,8 @@
     <body>
 
         <div id="wrapper">
+
+        @include('Shared._partials.flash')
 
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">

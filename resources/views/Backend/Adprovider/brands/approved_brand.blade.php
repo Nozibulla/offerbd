@@ -1,16 +1,20 @@
-@extends('Backend.Admin.layouts.master')
+@extends('Backend.Adprovider.layouts.master')
+
+@section('title')
+
+<title>Approved Brand | offerbd</title>
+
+@stop
 
 @section('sidebar')
 
-@include ('Backend.Admin.layouts.sidebar')
+@include ('Backend.Adprovider.layouts.sidebar')
 
 @endsection
 
 @section('content')
 
 <div id="page-wrapper" class="approved_brands">
-
-	@include ('Backend.modals.remove_brand_modal')
 
 	<div class="row">
 
@@ -37,8 +41,8 @@
 				<tr>
 					<th>SL#</th>
 					<th>Name</th>
-					<th>Delete</th>
-					<th>Owner</th>
+					<th>Status</th>
+					<th>Upload time</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -48,18 +52,10 @@
 					<tr>
 						<td>{{ $key+1 }}</td>
 						<td>
-							<a href="/admin/brands/details/{{$brand->id}}" title="click to see the detail page" target="_blank">{{ $brand->brand_name }}</a>
+							<a href="/adprovider/brands/details/{{$brand->id}}" title="click to see the detail page" target="_blank">{{ $brand->brand_name }}</a>
 						</td>
-						<td class="remove_brand">
-							<a href="#" title="click to delete" id="{{$brand->id}}">
-								<i class="glyphicon glyphicon-remove"></i>
-							</a>						
-						</td>
-						<td>
-						<a href="/profile/members/{{ $brand->profile->id }}">
-								{{ $brand->profile->first_name." ".$brand->profile->last_name }}
-							</a>
-						</td>						
+						<td>{{ ($brand->status == 0) ? "pending" : "Approved" }}</td>
+						<td>{{ $brand->created_at }}</td>						
 					</tr>
 				<?php endforeach ?>
 

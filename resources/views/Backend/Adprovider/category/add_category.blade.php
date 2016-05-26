@@ -1,8 +1,14 @@
-@extends('Backend.Admin.layouts.master')
+@extends('Backend.Adprovider.layouts.master')
+
+@section('title')
+
+<title>Add Category | offerbd</title>
+
+@stop
 
 @section('sidebar')
 
-@include ('Backend.Admin.layouts.sidebar')
+@include ('Backend.Adprovider.layouts.sidebar')
 
 @stop
 
@@ -26,7 +32,7 @@
 		
 		<div class="col-md-6">
 			
-			{!! Form::open(['method' => 'POST', 'url' => '/addnewcategory', 'name' => 'addCategoryForm','novalidate','data-remote'=>'data-remote', 'data-remote-success' => 'Category Added Successfully']) !!}
+			{!! Form::open(['method' => 'POST', 'url' => '/adprovider/addnewcategory', 'name' => 'addCategoryForm','novalidate','data-remote'=>'data-remote', 'data-remote-success' => 'Category Added Successfully']) !!}
 
 			<div class="form-group {{ $errors->has('category_name') ? ' has-error' : '' }}">
 				{!! Form::label('category_name', 'Category Name') !!}

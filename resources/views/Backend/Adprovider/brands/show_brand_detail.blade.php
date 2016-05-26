@@ -1,8 +1,14 @@
-@extends('Backend.Admin.layouts.master')
+@extends('Backend.Adprovider.layouts.master')
+
+@section('title')
+
+<title>Brand Detail | offerbd</title>
+
+@stop
 
 @section('sidebar')
 
-@include ('Backend.Admin.layouts.sidebar')
+@include ('Backend.Adprovider.layouts.sidebar')
 
 @endsection
 
@@ -32,47 +38,10 @@
 
 			<div class="row">
 				<div class="col-md-6">
-					Brand Name: {{ $brand_info->brand_name }}
+					Brand Name: {{ $brand_info->brand_name }} <br>
+					Upload time: {{ $brand_info->created_at }}
 				</div>
-				<div class="col-md-6">
-					<?php $brand_owner = $brand_info->profile ?>
-					<strong>Brand Owner</strong>
-					<div class="owner_name">
-						Owner Name: 
-						{{ $brand_owner->first_name." ".$brand_owner->last_name }}
-					</div>
-					<div class="owner_mobile">
-						Owner Mobile:
-						{{ $brand_owner->mobile }}
-					</div>
-					<div class="owner_address">Owner Address:
-
-						<address>{{ $brand_owner->address }}</address>
-
-					</div>
-				</div>
-			</div>
-
-			<div class="row brand_option">
-				<div class="col-md-12">
-					<div class="pull-left brand_edit_delete">
-
-						@if ($brand_info->status == 0)
-
-						<input type="button" class="btn btn-default approve_brand" name="approve_brand" value="Approve Brand" data-toggle="modal" data-target="#approveBrandModal">
-						@include ('Backend.modals.approve_brand_modal')
-
-						@endif
-
-						<input type="button" class="btn btn-default delete_approved_brand" name="remove_brand" value="Delete Brand" data-toggle="modal" data-target="#removeBrandModal">
-						@include ('Backend.modals.remove_brand_modal')
-
-						<input type="button" class="btn btn-default" name="edit_brand" value="Edit Brand" data-toggle="modal" data-target="#editBrandModal">
-						@include ('Backend.modals.edit_brand_modal')
-
-					</div>
-
-				</div>
+				
 			</div>
 
 		</div>

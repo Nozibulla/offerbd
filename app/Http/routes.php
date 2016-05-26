@@ -174,6 +174,22 @@ Route::group(['middleware' => 'adProvider'], function () {
 	Route::post('/adprovider/addnewbrand', 'Backend\Adprovider\APBrandController@addBrandProcess');
 	Route::get('/adprovider/brands/pending-brand', 'Backend\Adprovider\APBrandController@pendingBrandList');
 	Route::get('/adprovider/brands/approved-brand', 'Backend\Adprovider\APBrandController@approvedBrandList');
+	Route::get('/adprovider/brands/details/{brand_id}', 'Backend\Adprovider\APBrandController@showBrandDetail');
+
+	// category options
+	Route::get('/adprovider/category/add-category', 'Backend\Adprovider\APCategoryController@addCategory');
+	Route::post('/adprovider/addnewcategory', 'Backend\Adprovider\APCategoryController@addCategoryProcess');
+	Route::get('/adprovider/category/pending-category', 'Backend\Adprovider\APCategoryController@pendingCategoryList');
+	Route::get('/adprovider/category/approved-category', 'Backend\Adprovider\APCategoryController@approvedCategoryList');
+	Route::get('/adprovider/category/details/{category_id}', 'Backend\Adprovider\APCategoryController@showCategoryDetail');
+
+	// product options
+	Route::get('/adprovider/products/add-product', 'Backend\Adprovider\APProductController@addProduct');
+	Route::post('/adprovider/addnewproduct', 'Backend\Adprovider\APProductController@addProductProcess');
+	// Route::get('/adprovider/products/pending-product', 'Backend\Adprovider\APProductController@pendingProductList');
+	// Route::get('/adprovider/products/approved-product', 'Backend\Adprovider\APProductController@approvedProductList');
+	// Route::get('/adprovider/products/details/{product_id}', 'Backend\Adprovider\APProductController@showProductDetail');
+
 
 });
 

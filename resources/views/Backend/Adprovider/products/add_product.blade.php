@@ -1,8 +1,14 @@
-@extends('Backend.Admin.layouts.master')
+@extends('Backend.Adprovider.layouts.master')
+
+@section('title')
+
+<title>Add Product | offerbd</title>
+
+@stop
 
 @section('sidebar')
 
-@include ('Backend.Admin.layouts.sidebar')
+@include ('Backend.Adprovider.layouts.sidebar')
 
 @stop
 
@@ -28,7 +34,7 @@
 
 		<div class="addProductForm">
 
-			{!! Form::open(['method' => 'POST', 'url' => '/addnewproduct', 'name' => 'addProductForm','novalidate','data-remote'=>'data-remote', 'data-remote-success' => 'Product Added Successfully']) !!}
+			{!! Form::open(['method' => 'POST', 'url' => '/adprovider/addnewproduct', 'name' => 'addProductForm','novalidate','data-remote'=>'data-remote', 'data-remote-success' => 'Product Added Successfully']) !!}
 
 			<div class="col-md-6">
 

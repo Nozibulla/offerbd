@@ -1,18 +1,20 @@
-@extends('Backend.Admin.layouts.master')
+@extends('Backend.Adprovider.layouts.master')
+
+@section('title')
+
+<title>Pending Category | offerbd</title>
+
+@stop
 
 @section('sidebar')
 
-@include ('Backend.Admin.layouts.sidebar')
+@include ('Backend.Adprovider.layouts.sidebar')
 
 @endsection
 
 @section('content')
 
 <div id="page-wrapper" class="pending_category">
-
-	@include ('Backend.modals.approve_category_modal')
-
-	@include ('Backend.modals.remove_category_modal')
 
 	<div class="row">
 
@@ -39,9 +41,8 @@
 				<tr>
 					<th>SL#</th>
 					<th>Name</th>
-					<th>Approved</th>
-					<th>Delete</th>
-					<th>Owner</th>
+					<th>Status</th>
+					<th>Upload Time</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -51,23 +52,11 @@
 					<tr>
 						<td>{{ $key+1 }}</td>
 						<td>
-							<a href="/admin/category/details/{{$category->id}}" title="click to see the detail page" target="_blank">{{ $category->category_name }}</a>
+							<a href="/adprovider/category/details/{{$category->id}}" title="click to see the detail page" target="_blank">{{ $category->category_name }}</a>
 						</td>
-						<td class="approve_category">
-							<a href="#" title="click to approve" id="{{$category->id}}">
-								<i class="glyphicon glyphicon-ok"></i>
-							</a>
-						</td>
-						<td class="remove_category">
-							<a href="#" title="click to delete" id="{{$category->id}}">
-								<i class="glyphicon glyphicon-remove"></i>
-							</a>						
-						</td>
-						<td>
-							<a href="/profile/members/{{ $category->profile->id }}">
-								{{ $category->profile->first_name." ".$category->profile->last_name }}
-							</a>
-						</td>
+						
+						<td> {{($category->status == 0) ? "Pending" : "Approved" }} </td>
+						<td> {{ $category->created_at }} </td>
 					</tr>
 				<?php endforeach ?>
 

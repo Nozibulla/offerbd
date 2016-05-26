@@ -1,5 +1,11 @@
 @extends('Backend.Adprovider.layouts.master')
 
+@section('title')
+
+<title>Add Brand | offerbd</title>
+
+@stop
+
 @section('sidebar')
 
 @include ('Backend.Adprovider.layouts.sidebar')
@@ -14,7 +20,7 @@
 
 		<div class="col-lg-12">
 
-			<h1 class="page-header">Add a new Brand</h1>
+			<h1 class="page-header">Brand Addition</h1>
 
 		</div>
 		<!-- /.col-lg-12 -->
@@ -31,7 +37,7 @@
 			<div class="form-group {{ $errors->has('brand_name') ? ' has-error' : '' }}">
 				{!! Form::label('brand_name', 'Brand Name') !!}
 				{!! Form::text('brand_name', null, ['class' => 'form-control', 'required' => 'required','placeholder'=>'Enter Brand name']) !!}
-				<small class="text-danger val_error">{{ $errors->first('brand_name') }}</small>
+				<small class="text-danger val_error_brand_name">{{ $errors->first('brand_name') }}</small>
 
 			</div>
 
