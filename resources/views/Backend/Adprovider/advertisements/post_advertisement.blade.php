@@ -1,8 +1,14 @@
-@extends('Backend.Admin.layouts.master')
+@extends('Backend.Adprovider.layouts.master')
+
+@section('title')
+
+<title>Post Advertisement | offerbd</title>
+
+@stop
 
 @section('sidebar')
 
-@include ('Backend.Admin.layouts.sidebar')
+@include ('Backend.Adprovider.layouts.sidebar')
 
 @stop
 
@@ -24,7 +30,7 @@
 
 	<div class="row addAdvertisementForm">
 
-		{!! Form::open(['method' => 'POST', 'url' => '/addnewadvertisement', 'name' => 'addAdvertisementForm','novalidate', 'files' => true, 'data-remote'=>'data-remote', 'data-remote-success' => 'Advertisement Posted Successfully']) !!}
+		{!! Form::open(['method' => 'POST', 'url' => '/adprovider/addnewadvertisement', 'name' => 'addAdvertisementForm','novalidate', 'files' => true, 'data-remote'=>'data-remote', 'data-remote-success' => 'Advertisement Posted Successfully']) !!}
 
 		<div class="row">
 
@@ -33,8 +39,8 @@
 				<div class="form-group{{ $errors->has('ad_image') ? ' has-error' : '' }}">
 					{!! Form::label('ad_image', 'Advertisement Image *') !!}
 					{!! Form::file('ad_image', ['required' => 'required']) !!}
-					<p class="help-block">Image help block</p>
-					<small class="text-danger ad_image">{{ $errors->first('ad_image') }}</small>
+					<!-- <p class="help-block">Image help block</p> -->
+					<small class="text-danger no_image">{{ $errors->first('ad_image') }}</small>
 				</div>
 
 				<div class="form-group{{ $errors->has('brand_id') ? ' has-error' : '' }}">

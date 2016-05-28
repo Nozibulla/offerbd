@@ -161,7 +161,7 @@ $(document).ajaxError(function(event, jqxhr, ajaxOptions, errorThrown) {
 
 					var errors = jqXHR.responseJSON;
 
-					$(".val_error").html(errors.brand_name).parent("div").addClass('has-error');
+					$(".val_error_brand_name").html(errors.brand_name).parent("div").addClass('has-error');
 
 				}
 				else{
@@ -365,11 +365,11 @@ $(document).ajaxError(function(event, jqxhr, ajaxOptions, errorThrown) {
 		},
 
 				// adding new category modal showing
-		showAddCategoryModal: function(){
+				showAddCategoryModal: function(){
 
-			$("#addCategoryModal").modal('show');
+					$("#addCategoryModal").modal('show');
 
-		},
+				},
 
 		// adding new category from add_product page
 		addNewCategoryFromProductPage : function(event){
@@ -446,4 +446,274 @@ $(document).ajaxError(function(event, jqxhr, ajaxOptions, errorThrown) {
 		productManager.init();
 
 	});
+})(jQuery);
+
+// creating a branch manager
+(function($){
+
+	var branchManager = {
+
+		init : function(){
+
+			var method,url,form,currentPageUrl,data,message,formData;
+
+			// adding a new branch
+			$(".add_branch").on('submit','.addBranchForm form[data-remote]',this.addNewBranch);
+
+			// adding new brand from the add branch page
+			$(".add_branch").on('click','.addBranchForm #add_brand_button_from_branch_page',this.showAddBrandModal);
+
+			$(".add_branch").on('submit','#addBrandModal form[data-remote]',this.addNewBrandFromBranchPage);
+		},
+
+		// adding new branch
+		addNewBranch : function(event){
+
+			event.preventDefault();
+
+			form = $(this);
+
+			// clearing all the errors
+			$(".val_error_branch_name, .val_error_brand_name").html("").parent("div").removeClass('has-error');
+
+			// $(".val_error_brand_name").html("").parent("div").removeClass('has-error');
+
+			formData =  branchManager.getFormData(form);
+
+			$.ajax({
+
+				method: formData.method,
+
+				url : formData.url,
+
+				data: formData.data,
+
+			})
+			.success(function(msg){
+
+				message = form.data('remote-success');
+
+				$(".val_error_branch_name, .val_error_brand_name").html("").parent("div").removeClass('has-error');
+
+				// $(".val_error_brand_name").html("").parent("div").removeClass('has-error');
+
+				form.trigger('reset');
+
+				$('.bb-alert').find('span').html(message);
+
+				$('.bb-alert').show().delay(3000).fadeOut();
+
+			})
+			.error(function(jqXHR){
+
+				if (jqXHR.status == 422) {
+
+					var errors = jqXHR.responseJSON;
+
+					if (errors.branch_name) {
+						$(".val_error_branch_name").html(errors.branch_name).parent("div").addClass('has-error');
+					}
+					if (errors.brand_id) {
+						$(".val_error_brand_name").html(errors.brand_id).parent("div").addClass('has-error');
+					}
+
+				}
+				else{
+
+					$('.bb-alert').show().delay(3000).fadeOut();
+
+				}
+
+			});
+
+		},
+
+		// adding brand from the add branch page
+		showAddBrandModal : function(event){
+
+			$("#addBrandModal").modal('show');
+
+		},
+
+		addNewBrandFromBranchPage : function(event){
+
+			event.preventDefault();
+
+			form = $(this);
+
+			formData =  branchManager.getFormData(form);
+
+			$.ajax({
+
+				method: formData.method,
+
+				url : "/adprovider/addnewbrand",
+
+				data: formData.data,
+
+			})
+			.success(function(msg){
+
+				message = form.data('remote-success');
+
+				$("#addBrandModal").modal('hide');
+
+				$(".branch_val_error").html("").parent("div").removeClass('has-error');
+
+				form.trigger('reset');
+
+				$('.bb-alert').find('span').html(message);
+
+				$('.bb-alert').show().delay(3000).fadeOut();
+
+				currentPageUrl = window.location.href;
+
+				$(".addBranchForm").load(currentPageUrl+' .addBranchForm');
+
+			})
+			.error(function(jqXHR){
+
+				if (jqXHR.status == 422) {
+
+					var errors = jqXHR.responseJSON;
+
+					$(".val_error").html(errors.brand_name).parent("div").addClass('has-error');
+
+				}
+				else{
+
+					$('.bb-alert').show().delay(3000).fadeOut();
+
+				}
+
+			});
+
+		},
+
+		// getting the form detail to be submitted
+		getFormData: function(form){
+
+			url = form.prop('action');
+
+			method = form.find('input[name="_method"]').val() || 'POST';
+
+			data = form.serialize();
+
+			return {'form':form,'method':method,'url':url,'data':data};
+
+		},
+
+	};
+
+	$(function(){
+
+		branchManager.init();
+	});
+})(jQuery);
+
+// creating advertisement manager
+(function($){
+
+	var advertisementManager = {
+
+		init: function(){
+
+			var form,url,method,data,message,currentPageUrl,formData,errors,advertisement,advertisement_id;
+
+			// posting new advertisement
+			$(".post_advertisement").on('submit','.addAdvertisementForm form[data-remote]',this.postAdvertisement);
+		},
+
+		// posting new advertisement
+		postAdvertisement: function(event){
+
+			event.preventDefault();
+
+			$('small').html("");
+
+			$('.addAdvertisementForm div').removeClass('has-error');
+
+			$('.addAdvertisementForm').nextAll('small').removeClass('has-error');
+
+			form = $(this);
+
+			method = form.find('input[name="_method"]').val() || 'POST';
+
+			url = form.prop('action');
+
+			formData = new FormData(this);
+			
+			$.ajax({
+
+				type : method,
+
+				url  : url,
+
+				contentType: false,
+
+				processData: false,
+
+				data : formData,
+
+			})
+			.success(function(){
+
+				form.trigger('reset');
+
+				message = form.data('remote-success');
+
+				$('.bb-alert').find('span').html(message);
+
+				$('.bb-alert').show().delay(3000).fadeOut();
+
+
+			})
+			.error(function(jqXHR){
+
+				if (jqXHR.status == 422) {
+
+					errors = jqXHR.responseJSON;
+
+					// alert(errors.ad_image);
+
+					if (errors.ad_image) {
+						$(".no_image").html(errors.ad_image).parent("div").addClass('has-error');
+					}
+					if (errors.brand_id) {
+						$(".brand_id").html(errors.brand_id).parent("div").addClass('has-error');
+					}
+					if (errors.branch_id) {
+						$(".branch_id").html(errors.branch_id).parent("div").addClass('has-error');
+					}
+					if (errors.product_id) {
+						$(".product_id").html(errors.product_id).parent("div").addClass('has-error');
+					}
+					if (errors.discount) {
+						$(".discount").html(errors.discount).parent("div").addClass('has-error');
+					}
+					if (errors.actual_price) {
+						$(".actual_price").html(errors.actual_price).parent("div").addClass('has-error');
+					}
+					if (errors.expire_date) {
+						$(".expire_date").html(errors.expire_date).parent("div").addClass('has-error');
+					}
+
+				}
+				else{
+
+					$('.bb-alert').show().delay(3000).fadeOut();
+
+				}
+
+			});
+
+		},
+	};
+
+	$(function(){
+
+		advertisementManager.init();
+
+	});
+
 })(jQuery);

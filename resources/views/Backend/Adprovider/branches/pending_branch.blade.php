@@ -1,18 +1,20 @@
-@extends('Backend.Admin.layouts.master')
+@extends('Backend.Adprovider.layouts.master')
+
+@section('title')
+
+<title>Pending Branch | offerbd</title>
+
+@stop
 
 @section('sidebar')
 
-@include ('Backend.Admin.layouts.sidebar')
+@include ('Backend.Adprovider.layouts.sidebar')
 
 @endsection
 
 @section('content')
 
 <div id="page-wrapper" class="pending_branch">
-
-	@include ('Backend.modals.approve_branch_modal')
-
-	@include ('Backend.modals.remove_branch_modal')
 
 	<div class="row">
 
@@ -39,37 +41,24 @@
 				<tr>
 					<th>SL#</th>
 					<th>Name</th>
-					<th>Approved</th>
-					<th>Delete</th>
-					<th>Owner</th>
+					<th>Status</th>
+					<th>Upload time</th>
 				</tr>
 			</thead>
 			<tbody>
 
-				<?php foreach ($pending_branchs as $key => $branch): ?>
+				@foreach ($pending_branchs as $key => $branch)
 
 					<tr>
 						<td>{{ $key+1 }}</td>
 						<td>
-							<a href="/admin/branch/details/{{$branch->id}}" title="click to see the detail page" target="_blank">{{ $branch->branch_name }}</a>
+							<a href="/adprovider/branch/details/{{$branch->id}}" title="click to see the detail page" target="_blank">{{ $branch->branch_name }}</a>
 						</td>
-						<td class="approve_branch">
-							<a href="#" title="click to approve" id="{{$branch->id}}">
-								<i class="glyphicon glyphicon-ok"></i>
-							</a>
-						</td>
-						<td class="remove_branch">
-							<a href="#" title="click to delete" id="{{$branch->id}}">
-								<i class="glyphicon glyphicon-remove"></i>
-							</a>						
-						</td>
-						<td>
-							<a href="/profile/members/{{ $branch->profile->id }}">
-								{{ $branch->profile->first_name." ". $branch->profile->last_name}}
-							</a>
-						</td>
+					
+						<td>{{ ($branch->status == 0) ? "pending" : "Approved" }}</td>
+						<td>{{ $branch->created_at }}</td>
 					</tr>
-				<?php endforeach ?>
+				@endforeach
 
 			</tbody>
 		</table>

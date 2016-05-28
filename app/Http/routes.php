@@ -186,10 +186,25 @@ Route::group(['middleware' => 'adProvider'], function () {
 	// product options
 	Route::get('/adprovider/products/add-product', 'Backend\Adprovider\APProductController@addProduct');
 	Route::post('/adprovider/addnewproduct', 'Backend\Adprovider\APProductController@addProductProcess');
-	// Route::get('/adprovider/products/pending-product', 'Backend\Adprovider\APProductController@pendingProductList');
-	// Route::get('/adprovider/products/approved-product', 'Backend\Adprovider\APProductController@approvedProductList');
-	// Route::get('/adprovider/products/details/{product_id}', 'Backend\Adprovider\APProductController@showProductDetail');
+	Route::get('/adprovider/products/pending-product', 'Backend\Adprovider\APProductController@pendingProductList');
+	Route::get('/adprovider/products/approved-product', 'Backend\Adprovider\APProductController@approvedProductList');
+	Route::get('/adprovider/products/details/{product_id}', 'Backend\Adprovider\APProductController@showProductDetail');
 
+	// branch options
+	Route::get('/adprovider/branch/add-branch', 'Backend\Adprovider\APBranchController@addNewBranch');
+	Route::post('/adprovider/addnewbranch', 'Backend\Adprovider\APBranchController@addNewBranchProcess');
+	Route::get('/adprovider/branch/pending-branch', 'Backend\Adprovider\APBranchController@pendingBranchList');
+	Route::get('/adprovider/branch/approved-branch', 'Backend\Adprovider\APBranchController@approvedBranchList');
+	Route::get('/adprovider/branch/details/{branch_id}', 'Backend\Adprovider\APBranchController@showBranchDetail');
+
+	// advertisement portions
+	Route::get('/adprovider/advertisements/post-ad','Backend\Adprovider\APAdvertisementController@addAdvertisement');
+	Route::post('/adprovider/addnewadvertisement','Backend\Adprovider\APAdvertisementController@addAdvertisementProcess');
+	Route::get('/adprovider/advertisements/pending-ad','Backend\Adprovider\APAdvertisementController@pendingAdvertisement');
+	Route::get('/adprovider/advertisements/approved-ad','Backend\Adprovider\APAdvertisementController@approvedAdvertisement');
+
+	// edit an advertisement
+	Route::get('/adprovider/advertisements/details/{advertisement_id}', 'Backend\Adprovider\APAdvertisementController@showAdvertisementDetail');
 
 });
 

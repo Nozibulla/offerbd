@@ -1,8 +1,14 @@
-@extends('Backend.Admin.layouts.master')
+@extends('Backend.Adprovider.layouts.master')
+
+@section('title')
+
+<title>Add Branch | offerbd</title>
+
+@stop
 
 @section('sidebar')
 
-@include ('Backend.Admin.layouts.sidebar')
+@include ('Backend.Adprovider.layouts.sidebar')
 
 @stop
 
@@ -28,7 +34,7 @@
 
 		<div class="addBranchForm">
 
-			{!! Form::open(['method' => 'POST', 'url' => '/addnewbranch', 'name' => 'addBranchForm','novalidate','data-remote'=>'data-remote', 'data-remote-success' => 'Branch Added Successfully']) !!}
+			{!! Form::open(['method' => 'POST', 'url' => '/adprovider/addnewbranch', 'name' => 'addBranchForm','novalidate','data-remote'=>'data-remote', 'data-remote-success' => 'Branch Added Successfully']) !!}
 
 			<div class="col-md-6">
 

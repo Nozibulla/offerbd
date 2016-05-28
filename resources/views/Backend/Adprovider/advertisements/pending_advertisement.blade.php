@@ -1,18 +1,20 @@
-@extends('Backend.Admin.layouts.master')
+@extends('Backend.Adprovider.layouts.master')
+
+@section('title')
+
+<title>Pending Advertisement | offerbd</title>
+
+@stop
 
 @section('sidebar')
 
-@include ('Backend.Admin.layouts.sidebar')
+@include ('Backend.Adprovider.layouts.sidebar')
 
-@endsection
+@stop
 
 @section('content')
 
 <div id="page-wrapper" class="pending_advertisements">
-
-	@include ('Backend.modals.approve_advertisement_modal')
-
-	@include ('Backend.modals.remove_advertisement_modal')
 
 	<div class="row">
 
@@ -38,10 +40,9 @@
 			<thead>
 				<tr>
 					<th>SL#</th>
-					<th>Image</th>
-					<th>Approved</th>
-					<th>Delete</th>
-					<th>Owner</th>
+					<th>Name</th>
+					<th>Status</th>
+					<th>Upload time</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -51,25 +52,13 @@
 					<tr>
 						<td>{{ $key+1 }}</td>
 						<td>
-							<a href="/admin/advertisements/details/{{$advertisement->id}}" title="click to see the detail page" target="_blank">
+							<a href="/adprovider/advertisements/details/{{$advertisement->id}}" title="click to see the detail page" target="_blank">
 								<img src="{{ asset($advertisement->ad_image) }}" alt="adno{{$advertisement->id}}">
 							</a>
 						</td>
-						<td class="approve_advertisement">
-							<a href="#" title="click to approve" id="{{$advertisement->id}}">
-								<i class="glyphicon glyphicon-ok"></i>
-							</a>
-						</td>
-						<td class="remove_advertisement">
-							<a href="#" title="click to delete" id="{{$advertisement->id}}">
-								<i class="glyphicon glyphicon-remove"></i>
-							</a>						
-						</td>
-						<td>
-							<a href="/profile/members/{{ $advertisement->profile->id }}">
-								{{ $advertisement->profile->first_name." ".$advertisement->profile->last_name }}
-							</a>
-						</td>
+					
+						<td>{{ ($advertisement->status == 0) ? "pending" : "Approved" }}</td>
+						<td>{{ $advertisement->created_at }}</td>
 					</tr>
 				@endforeach
 

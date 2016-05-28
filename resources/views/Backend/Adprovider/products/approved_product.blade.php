@@ -1,8 +1,14 @@
-@extends('Backend.Admin.layouts.master')
+@extends('Backend.Adprovider.layouts.master')
+
+@section('title')
+
+<title>Approved Product | offerbd</title>
+
+@stop
 
 @section('sidebar')
 
-@include ('Backend.Admin.layouts.sidebar')
+@include ('Backend.Adprovider.layouts.sidebar')
 
 @endsection
 
@@ -37,31 +43,24 @@
 				<tr>
 					<th>SL#</th>
 					<th>Name</th>
-					<th>Delete</th>
-					<th>Owner</th>
+					<th>Status</th>
+					<th>Uploaded Time</th>
 				</tr>
 			</thead>
 			<tbody>
 
-				<?php foreach ($approved_products as $key => $product): ?>
+				@foreach ($approved_products as $key => $product)
 
-					<tr>
-						<td>{{ $key+1 }}</td>
-						<td>
-							<a href="/admin/products/details/{{ $product->id }}" title="click to see the detail page" target="_blank">{{ $product->product_name }}</a>
-						</td>
-						<td class="remove_product">
-							<a href="#" title="click to delete" id="{{ $product->id }}">
-								<i class="glyphicon glyphicon-remove"></i>
-							</a>						
-						</td>
-						<td>
-							<a href="/profile/members/{{ $product->profile->id }}">
-								{{ $product->profile->first_name." ".$product->profile->last_name }}
-							</a>
-						</td>
-					</tr>
-				<?php endforeach ?>
+				<tr>
+					<td>{{ $key+1 }}</td>
+					<td>
+						<a href="/adprovider/products/details/{{ $product->id }}" title="click to see the detail page" target="_blank">{{ $product->product_name }}</a>
+					</td>
+					<td> {{ ($product->status == 0) ? "Pending" : "Approved" }} </td>
+
+					<td> {{ $product->created_at }} </td>
+				</tr>
+				@endforeach
 
 			</tbody>
 		</table>
