@@ -44,6 +44,8 @@ class AdvertisementController extends Controller
 	{
 		$advertisement = new Advertisement;
 
+		$profile_id = auth()->guard('admin')->user()->profile->id;
+
 		$ad_image = $request->ad_image->getClientOriginalName();
 
 		$store_image = $request->ad_image->move('offer_images', $ad_image);
@@ -60,7 +62,7 @@ class AdvertisementController extends Controller
 
 			$advertisement->product_id = $request->product_id;
 
-			$advertisement->profile_id = auth()->guard('admin')->user()->id;
+			$advertisement->profile_id = $profile_id;
 
 			$advertisement->discount = $request->discount;
 

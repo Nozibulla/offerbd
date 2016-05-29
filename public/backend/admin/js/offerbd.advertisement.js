@@ -149,7 +149,7 @@
 			})
 			.success(function(jqXHR){
 
-				$('.bb-alert').find('span').html("Product Approved Successfully");
+				$('.bb-alert').find('span').html("Advertisement Approved Successfully");
 
 				$('.bb-alert').show().delay(3000).fadeOut();
 

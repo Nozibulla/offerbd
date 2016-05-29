@@ -35,11 +35,13 @@ class BranchController extends Controller
     {
     	$branch = new Branch;
 
+    	$profile_id = auth()->guard('admin')->user()->profile->id; 
+
     	$branch->branch_name = $request->branch_name;
     	
     	$branch->brand_id = $request->brand_id;
 
-    	$branch->profile_id =  auth()->guard('admin')->user()->id;
+    	$branch->profile_id = $profile_id;
 
     	$branch->save();
 

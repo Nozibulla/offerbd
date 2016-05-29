@@ -34,11 +34,13 @@ class ProductController extends Controller
     {
     	$product = new Product;
 
+        $profile_id = auth()->guard('admin')->user()->profile->id;
+
     	$product->product_name = $request->product_name;
 
     	$product->category_id = $request->category_id;
 
-    	$product->profile_id = auth()->guard('admin')->user()->id;
+    	$product->profile_id = $profile_id;
 
     	$product->save();
 

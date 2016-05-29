@@ -1,5 +1,11 @@
 @extends('Backend.Admin.layouts.master')
 
+@section('title')
+
+<title>Admin Role | offerbd</title>
+
+@stop
+
 @section('sidebar')
 
 @include ('Backend.Admin.layouts.sidebar')

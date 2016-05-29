@@ -1,5 +1,11 @@
 @extends('Backend.Admin.layouts.master')
 
+@section('title')
+
+<title>Product Detail | offerbd</title>
+
+@stop
+
 @section('sidebar')
 
 @include ('Backend.Admin.layouts.sidebar')
@@ -54,9 +60,14 @@
 
 					@if ($product_info->status == 0)
 
+					<!-- checking whether this is your addition or not -->
+					@if (is_null($product_info->profile->admin_id) && ($product_info->profile->admin_id != auth()->guard('admin')->user()->id))
+
 					<input type="button" class="btn btn-primary approve_product" name="approve_product" value="Approve Product" data-toggle="modal" data-target="#approveProductModal">
 					@include ('Backend.modals.approve_product_modal')
 
+					@endif
+					
 					@endif
 
 					<input type="button" class="btn btn-primary delete_approved_product" name="remove_product" value="Delete Product" data-toggle="modal" data-target="#removeProductModal">

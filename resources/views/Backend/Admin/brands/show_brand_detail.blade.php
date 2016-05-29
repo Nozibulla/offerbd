@@ -1,5 +1,11 @@
 @extends('Backend.Admin.layouts.master')
 
+@section('title')
+
+<title>Brand Detail | offerbd</title>
+
+@stop
+
 @section('sidebar')
 
 @include ('Backend.Admin.layouts.sidebar')
@@ -63,9 +69,14 @@
 					<div class="pull-left brand_edit_delete">
 
 						@if ($brand_info->status == 0)
+						
+						<!-- checking whether this is your addition or not -->
+						@if (is_null($brand_info->profile->admin_id) && ($brand_info->profile->admin_id != auth()->guard('admin')->user()->id))
 
 						<input type="button" class="btn btn-default approve_brand" name="approve_brand" value="Approve Brand" data-toggle="modal" data-target="#approveBrandModal">
 						@include ('Backend.modals.approve_brand_modal')
+
+						@endif
 
 						@endif
 

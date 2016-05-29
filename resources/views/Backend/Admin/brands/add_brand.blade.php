@@ -1,5 +1,11 @@
 @extends('Backend.Admin.layouts.master')
 
+@section('title')
+
+<title>Add Brand | offerbd</title>
+
+@stop
+
 @section('sidebar')
 
 @include ('Backend.Admin.layouts.sidebar')

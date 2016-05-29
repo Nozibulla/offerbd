@@ -1,5 +1,11 @@
 @extends('Backend.Admin.layouts.master')
 
+@section('title')
+
+<title>Branch Detail | offerbd</title>
+
+@stop
+
 @section('sidebar')
 
 @include ('Backend.Admin.layouts.sidebar')
@@ -69,8 +75,13 @@
 
 					@if ($branch_info->status == 0)
 
+					<!-- checking whether this is your addition or not -->
+					@if (is_null($branch_info->profile->admin_id) && ($branch_info->profile->admin_id != auth()->guard('admin')->user()->id))
+
 					<input type="button" class="btn btn-default approve_branch" name="approve_branch" value="Approve Branch" data-toggle="modal" data-target="#approveBranchModal">
 					@include ('Backend.modals.approve_branch_modal')
+
+					@endif
 
 					@endif
 

@@ -214,3 +214,5 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/','Frontend\DashboardController@index');
 
 });
+
+$profile_id = auth()->guard('admin')->user()->profile->id;

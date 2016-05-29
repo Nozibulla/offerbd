@@ -1,5 +1,11 @@
 @extends('Backend.Admin.layouts.master')
 
+@section('title')
+
+<title>Category Detail | offerbd</title>
+
+@stop
+
 @section('sidebar')
 
 @include ('Backend.Admin.layouts.sidebar')
@@ -31,7 +37,7 @@
 		<div class="row">
 			<div class="col-md-6">Category Name: {{ $category_info->category_name }}</div>
 			<div class="col-md-6">
-				@$brand_owner = $category_info->profile
+				@define $brand_owner = $category_info->profile
 				<strong>Brand Owner</strong>
 				<div class="owner_name">Owner Name: 
 					{{ $brand_owner->first_name." ".$brand_owner->last_name }}
@@ -54,9 +60,14 @@
 
 					@if ($category_info->status == 0)
 
+					<!-- checking whether this is your addition or not -->
+					@if (is_null($category_info->profile->admin_id) && ($category_info->profile->admin_id != auth()->guard('admin')->user()->id))
+
 					<input type="button" class="btn btn-default approve_category" name="approve_category" value="Approve Category" data-toggle="modal" data-target="#approveCategoryModal">
 					@include ('Backend.modals.approve_category_modal')
 
+					@endif
+					
 					@endif
 
 					<input type="button" class="btn btn-default delete_approved_category" name="remove_category" value="Delete Category" data-toggle="modal" data-target="#removeCategoryModal">

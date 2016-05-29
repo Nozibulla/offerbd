@@ -1,11 +1,25 @@
 @extends('Backend.Admin.layouts.master')
+
+@section('title')
+
+<title>Pending Admin | offerbd</title>
+
+@stop
+
 @section('sidebar')
+
 @include ('Backend.Admin.layouts.sidebar')
+
 @endsection
+
 @section('content')
+
 <div id="page-wrapper" class="pending_admin_list">
+
 	@include ('Backend.modals.approve_admin_modal')
+
 	@include ('Backend.modals.remove_admin_modal')
+
 	<div class="row">
 		<div class="col-lg-12">
 			<h3 class="page-header">

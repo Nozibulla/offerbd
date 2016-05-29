@@ -1,5 +1,11 @@
 @extends('Backend.Admin.layouts.master')
 
+@section('title')
+
+<title>Advertisement Detail | offerbd</title>
+
+@stop
+
 @section('sidebar')
 
 @include ('Backend.Admin.layouts.sidebar')
@@ -78,9 +84,14 @@
 
 						@if ($advertisement_info->status == 0)
 
+						<!-- checking whether this is your addition or not -->
+						@if (is_null($advertisement_info->profile->admin_id) && ($advertisement_info->profile->admin_id != auth()->guard('admin')->user()->id))
+
 						<input type="button" class="btn btn-default approve_advertisement" name="approve_advertisement" value="Approve Advertisement" data-toggle="modal" data-target="#approveAdvertisementModal">
 						@include ('Backend.modals.approve_advertisement_modal')
 
+						@endif
+						
 						@endif
 
 						<input type="button" class="btn btn-default delete_approved_advertisement" name="remove_advertisement" value="Delete Advertisement" data-toggle="modal" data-target="#removeAdvertisementModal">

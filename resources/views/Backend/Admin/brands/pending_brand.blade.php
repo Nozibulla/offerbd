@@ -1,5 +1,11 @@
 @extends('Backend.Admin.layouts.master')
 
+@section('title')
+
+<title>Pending Brand | offerbd</title>
+
+@stop
+
 @section('sidebar')
 
 @include ('Backend.Admin.layouts.sidebar')
@@ -48,27 +54,45 @@
 
 				@foreach ($pending_brands as $key => $brand)
 
-					<tr>
-						<td>{{ $key+1 }}</td>
-						<td>
-							<a href="/admin/brands/details/{{$brand->id}}" title="click to see the detail page" target="_blank">{{ $brand->brand_name }}</a>
-						</td>
-						<td class="approve_brand">
-							<a href="#" title="click to approve" id="{{$brand->id}}">
-								<i class="glyphicon glyphicon-ok"></i>
-							</a>
-						</td>
-						<td class="remove_brand">
-							<a href="#" title="click to delete" id="{{$brand->id}}">
-								<i class="glyphicon glyphicon-remove"></i>
-							</a>						
-						</td>
-						<td>
-							<a href="/profile/members/{{ $brand->profile->id }}">
-								{{ $brand->profile->first_name." ".$brand->profile->last_name }}
-							</a>
-						</td>
-					</tr>
+				<tr>
+					<td>{{ $key+1 }}</td>
+					<td>
+						<a href="/admin/brands/details/{{$brand->id}}" title="click to see the detail page" target="_blank">{{ $brand->brand_name }}</a>
+					</td>
+
+					@if(is_null($brand->profile->admin_id))
+
+					<td class="approve_brand">
+						<a href="#" title="click to approve" id="{{$brand->id}}">
+							<i class="glyphicon glyphicon-ok"></i>
+						</a>
+					</td>
+
+					@else
+
+					<td>---</td>
+
+					@endif
+
+					<td class="remove_brand">
+						<a href="#" title="click to delete" id="{{$brand->id}}">
+							<i class="glyphicon glyphicon-remove"></i>
+						</a>						
+					</td>
+					<td>
+
+						<!-- checking whether this is your addition or not -->
+						@if (is_null($brand->profile->admin_id) && ($brand->profile->admin_id != auth()->guard('admin')->user()->id))
+						<a href="/profile/members/{{ $brand->profile->id }}">
+							{{ $brand->profile->first_name." ".$brand->profile->last_name }}
+						</a>
+						@else
+
+						<!-- printing my name -->
+						{{ $brand->profile->first_name." ".$brand->profile->last_name  }} (you)
+						@endif
+					</td>
+				</tr>
 				@endforeach
 
 			</tbody>

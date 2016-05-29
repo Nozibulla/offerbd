@@ -1,5 +1,11 @@
 @extends('Backend.Admin.layouts.master')
 
+@section('title')
+
+<title>Approved Brand | offerbd</title>
+
+@stop
+
 @section('sidebar')
 
 @include ('Backend.Admin.layouts.sidebar')
@@ -45,36 +51,44 @@
 
 				@foreach ($approved_brands as $key => $brand)
 
-					<tr>
-						<td>{{ $key+1 }}</td>
+				<tr>
+					<td>{{ $key+1 }}</td>
+					<td>
+						<a href="/admin/brands/details/{{$brand->id}}" title="click to see the detail page" target="_blank">{{ $brand->brand_name }}</a>
+					</td>
+					<td class="remove_brand">
+						<a href="#" title="click to delete" id="{{$brand->id}}">
+							<i class="glyphicon glyphicon-remove"></i>
+						</a>						
+					</td>
+					<td>
 						<td>
-							<a href="/admin/brands/details/{{$brand->id}}" title="click to see the detail page" target="_blank">{{ $brand->brand_name }}</a>
-						</td>
-						<td class="remove_brand">
-							<a href="#" title="click to delete" id="{{$brand->id}}">
-								<i class="glyphicon glyphicon-remove"></i>
-							</a>						
-						</td>
-						<td>
-						<a href="/profile/members/{{ $brand->profile->id }}">
+							<!-- checking whether this is your addition or not -->
+							@if (is_null($brand->profile->admin_id) && ($brand->profile->admin_id != auth()->guard('admin')->user()->id))
+							<a href="/profile/members/{{ $brand->profile->id }}">
 								{{ $brand->profile->first_name." ".$brand->profile->last_name }}
 							</a>
-						</td>						
+							@else
+
+							<!-- printing my name -->
+							{{ $brand->profile->first_name." ".$brand->profile->last_name  }} (you)
+							@endif
+						</td>					
 					</tr>
-				@endforeach
+					@endforeach
 
-			</tbody>
-		</table>
-		@else
+				</tbody>
+			</table>
+			@else
 
-		<strong>No approved Brand is available yet</strong>
+			<strong>No approved Brand is available yet</strong>
 
-		@endif
+			@endif
+
+		</div>
 
 	</div>
-
-</div>
-<!-- /#page-wrapper -->
+	<!-- /#page-wrapper -->
 
 </div>
 <!-- /#wrapper -->

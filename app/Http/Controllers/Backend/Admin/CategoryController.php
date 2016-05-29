@@ -32,9 +32,11 @@ class CategoryController extends Controller
     {
     	$category = new Category;
 
+        $profile_id = auth()->guard('admin')->user()->profile->id;
+
     	$category->category_name = $request->category_name;
 
-    	$category->profile_id = auth()->guard('admin')->user()->id;
+    	$category->profile_id = $profile_id;
 
     	$category->save();
     }
