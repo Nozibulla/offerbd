@@ -30,6 +30,14 @@ class ProfileController extends Controller
 		return view('Backend.Admin.profile.show_profile',compact('profile_info'));
 	}
 
+	// profile setting
+	public function profileSetting()
+	{
+		$profile_info = Profile::whereadmin_id(Auth::guard('admin')->user()->id)->firstOrFail();
+
+		return view('Backend.Admin.profile.profile_setting',compact('profile_info'));
+	}
+
 	public function getInfo()
 	{
 		$profile_info = Admin::find(1)->profile;
@@ -51,6 +59,24 @@ class ProfileController extends Controller
 
 		$updateInfo->save();
 
+	}
+
+	// saving admin profile picture
+	public function setProfilePicture(Request $request)
+	{
+		$profile_id = auth()->guard('admin')->user()->profile->id;
+
+		$find_profile = Profile::findOrFail($profile_id);
+
+		$profile_image = $request->profile_image->getClientOriginalName();
+
+		$store_image = $request->profile_image->move('profile_images/admin_owner', $profile_image);
+
+		$destinationPath = '/profile_images/admin_owner/' . $profile_image;
+
+		$find_profile->image = $destinationPath;
+
+		$find_profile->save();
 	}
 
 	// showing the specific member for a brand (brand owner)

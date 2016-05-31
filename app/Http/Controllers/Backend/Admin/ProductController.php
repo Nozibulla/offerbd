@@ -49,7 +49,7 @@ class ProductController extends Controller
     // pending product list
     public function pendingProduct()
 	{
-		$pending_products = Product::wherestatus(0)->get();
+		$pending_products = Product::wherestatus(0)->paginate(10);
 
 		return view('Backend.Admin.products.pending_product',compact('pending_products'));
 	}
@@ -57,7 +57,7 @@ class ProductController extends Controller
 	// approved product list
 	public function approvedProduct()
 	{
-		$approved_products = Product::wherestatus(1)->get();
+		$approved_products = Product::wherestatus(1)->paginate(10);
 
 		return view('Backend.Admin.products.approved_product',compact('approved_products'));
 	}

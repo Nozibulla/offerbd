@@ -22,7 +22,7 @@ class CategoryController extends Controller
     // adding a new category page
     public function addNewCategory()
     {
-    	$categorys = Category::get();
+    	$categorys = Category::paginate(10);
 
     	return view('Backend.Admin.category.add_category',compact('categorys'));
     }

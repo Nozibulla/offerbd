@@ -80,6 +80,8 @@
 
 			</tbody>
 		</table>
+
+		{!! $approved_branchs->links() !!}
 		@else
 
 		<strong>No approved Branch is available yet</strong>

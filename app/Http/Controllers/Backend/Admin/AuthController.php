@@ -22,6 +22,8 @@ use Auth;
 
 use Redirect;
 
+use URL;
+
 class AuthController extends Controller
 {
 
@@ -47,10 +49,8 @@ class AuthController extends Controller
 		$profile->save();
 
 		//"administrator" access by default to newly registered user
-
 		$admin->role()->attach(2);
 
-		return redirect('/admin/login');
 	}
 
 	public function getLogin()
@@ -73,12 +73,20 @@ class AuthController extends Controller
 
 		if(auth()->guard('admin')->attempt($admin,$remember)){
 
-			// return redirect('/admin/dashboard');
-			return redirect()->intended('/admin/dashboard');
-		}
+			// return redirect()->intended('/admin/dashboard');
 
-		return Redirect::back()->withErrors(['msg'=>'The credentials doesn\'t match'])->withInput();
-		;
+			// successfully logged in
+
+			return 1;
+
+		}
+		else
+		{
+			// return Redirect::back()->withErrors(['msg'=>'The credentials doesn\'t match'])->withInput();
+
+			return 0;
+
+		}
 		
 	}
 

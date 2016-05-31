@@ -98,6 +98,8 @@
 			</tbody>
 		</table>
 
+		{!! $pending_brands->links() !!}
+
 		@else
 
 		<strong>No pending brand available</strong>

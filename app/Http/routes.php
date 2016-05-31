@@ -49,10 +49,13 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/admin/dashboard','Backend\Admin\DashboardController@showDashboard');
 
 	//admin profile options
-	Route::get('/admin/profile','Backend\Admin\ProfileController@showProfile');
+	Route::get('/admin/profile/show','Backend\Admin\ProfileController@showProfile');
 
 	//updating info
 	Route::post('/saveprofileinfo','Backend\Admin\ProfileController@updateProfileInfo');
+	Route::get('/admin/profile/setting', 'Backend\Admin\ProfileController@profileSetting');
+	// saving admin profile picture
+	Route::post('/admin/saveimage','Backend\Admin\ProfileController@setProfilePicture');
 
 	// admin menu items (only accessed by "owner")
 	Route::get('/admin/approved-admin','Backend\Admin\AdminController@approvedAdminList');
@@ -156,6 +159,15 @@ Route::group(['middleware' => 'admin'], function () {
  */
 Route::group(['middleware' => 'adProvider'], function () {
 
+	//creating a pattern for id (integer type)
+	Route::pattern('id', '[0-9]+');
+	Route::pattern('adprovider_id', '[0-9]+');
+	Route::pattern('brand_id', '[0-9]+');
+	Route::pattern('profile_id', '[0-9]+');
+	Route::pattern('branch_id', '[0-9]+');
+	Route::pattern('category_id', '[0-9]+');
+	Route::pattern('advertisement_id', '[0-9]+');
+
 	Route::get('/adprovider/login','Backend\adprovider\AuthController@getLogin');
 	Route::post('/adprovider/login','Backend\adprovider\AuthController@postLogin');
 	Route::get('/adprovider/registration','Backend\adprovider\AuthController@getRegister');
@@ -214,5 +226,3 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/','Frontend\DashboardController@index');
 
 });
-
-$profile_id = auth()->guard('admin')->user()->profile->id;

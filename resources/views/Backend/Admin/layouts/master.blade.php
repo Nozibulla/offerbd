@@ -4,331 +4,339 @@
 
 <head>
 
-    <meta charset="utf-8">
+	<meta charset="utf-8">
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="offerbd">
+	<meta name="description" content="offerbd">
 
-    <meta name="author" content="enableit">
+	<meta name="author" content="enableit">
 
-    <meta name="csrf-token" content="{!! csrf_token() !!}">
+	<meta name="csrf-token" content="{!! csrf_token() !!}">
 
-    @yield('title')
+	@yield('title')
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
 
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ asset('shared/js/bootstrap.min.js') }}"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="{{ asset('shared/js/bootstrap.min.js') }}"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="{{ asset('backend/admin/js/metisMenu.min.js') }}"></script>
+	<!-- Metis Menu Plugin JavaScript -->
+	<script src="{{ asset('backend/admin/js/metisMenu.min.js') }}"></script>
 
-    <!-- inline editing -->
-    <script src="{{ asset('shared/inline-edit/js/bootstrap-editable.js') }}" type="text/javascript"></script>
+	<!-- inline editing -->
+	<script src="{{ asset('shared/inline-edit/js/bootstrap-editable.js') }}" type="text/javascript"></script>
+	
+	<!-- Custom Theme JavaScript -->
+	<script src="{{ asset('backend/admin/js/custom.js') }}"></script>
+	
+	<!-- offerbd custom javascript file -->
+	<script src="{{ asset('backend/admin/js/offerbd.custom.js') }}"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="{{ asset('backend/admin/js/custom.js') }}"></script>
+	@yield('sectionJS')
 
-    <script src="{{ asset('backend/admin/js/offerbd.custom.js') }}"></script>
-    <script src="{{ asset('backend/admin/js/offerbd.advertisement.js') }}"></script>
+	<!-- Bootstrap Core CSS -->
+	<link href="{{ asset('shared/css/bootstrap.min.css') }}" rel="stylesheet">
 
-    @yield('sectionJS')
+	<!-- MetisMenu CSS -->
+	<link href="{{ asset('backend/admin/css/metisMenu.min.css') }}" rel="stylesheet">
 
-    <!-- Bootstrap Core CSS -->
-    <link href="{{ asset('shared/css/bootstrap.min.css') }}" rel="stylesheet">
+	<!-- Custom CSS -->
+	<link href="{{ asset('backend/admin/css/sb-admin-2.css') }}" rel="stylesheet">
 
-    <!-- MetisMenu CSS -->
-    <link href="{{ asset('backend/admin/css/metisMenu.min.css') }}" rel="stylesheet">
+	<!-- inline editing -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('shared/inline-edit/css/bootstrap-editable.css') }}">
 
-    <!-- Custom CSS -->
-    <link href="{{ asset('backend/admin/css/sb-admin-2.css') }}" rel="stylesheet">
+	<link href="{{ asset('backend/admin/css/offerbd.custom.css') }}" rel="stylesheet">
 
-    <!-- inline editing -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('shared/inline-edit/css/bootstrap-editable.css') }}">
+	<!-- Custom Fonts -->
+	<link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
-    <link href="{{ asset('backend/admin/css/offerbd.custom.css') }}" rel="stylesheet">
+	@yield('sectionCSS')
 
-    <!-- Custom Fonts -->
-    <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+	@yield ('angularjs')      
 
-    @yield('sectionCSS')
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
 
-    @yield ('angularjs')      
+	</head>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+	<body>
 
-    </head>
+		<div id="wrapper">
+			
+			<!-- adding flash message -->
+			@include('Shared._partials.flash')
 
-    <body>
+			<!-- showing the ajax loader -->
+			<div class="overlay" style="display: none">
+			   <img src="{{ asset('images/offerbd.gif') }}" class="img-responsive" alt="offerbd loader">
+		   </div>
 
-        <div id="wrapper">
+		   <!-- Navigation -->
+		   <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 
-            @include('Shared._partials.flash')
+			<div class="navbar-header">
 
-            <!-- Navigation -->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 
-                <div class="navbar-header">
+					<span class="sr-only">Toggle navigation</span>
 
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
 
-                        <span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
 
-                        <span class="icon-bar"></span>
+					<span class="icon-bar"></span>
 
-                        <span class="icon-bar"></span>
+				</button>
 
-                        <span class="icon-bar"></span>
+				<a class="navbar-brand" href="/admin/dashboard">
+					{{ (auth()->guard('admin')->user()->profile->first_name && auth()->guard('admin')->user()->profile->last_name) ? auth()->guard('admin')->user()->profile->first_name ." ". auth()->guard('admin')->user()->profile->last_name : "Mr. X" }} | offerBD
+				</a>
 
-                    </button>
+			</div>
+			<!-- /.navbar-header -->
 
-                    <a class="navbar-brand" href="/admin/dashboard">{{ auth()->guard('admin')->user()->email }} | offerBD</a>
+			<ul class="nav navbar-top-links navbar-right">
 
-                </div>
-                <!-- /.navbar-header -->
+				<li class="dropdown">
 
-                <ul class="nav navbar-top-links navbar-right">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 
-                    <li class="dropdown">
+						<i class="fa fa-envelope fa-fw"></i>  
 
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="fa fa-caret-down"></i>
 
-                            <i class="fa fa-envelope fa-fw"></i>  
+					</a>
 
-                            <i class="fa fa-caret-down"></i>
+					<ul class="dropdown-menu dropdown-messages">
 
-                        </a>
+						<li>
 
-                        <ul class="dropdown-menu dropdown-messages">
+							<a href="#">
 
-                            <li>
+								<div>
 
-                                <a href="#">
+									<strong>John Smith</strong>
 
-                                    <div>
+									<span class="pull-right text-muted">
 
-                                        <strong>John Smith</strong>
+										<em>Yesterday</em>
 
-                                        <span class="pull-right text-muted">
+									</span>
 
-                                            <em>Yesterday</em>
+								</div>
 
-                                        </span>
+								<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
 
-                                    </div>
+							</a>
 
-                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+						</li>
 
-                                </a>
+						<li class="divider"></li>
 
-                            </li>
+					</ul>
+					<!-- /.dropdown-messages -->
 
-                            <li class="divider"></li>
+				</li>
+				<!-- /.dropdown -->
 
-                        </ul>
-                        <!-- /.dropdown-messages -->
+				<li class="dropdown">
 
-                    </li>
-                    <!-- /.dropdown -->
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 
-                    <li class="dropdown">
+						<i class="fa fa-tasks fa-fw"></i> 
 
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="fa fa-caret-down"></i>
 
-                            <i class="fa fa-tasks fa-fw"></i> 
+					</a>
 
-                            <i class="fa fa-caret-down"></i>
+					<ul class="dropdown-menu dropdown-tasks">
 
-                        </a>
+						<li>
 
-                        <ul class="dropdown-menu dropdown-tasks">
+							<a href="#">
 
-                            <li>
+								<div>
 
-                                <a href="#">
+									<p>
 
-                                    <div>
+										<strong>Task 1</strong>
 
-                                        <p>
+										<span class="pull-right text-muted">40% Complete</span>
 
-                                            <strong>Task 1</strong>
+									</p>
 
-                                            <span class="pull-right text-muted">40% Complete</span>
+									<div class="progress progress-striped active">
 
-                                        </p>
+										<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
 
-                                        <div class="progress progress-striped active">
+											<span class="sr-only">40% Complete (success)</span>
 
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+										</div>
 
-                                                <span class="sr-only">40% Complete (success)</span>
+									</div>
 
-                                            </div>
+								</div>
 
-                                        </div>
+							</a>
 
-                                    </div>
+						</li>
 
-                                </a>
+						<li class="divider"></li>
 
-                            </li>
+						<li>
 
-                            <li class="divider"></li>
+							<a class="text-center" href="#">
 
-                            <li>
+								<strong>See All Tasks</strong>
 
-                                <a class="text-center" href="#">
+								<i class="fa fa-angle-right"></i>
 
-                                    <strong>See All Tasks</strong>
+							</a>
 
-                                    <i class="fa fa-angle-right"></i>
+						</li>
 
-                                </a>
+					</ul>
+					<!-- /.dropdown-tasks -->
 
-                            </li>
+				</li>
+				<!-- /.dropdown -->
 
-                        </ul>
-                        <!-- /.dropdown-tasks -->
+				<li class="dropdown">
 
-                    </li>
-                    <!-- /.dropdown -->
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 
-                    <li class="dropdown">
+						<i class="fa fa-bell fa-fw"></i>
 
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="fa fa-caret-down"></i>
 
-                            <i class="fa fa-bell fa-fw"></i>
+					</a>
 
-                            <i class="fa fa-caret-down"></i>
+					<ul class="dropdown-menu dropdown-alerts">
 
-                        </a>
+						<li>
 
-                        <ul class="dropdown-menu dropdown-alerts">
+							<a href="#">
 
-                            <li>
+								<div>
 
-                                <a href="#">
+									<i class="fa fa-comment fa-fw"></i>
 
-                                    <div>
+									New Comment
 
-                                        <i class="fa fa-comment fa-fw"></i>
+									<span class="pull-right text-muted small">4 minutes ago</span>
 
-                                        New Comment
+								</div>
 
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
+							</a>
 
-                                    </div>
+						</li>
 
-                                </a>
+						<li class="divider"></li>
 
-                            </li>
+						<li>
 
-                            <li class="divider"></li>
+							<a class="text-center" href="#">
 
-                            <li>
+								<strong>See All Alerts</strong>
 
-                                <a class="text-center" href="#">
+								<i class="fa fa-angle-right"></i>
 
-                                    <strong>See All Alerts</strong>
+							</a>
 
-                                    <i class="fa fa-angle-right"></i>
+						</li>
 
-                                </a>
+					</ul>
 
-                            </li>
+					<!-- /.dropdown-alerts -->
 
-                        </ul>
+				</li>
 
-                        <!-- /.dropdown-alerts -->
+				<!-- /.dropdown -->
 
-                    </li>
+				<li class="dropdown">
 
-                    <!-- /.dropdown -->
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 
-                    <li class="dropdown">
+						<i class="fa fa-user fa-fw"></i>  
 
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="fa fa-caret-down"></i>
 
-                            <i class="fa fa-user fa-fw"></i>  
+					</a>
 
-                            <i class="fa fa-caret-down"></i>
+					<ul class="dropdown-menu dropdown-user">
 
-                        </a>
-                        
-                        <ul class="dropdown-menu dropdown-user">
+						<li>
 
-                            <li>
+							<a> 
 
-                                <a> 
+								{{ Auth::guard('admin')->user()->email }}
 
-                                    {{ Auth::guard('admin')->user()->email }}
+							</a>
 
-                                </a>
+						</li>
 
-                            </li>
+						<li>
 
-                            <li>
+							<a href="/admin/profile/show">
 
-                                <a href="/admin/profile">
+								<i class="fa fa-user fa-fw"></i> 
 
-                                    <i class="fa fa-user fa-fw"></i> 
+								Go to Profile
 
-                                    Go to Profile
+							</a>
 
-                                </a>
+						</li>
 
-                            </li>
+						<li>
 
-                            <li>
+							<a href="/admin/profile/setting">
 
-                                <a href="/admin/settings">
+								<i class="fa fa-gear fa-fw"></i> 
 
-                                    <i class="fa fa-gear fa-fw"></i> 
+								Settings
 
-                                    Settings
+							</a>
 
-                                </a>
+						</li>
 
-                            </li>
+						<li class="divider"></li>
 
-                            <li class="divider"></li>
-                            
-                            <li>
+						<li>
 
-                                <a href="/admin/logout">
+							<a href="/admin/logout">
 
-                                    <i class="fa fa-sign-out fa-fw"></i> 
+								<i class="fa fa-sign-out fa-fw"></i> 
 
-                                    Logout
+								Logout
 
-                                </a>
+							</a>
 
-                            </li>
+						</li>
 
-                        </ul>
-                        <!-- /.dropdown-user -->
+					</ul>
+					<!-- /.dropdown-user -->
 
-                    </li>
-                    <!-- /.dropdown -->
+				</li>
+				<!-- /.dropdown -->
 
-                </ul>
-                <!-- /.navbar-top-links -->
+			</ul>
+			<!-- /.navbar-top-links -->
 
-                @yield('sidebar')
+			@yield('sidebar')
 
-                @yield('content')
+			@yield('content')
 
-            </body>
+		</body>
 
-            </html>
+		</html>

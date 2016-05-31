@@ -96,6 +96,8 @@
 			</tbody>
 		</table>
 
+		{!! $pending_products->links() !!}
+
 		@else
 
 		<strong>No pending product available</strong>

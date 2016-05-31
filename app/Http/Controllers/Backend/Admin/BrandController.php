@@ -43,14 +43,14 @@ class BrandController extends Controller
 
 	public function pendingBrandList()
 	{
-		$pending_brands = Brand::wherestatus(0)->get();
+		$pending_brands = Brand::wherestatus(0)->paginate(10);
 
 		return view('Backend.Admin.brands.pending_brand',compact('pending_brands'));
 	}
 
 	public function approvedBrandList()
 	{
-		$approved_brands = Brand::wherestatus(1)->get();
+		$approved_brands = Brand::wherestatus(1)->paginate(10);
 
 		return view('Backend.Admin.brands.approved_brand',compact('approved_brands'));
 	}

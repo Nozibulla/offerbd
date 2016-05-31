@@ -98,6 +98,8 @@
 			</tbody>
 		</table>
 
+		{!! $pending_branchs->links() !!}
+
 		@else
 
 		<strong>No pending branch available</strong>

@@ -33,23 +33,23 @@ class AdminRegistrationRequest extends Request
 
     }
 
-    /**
+/**
  * Get the error messages for the defined validation rules.
  *
  * @return array
  */
-    // public function errors()
-    // {
-    //     $errors = [
+    public function messages()
+    {
+        return [
 
-    //     'email.required' => 'email required.',
-    //     //'email.unique' => 'email already used.',
-    //     'user_password.required'  => 'password required',
-    //     'confirm_user_password.required'  => 'confirm password required',
-    //     'confirm_user_password.same'  => 'confirm password doesn\'t match'
+        'email.required' => 'Email required.',
+        'email.unique' => 'Email has already used.',
+        'user_password.required'  => 'Password required',
+        'confirm_user_password.required'  => 'Retype password please.',
+        'confirm_user_password.same'  => 'Password doesn\'t match.'
 
-    //     ];
+        ];
 
-    //     return $errors;
-    // }
+        return $errors;
+    }
 }

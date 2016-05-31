@@ -2,7 +2,7 @@
 
 @section('title')
 
-<title>Profile | offerbd</title>
+<title>Profile Setting | offerbd</title>
 
 @stop
 
@@ -87,7 +87,7 @@
 
 				@else
 
-				<img src="{{ asset('images/avatar.jpg') }}" alt="image" height="150px" width="150px">
+				<img src="{{ asset('images/avatar.jpg') }}" alt="image">
 
 				@endif
 

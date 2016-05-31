@@ -79,6 +79,8 @@
 
 				</tbody>
 			</table>
+
+			{!! $approved_brands->links() !!}
 			@else
 
 			<strong>No approved Brand is available yet</strong>

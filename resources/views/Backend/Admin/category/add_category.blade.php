@@ -68,6 +68,8 @@
 
 				</ul>
 
+				{!! $categorys->links() !!}
+
 				@else
 
 				<h3>No Category available yet</h3>
