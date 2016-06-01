@@ -32,6 +32,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::pattern('branch_id', '[0-9]+');
 	Route::pattern('category_id', '[0-9]+');
 	Route::pattern('advertisement_id', '[0-9]+');
+	Route::pattern('adprovider_id', '[0-9]+');
 
 	//login options
 	Route::get('/admin/login','Backend\Admin\AuthController@getLogin');
@@ -44,6 +45,13 @@ Route::group(['middleware' => 'admin'], function () {
 
 	//logout options
 	Route::get('/admin/logout','Backend\Admin\AuthController@getLogout');
+
+	// password resets
+	Route::get('/admin/password/email', 'Backend\Admin\PasswordController@getEmail');
+	Route::post('/admin/password/email', 'Backend\Admin\PasswordController@postEmail');
+	// Password reset routes...
+	Route::get('/admin/password/reset/{token}', 'Backend\Admin\PasswordController@getReset');
+	Route::post('/admin/password/reset', 'Backend\Admin\PasswordController@postReset');
 
 	// dashboard options
 	Route::get('/admin/dashboard','Backend\Admin\DashboardController@showDashboard');
@@ -148,6 +156,10 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/admin/advertisements/details/{advertisement_id}', 'Backend\Admin\AdvertisementController@showAdvertisementDetail');
 	// save advertisement after editing
 	Route::post('/saveeditedadvertisement','Backend\Admin\AdvertisementController@saveEditedAdvertisement');
+
+	// see all the adproviders from admin panel
+	Route::get('/admin/adproviders/list', 'Backend\Admin\DashboardController@adproviderList');
+	Route::get('/admin/adprovider-list/details/{adprovider_id}', 'Backend\Admin\DashboardController@showAdproviderDetail');
 
 	// subscriptions list
 	Route::get('/admin/subscriptions/list', 'Backend\Admin\SubscriptionController@subscriptionList');

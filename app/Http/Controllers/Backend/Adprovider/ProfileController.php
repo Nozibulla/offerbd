@@ -25,9 +25,9 @@ class ProfileController extends Controller
     {
     	$id = Auth::guard('adProvider')->user()->id;
 
-    	$adproviderInfo = Profile::whereadprovider_id($id)->firstOrFail();
+    	$profile_info = Profile::whereadprovider_id($id)->firstOrFail();
 
-    	return view('Backend.Adprovider.profile.show_profile',compact('adproviderInfo'));
+    	return view('Backend.Adprovider.profile.show_profile',compact('profile_info'));
 
     }
 

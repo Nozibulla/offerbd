@@ -69,6 +69,13 @@ $(document).ready(function(){
 
 $( document ).ajaxStart(function(event, jqxhr, ajaxOptions, errorThrown) {
 
+	$('.overlay').show();
+});
+
+
+$( document ).ajaxStop(function(event, jqxhr, ajaxOptions, errorThrown) {
+
+	$('.overlay').hide();
 });
 
 

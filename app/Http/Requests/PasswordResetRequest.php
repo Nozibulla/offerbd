@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class AdminRegistrationRequest extends Request
+class PasswordResetRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,25 +25,19 @@ class AdminRegistrationRequest extends Request
     {
         return [
 
-        "email" => "required|unique:admins|email",
+        "email" => "required|email",
         "password" => "required|min:3",
         "confirm_password"   => "required|same:password"
         
         ];
-
     }
 
-/**
- * Get the error messages for the defined validation rules.
- *
- * @return array
- */
-    public function messages()
+    // custom messages
+     public function messages()
     {
         return [
 
         'email.required' => 'Email required.',
-        'email.unique' => 'Email has already used.',
         'user_password.required'  => 'Password required',
         'confirm_password.required'  => 'Retype password please.',
         'confirm_password.same'  => 'Password doesn\'t match.'
