@@ -1,0 +1,55 @@
+.profile{
+
+}
+.profile_left{
+	background: #f7f7f7 repeat scroll 0 0;
+	width: 60%;
+	float: left;
+	margin-left: 0px;
+}
+.offerbd_table tbody{
+	overflow-y: scroll;
+}
+.offerbd_table thead,.offerbd_table tbody,.offerbd_table th,.offerbd_table tr,.offerbd_table td,.offerbd_table caption{
+	text-align: center;
+}
+.bb-alert {
+	bottom: 25%;
+	font-size: 1.2em;
+	margin-bottom: 0;
+	padding: 1em 1.3em;
+	position: fixed;
+	right: 0;
+	z-index: 2000;
+}
+.add_brand_from_branch_page{
+	display: none;
+}
+.advertisements_table .offerbd_table tr, .advertisements_table .offerbd_table td{
+	vertical-align: middle;
+}
+.advertisements_table .offerbd_table img{
+	height: 100px;
+	width: 120px;
+	border: 2px solid grey;
+}
+
+/* overlay design */
+.overlay{
+ position: absolute;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ background-color: rgba(0, 0, 0, 0.85);
+ z-index: 9999;
+ color: white;
+ display: inline-block;
+ opacity: 0.8;
+}
+.overlay img{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

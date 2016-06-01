@@ -2470,6 +2470,10 @@ $(document).ready(function(){
 
 				$('.bb-alert').show().delay(3000).fadeOut();
 
+				currentPageUrl = window.location.href;
+
+				$('.profile_right').load(currentPageUrl+' .profile_image');
+
 
 			})
 			.error(function(jqXHR){

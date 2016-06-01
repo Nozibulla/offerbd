@@ -73,270 +73,280 @@
 	<body>
 
 		<div id="wrapper">
+
+			@define $admin_profile = auth()->guard('admin')->user()->profile
+
+			<!-- checking the admin has set the profile info -->
+			@if((empty($admin_profile->first_name) || empty($admin_profile->last_name)) && (Request::path() != 'admin/profile/show' && Request::path() != 'admin/profile/setting'))
+
+			@include('Backend.modals.set_profile_warning')
+
+			@endif
+			<!-- end of admin profile info checking -->
 			
 			<!-- adding flash message -->
 			@include('Shared._partials.flash')
 
 			<!-- showing the ajax loader -->
 			<div class="overlay" style="display: none">
-			   <img src="{{ asset('images/offerbd.gif') }}" class="img-responsive" alt="offerbd loader">
-		   </div>
-
-		   <!-- Navigation -->
-		   <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-
-			<div class="navbar-header">
-
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-
-					<span class="sr-only">Toggle navigation</span>
-
-					<span class="icon-bar"></span>
-
-					<span class="icon-bar"></span>
-
-					<span class="icon-bar"></span>
-
-				</button>
-
-				<a class="navbar-brand" href="/admin/dashboard">
-					{{ (auth()->guard('admin')->user()->profile->first_name && auth()->guard('admin')->user()->profile->last_name) ? auth()->guard('admin')->user()->profile->first_name ." ". auth()->guard('admin')->user()->profile->last_name : "Mr. X" }} | offerBD
-				</a>
-
+				<img src="{{ asset('images/offerbd.gif') }}" class="img-responsive" alt="offerbd loader">
 			</div>
-			<!-- /.navbar-header -->
 
-			<ul class="nav navbar-top-links navbar-right">
+			<!-- Navigation -->
+			<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 
-				<li class="dropdown">
+				<div class="navbar-header">
 
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 
-						<i class="fa fa-envelope fa-fw"></i>  
+						<span class="sr-only">Toggle navigation</span>
 
-						<i class="fa fa-caret-down"></i>
+						<span class="icon-bar"></span>
 
+						<span class="icon-bar"></span>
+
+						<span class="icon-bar"></span>
+
+					</button>
+
+					<a class="navbar-brand" href="/admin/dashboard">
+						{{ (auth()->guard('admin')->user()->profile->first_name && auth()->guard('admin')->user()->profile->last_name) ? auth()->guard('admin')->user()->profile->first_name ." ". auth()->guard('admin')->user()->profile->last_name : "Mr. X" }} | offerBD
 					</a>
 
-					<ul class="dropdown-menu dropdown-messages">
+				</div>
+				<!-- /.navbar-header -->
 
-						<li>
+				<ul class="nav navbar-top-links navbar-right">
 
-							<a href="#">
+					<li class="dropdown">
 
-								<div>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 
-									<strong>John Smith</strong>
+							<i class="fa fa-envelope fa-fw"></i>  
 
-									<span class="pull-right text-muted">
+							<i class="fa fa-caret-down"></i>
 
-										<em>Yesterday</em>
+						</a>
 
-									</span>
+						<ul class="dropdown-menu dropdown-messages">
 
-								</div>
+							<li>
 
-								<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+								<a href="#">
 
-							</a>
+									<div>
 
-						</li>
+										<strong>John Smith</strong>
 
-						<li class="divider"></li>
+										<span class="pull-right text-muted">
 
-					</ul>
-					<!-- /.dropdown-messages -->
+											<em>Yesterday</em>
 
-				</li>
-				<!-- /.dropdown -->
+										</span>
 
-				<li class="dropdown">
+									</div>
 
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
 
-						<i class="fa fa-tasks fa-fw"></i> 
+								</a>
 
-						<i class="fa fa-caret-down"></i>
+							</li>
 
-					</a>
+							<li class="divider"></li>
 
-					<ul class="dropdown-menu dropdown-tasks">
+						</ul>
+						<!-- /.dropdown-messages -->
 
-						<li>
+					</li>
+					<!-- /.dropdown -->
 
-							<a href="#">
+					<li class="dropdown">
 
-								<div>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 
-									<p>
+							<i class="fa fa-tasks fa-fw"></i> 
 
-										<strong>Task 1</strong>
+							<i class="fa fa-caret-down"></i>
 
-										<span class="pull-right text-muted">40% Complete</span>
+						</a>
 
-									</p>
+						<ul class="dropdown-menu dropdown-tasks">
 
-									<div class="progress progress-striped active">
+							<li>
 
-										<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+								<a href="#">
 
-											<span class="sr-only">40% Complete (success)</span>
+									<div>
+
+										<p>
+
+											<strong>Task 1</strong>
+
+											<span class="pull-right text-muted">40% Complete</span>
+
+										</p>
+
+										<div class="progress progress-striped active">
+
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+
+												<span class="sr-only">40% Complete (success)</span>
+
+											</div>
 
 										</div>
 
 									</div>
 
-								</div>
+								</a>
 
-							</a>
+							</li>
 
-						</li>
+							<li class="divider"></li>
 
-						<li class="divider"></li>
+							<li>
 
-						<li>
+								<a class="text-center" href="#">
 
-							<a class="text-center" href="#">
+									<strong>See All Tasks</strong>
 
-								<strong>See All Tasks</strong>
+									<i class="fa fa-angle-right"></i>
 
-								<i class="fa fa-angle-right"></i>
+								</a>
 
-							</a>
+							</li>
 
-						</li>
+						</ul>
+						<!-- /.dropdown-tasks -->
 
-					</ul>
-					<!-- /.dropdown-tasks -->
+					</li>
+					<!-- /.dropdown -->
 
-				</li>
-				<!-- /.dropdown -->
+					<li class="dropdown">
 
-				<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<i class="fa fa-bell fa-fw"></i>
 
-						<i class="fa fa-bell fa-fw"></i>
+							<i class="fa fa-caret-down"></i>
 
-						<i class="fa fa-caret-down"></i>
+						</a>
 
-					</a>
+						<ul class="dropdown-menu dropdown-alerts">
 
-					<ul class="dropdown-menu dropdown-alerts">
+							<li>
 
-						<li>
+								<a href="#">
 
-							<a href="#">
+									<div>
 
-								<div>
+										<i class="fa fa-comment fa-fw"></i>
 
-									<i class="fa fa-comment fa-fw"></i>
+										New Comment
 
-									New Comment
+										<span class="pull-right text-muted small">4 minutes ago</span>
 
-									<span class="pull-right text-muted small">4 minutes ago</span>
+									</div>
 
-								</div>
+								</a>
 
-							</a>
+							</li>
 
-						</li>
+							<li class="divider"></li>
 
-						<li class="divider"></li>
+							<li>
 
-						<li>
+								<a class="text-center" href="#">
 
-							<a class="text-center" href="#">
+									<strong>See All Alerts</strong>
 
-								<strong>See All Alerts</strong>
+									<i class="fa fa-angle-right"></i>
 
-								<i class="fa fa-angle-right"></i>
+								</a>
 
-							</a>
+							</li>
 
-						</li>
+						</ul>
 
-					</ul>
+						<!-- /.dropdown-alerts -->
 
-					<!-- /.dropdown-alerts -->
+					</li>
 
-				</li>
+					<!-- /.dropdown -->
 
-				<!-- /.dropdown -->
+					<li class="dropdown">
 
-				<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<i class="fa fa-user fa-fw"></i>  
 
-						<i class="fa fa-user fa-fw"></i>  
+							<i class="fa fa-caret-down"></i>
 
-						<i class="fa fa-caret-down"></i>
+						</a>
 
-					</a>
+						<ul class="dropdown-menu dropdown-user">
 
-					<ul class="dropdown-menu dropdown-user">
+							<li>
 
-						<li>
+								<a> 
 
-							<a> 
+									{{ Auth::guard('admin')->user()->email }}
 
-								{{ Auth::guard('admin')->user()->email }}
+								</a>
 
-							</a>
+							</li>
 
-						</li>
+							<li>
 
-						<li>
+								<a href="/admin/profile/show">
 
-							<a href="/admin/profile/show">
+									<i class="fa fa-user fa-fw"></i> 
 
-								<i class="fa fa-user fa-fw"></i> 
+									Go to Profile
 
-								Go to Profile
+								</a>
 
-							</a>
+							</li>
 
-						</li>
+							<li>
 
-						<li>
+								<a href="/admin/profile/setting">
 
-							<a href="/admin/profile/setting">
+									<i class="fa fa-gear fa-fw"></i> 
 
-								<i class="fa fa-gear fa-fw"></i> 
+									Settings
 
-								Settings
+								</a>
 
-							</a>
+							</li>
 
-						</li>
+							<li class="divider"></li>
 
-						<li class="divider"></li>
+							<li>
 
-						<li>
+								<a href="/admin/logout">
 
-							<a href="/admin/logout">
+									<i class="fa fa-sign-out fa-fw"></i> 
 
-								<i class="fa fa-sign-out fa-fw"></i> 
+									Logout
 
-								Logout
+								</a>
 
-							</a>
+							</li>
 
-						</li>
+						</ul>
+						<!-- /.dropdown-user -->
 
-					</ul>
-					<!-- /.dropdown-user -->
+					</li>
+					<!-- /.dropdown -->
 
-				</li>
-				<!-- /.dropdown -->
+				</ul>
+				<!-- /.navbar-top-links -->
 
-			</ul>
-			<!-- /.navbar-top-links -->
+				@yield('sidebar')
 
-			@yield('sidebar')
+				@yield('content')
 
-			@yield('content')
+			</body>
 
-		</body>
-
-		</html>
+			</html>

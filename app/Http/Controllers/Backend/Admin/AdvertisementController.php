@@ -74,6 +74,8 @@ class AdvertisementController extends Controller
 
 			$advertisement->expire_date = $request->expire_date;
 
+			$advertisement->status = 1; // by default approved for admin addition
+
 			$advertisement->save();
 
 		}

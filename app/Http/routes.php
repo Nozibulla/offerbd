@@ -176,10 +176,15 @@ Route::group(['middleware' => 'adProvider'], function () {
 
 	Route::get('/adprovider/dashboard','Backend\Adprovider\DashboardController@showDashboard');
 
-	Route::get('/adprovider/profile', 'Backend\Adprovider\ProfileController@showProfile');
+	Route::get('/adprovider/profile/show', 'Backend\Adprovider\ProfileController@showProfile');
+	Route::get('/adprovider/profile/setting', 'Backend\Adprovider\ProfileController@profileSetting');
 
 	//updating info
 	Route::post('/SAdPI','Backend\Adprovider\ProfileController@updateProfileInfo');
+
+	// saving adprovider profile picture
+	Route::post('/adprovider/saveimage','Backend\Adprovider\ProfileController@setProfilePicture');
+
 
 	// brands options
 	Route::get('/adprovider/brands/add-brand', 'Backend\Adprovider\APBrandController@addBrand');

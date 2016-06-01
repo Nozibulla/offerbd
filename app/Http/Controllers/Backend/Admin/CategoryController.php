@@ -38,6 +38,8 @@ class CategoryController extends Controller
 
     	$category->profile_id = $profile_id;
 
+        $category->status = 1;
+
     	$category->save();
     }
 

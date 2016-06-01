@@ -29,13 +29,13 @@
     <script src="{{ asset('shared/js/bootstrap.min.js') }}"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="{{ asset('backend/admin/js/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('backend/adprovider/js/metisMenu.min.js') }}"></script>
 
     <!-- inline editing -->
     <script src="{{ asset('shared/inline-edit/js/bootstrap-editable.js') }}" type="text/javascript"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="{{ asset('backend/admin/js/custom.js') }}"></script>
+    <script src="{{ asset('backend/adprovider/js/custom.js') }}"></script>
 
     <script src="{{ asset('backend/adprovider/js/offerbd.custom.js') }}"></script>
 
@@ -70,7 +70,23 @@
 
         <div id="wrapper">
 
-        @include('Shared._partials.flash')
+        @define $adprovider_profile = auth()->guard('adProvider')->user()->profile
+
+            <!-- checking the admin has set the profile info -->
+            @if((empty($adprovider_profile->first_name) || empty($adprovider_profile->last_name)) && (Request::path() != 'adprovider/profile/show' && Request::path() != 'adprovider/profile/setting'))
+
+            @include('Backend.modals.set_profile_warning')
+
+            @endif
+            <!-- end of admin profile info checking -->
+            
+            <!-- adding flash message -->
+            @include('Shared._partials.flash')
+
+            <!-- showing the ajax loader -->
+            <div class="overlay" style="display: none">
+                <img src="{{ asset('images/offerbd.gif') }}" class="img-responsive" alt="offerbd loader">
+            </div>
 
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -276,7 +292,7 @@
 
                             <li>
 
-                                <a href="/adprovider/profile">
+                                <a href="/adprovider/profile/show">
 
                                     <i class="fa fa-user fa-fw"></i> 
 
@@ -288,7 +304,7 @@
 
                             <li>
 
-                                <a href="/adprovider/settings">
+                                <a href="/adprovider/profile/setting">
 
                                     <i class="fa fa-gear fa-fw"></i> 
 

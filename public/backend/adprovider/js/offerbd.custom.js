@@ -111,6 +111,21 @@ $(document).ajaxError(function(event, jqxhr, ajaxOptions, errorThrown) {
 
 });
 
+$(document).ready(function(){
+
+	// showing the set profile warning modal
+	$("#setProfile").modal({
+
+		show: true,
+
+		backdrop: 'static',
+
+		keyboard: false
+
+	});
+
+});
+
 // creating brand manager for adprovider
 (function($){
 
@@ -713,6 +728,80 @@ $(document).ajaxError(function(event, jqxhr, ajaxOptions, errorThrown) {
 	$(function(){
 
 		advertisementManager.init();
+
+	});
+
+})(jQuery);
+
+// profile manager
+(function($){
+
+	var profileManager = {
+
+		init: function(){
+
+			var form,url,method,data,message,currentPageUrl,formData,errors;
+
+			// saving the profile picture of admin/owner
+			$(".profile").on('submit','.profile_right form[data-remote]',this.saveProfilePicture);
+
+		},
+
+		// saving the profile picture
+		saveProfilePicture: function(event){
+
+			event.preventDefault();
+
+			form = $(this);
+
+			method = form.find('input[name="_method"]').val() || 'POST';
+
+			url = form.prop('action');
+
+			formData = new FormData(this);
+			
+			$.ajax({
+
+				type : method,
+
+				url  : url,
+
+				contentType: false,
+
+				processData: false,
+
+				data : formData,
+
+			})
+			.success(function(){
+
+				form.trigger('reset');
+
+				message = form.data('remote-success');
+
+				$('.bb-alert').find('span').html(message);
+
+				$('.bb-alert').show().delay(3000).fadeOut();
+
+				currentPageUrl = window.location.href;
+
+				$('.profile_right').load(currentPageUrl+' .profile_image');
+
+
+			})
+			.error(function(jqXHR){
+
+				alert("error");
+
+			});
+
+		},
+
+	};
+
+	$(function(){
+
+		profileManager.init();
 
 	});
 

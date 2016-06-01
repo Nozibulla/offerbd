@@ -42,6 +42,8 @@ class ProductController extends Controller
 
     	$product->profile_id = $profile_id;
 
+        $product->status = 1;
+
     	$product->save();
 
     }

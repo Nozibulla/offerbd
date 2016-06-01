@@ -62,35 +62,34 @@
 						</a>						
 					</td>
 					<td>
-						<td>
-							<!-- checking whether this is your addition or not -->
-							@if (is_null($brand->profile->admin_id) && ($brand->profile->admin_id != auth()->guard('admin')->user()->id))
-							<a href="/profile/members/{{ $brand->profile->id }}">
-								{{ $brand->profile->first_name." ".$brand->profile->last_name }}
-							</a>
-							@else
+						<!-- checking whether this is your addition or not -->
+						@if (is_null($brand->profile->admin_id) && ($brand->profile->admin_id != auth()->guard('admin')->user()->id))
+						<a href="/profile/members/{{ $brand->profile->id }}">
+							{{ $brand->profile->first_name." ".$brand->profile->last_name }}
+						</a>
+						@else
 
-							<!-- printing my name -->
-							{{ $brand->profile->first_name." ".$brand->profile->last_name  }} (you)
-							@endif
-						</td>					
-					</tr>
-					@endforeach
+						<!-- printing my name -->
+						{{ $brand->profile->first_name." ".$brand->profile->last_name  }} (you)
+						@endif
+					</td>					
+				</tr>
+				@endforeach
 
-				</tbody>
-			</table>
+			</tbody>
+		</table>
 
-			{!! $approved_brands->links() !!}
-			@else
+		{!! $approved_brands->links() !!}
+		@else
 
-			<strong>No approved Brand is available yet</strong>
+		<strong>No approved Brand is available yet</strong>
 
-			@endif
-
-		</div>
+		@endif
 
 	</div>
-	<!-- /#page-wrapper -->
+
+</div>
+<!-- /#page-wrapper -->
 
 </div>
 <!-- /#wrapper -->

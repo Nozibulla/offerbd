@@ -40,16 +40,19 @@ class AuthController extends Controller
 
 		$admin->password = Hash::make($request->password);
 
-		$admin->save();
+		if($admin->save()){
 
-		$profile = new Profile;
+			$profile = new Profile;
 
-		$profile->admin_id = $admin->id;
+			$profile->admin_id = $admin->id;
 
-		$profile->save();
+			$profile->membership_id = 1;
+
+			$profile->save();
 
 		//"administrator" access by default to newly registered user
-		$admin->role()->attach(2);
+			$admin->role()->attach(2);
+		}
 
 	}
 

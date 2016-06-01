@@ -37,6 +37,8 @@ class BrandController extends Controller
 
 		$brand->profile_id = $profile_id;
 
+		$brand->status = 1;
+
 		$brand->save();
 
 	}

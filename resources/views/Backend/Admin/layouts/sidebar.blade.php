@@ -18,7 +18,9 @@
                     Dashboard
                 </a>
             </li>
+
             @if(Auth::guard('admin')->user()->hasRole("owner"))
+            
             <li>
                 <a href="#">
                     <i class="fa fa-bar-chart-o fa-fw"></i> 
@@ -26,14 +28,14 @@
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                <li>
-                        <a href="/admin/pending-admin">Pending List</a>
+                    <li>
+                        <a href="{{ url('/admin/pending-admin') }}">Pending List</a>
                     </li>
                     <li>
-                        <a href="/admin/approved-admin">Approved List</a>
+                        <a href="{{ url('/admin/approved-admin') }}">Approved List</a>
                     </li>
                     <li>
-                        <a href="/admin/rolewise-admin">Role per Admin</a>
+                        <a href="{{ url('/admin/rolewise-admin') }}">Role per Admin</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

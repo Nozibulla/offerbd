@@ -45,6 +45,8 @@ class AuthController extends Controller
 
 			$profile->adprovider_id = $adprovider->id;
 
+			$profile->membership_id = 1;
+
 			$profile->save();
 
 			return redirect('/adprovider/login');
@@ -73,11 +75,20 @@ class AuthController extends Controller
 
 		if(auth()->guard('adProvider')->attempt($adprovider,$remember)){
 
-			return redirect('/adprovider/dashboard');
-		}
+			// return redirect()->intended('/adprovider/dashboard');
 
-		return Redirect::back()->withErrors(['msg'=>'The credentials doesn\'t match'])->withInput();
-		;
+			// successfully logged in
+
+			return 1;
+
+		}
+		else
+		{
+			// return Redirect::back()->withErrors(['msg'=>'The credentials doesn\'t match'])->withInput();
+
+			return 0;
+
+		}
 		
 	}
 

@@ -43,6 +43,8 @@ class BranchController extends Controller
 
     	$branch->profile_id = $profile_id;
 
+    	$branch->status = 1; // by default approved for admin addition
+
     	$branch->save();
 
     }

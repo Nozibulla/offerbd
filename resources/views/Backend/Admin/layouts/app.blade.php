@@ -56,10 +56,12 @@
     </head>
 
     <body id="app-layout">
-
+    
+    <!-- setting the overlay for loading image -->
      <div class="overlay" style="display: none">
          <img src="{{ asset('images/offerbd.gif') }}" class="img-responsive" alt="offerbd loader">
      </div>
+     <!-- end of loaded -->
 
      <nav class="navbar navbar-default navbar-static-top">
 

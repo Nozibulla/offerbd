@@ -14,6 +14,7 @@
    <div class="alert alert-success rs_div" style="display:none">
        <strong class="reg_successful"></strong>
    </div>
+   <!-- end of message -->
 
    <div class="registrationForm">
 

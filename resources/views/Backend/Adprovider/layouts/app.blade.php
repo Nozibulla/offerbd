@@ -24,6 +24,8 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('shared/js/bootstrap.min.js') }}"></script>
 
+    <script src="{{ asset('backend/adprovider/js/offerbd.login.js') }}"></script>
+
     <!-- Custom Fonts -->
     <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
@@ -36,11 +38,13 @@
 
     <!-- customize css file for login/registration -->
 
-    <link rel="stylesheet" href="{{ asset('backend/admin/css/login/reset.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('backend/adprovider/css/login/reset.css') }}" type="text/css">
 
-    <link rel="stylesheet" href="{{ asset('backend/admin/css/login/animate.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('backend/adprovider/css/login/animate.css') }}" type="text/css">
 
-    <link rel="stylesheet" href="{{ asset('backend/admin/css/login/styles.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('backend/adprovider/css/login/styles.css') }}" type="text/css">
+
+    <link rel="stylesheet" href="{{ asset('backend/adprovider/css/login/offerbd.custom.login.css') }}" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -54,94 +58,100 @@
 
     <body id="app-layout">
 
-        <nav class="navbar navbar-default navbar-static-top">
+        <!-- setting the overlay for loading image -->
+        <div class="overlay" style="display: none">
+           <img src="{{ asset('images/offerbd.gif') }}" class="img-responsive" alt="offerbd loader">
+       </div>
+       <!-- end of loaded -->
 
-            <div class="container">
+       <nav class="navbar navbar-default navbar-static-top">
 
-                <div class="navbar-header">
+        <div class="container">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+            <div class="navbar-header">
 
-                        <span class="sr-only">Toggle Navigation</span>
+                <!-- Collapsed Hamburger -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
 
-                        <span class="icon-bar"></span>
+                    <span class="sr-only">Toggle Navigation</span>
 
-                        <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
 
-                        <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
 
-                    </button>
+                    <span class="icon-bar"></span>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">OfferBD</a>
+                </button>
 
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-
-                    <!-- Right Side Of Navbar -->
-
-                    <ul class="nav navbar-nav navbar-right">
-
-                        <!-- Authentication Links -->
-
-                        @if (Auth::guard('adProvider')->guest())
-
-                        <li>
-
-                            <a href="{{ url('/adprovider/login') }}">Sign In</a>
-                            
-                        </li>
-
-                        <li>
-
-                            <a href="{{ url('/adprovider/registration') }}">Sign Up</a>
-
-                        </li>
-
-                        @else
-
-                        <li class="dropdown">
-
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-
-                                {{ auth()->guard('adProvider')->user()->email }} 
-
-                                <span class="caret"></span>
-
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-
-                                <li>
-
-                                    <a href="{{ url('/adprovider/logout') }}">
-
-                                        <i class="fa fa-btn fa-sign-out"></i>
-
-                                        Logout
-
-                                    </a>
-
-                                </li>
-
-                            </ul>
-
-                        </li>
-
-                        @endif
-
-                    </ul>
-
-                </div>
+                <!-- Branding Image -->
+                <a class="navbar-brand" href="{{ url('/') }}">OfferBD</a>
 
             </div>
 
-        </nav>
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
 
-        @yield('content')
+                <!-- Right Side Of Navbar -->
 
-    </body>
+                <ul class="nav navbar-nav navbar-right">
 
-    </html>
+                    <!-- Authentication Links -->
+
+                    @if (Auth::guard('adProvider')->guest())
+
+                    <li>
+
+                        <a href="{{ url('/adprovider/login') }}">Sign In</a>
+                        
+                    </li>
+
+                    <li>
+
+                        <a href="{{ url('/adprovider/registration') }}">Sign Up</a>
+
+                    </li>
+
+                    @else
+
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+
+                            {{ auth()->guard('adProvider')->user()->email }} 
+
+                            <span class="caret"></span>
+
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li>
+
+                                <a href="{{ url('/adprovider/logout') }}">
+
+                                    <i class="fa fa-btn fa-sign-out"></i>
+
+                                    Logout
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                    @endif
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    @yield('content')
+
+</body>
+
+</html>
