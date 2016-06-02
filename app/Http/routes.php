@@ -184,6 +184,9 @@ Route::group(['middleware' => 'adProvider'], function () {
 	Route::post('/adprovider/login','Backend\adprovider\AuthController@postLogin');
 	Route::get('/adprovider/registration','Backend\adprovider\AuthController@getRegister');
 	Route::post('/adprovider/registration','Backend\adprovider\AuthController@postRegister');
+
+	// registration confirm through email verification
+	Route::get('/adprovider/registration/confirm/{token_email}', 'Backend\Adprovider\AuthController@confirmRegistration'); 
 	Route::get('/adprovider/logout','Backend\adprovider\AuthController@getLogout');
 
 	Route::get('/adprovider/dashboard','Backend\Adprovider\DashboardController@showDashboard');

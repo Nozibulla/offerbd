@@ -112,7 +112,7 @@ $( document ).ajaxStop(function(event, jqxhr, ajaxOptions, errorThrown) {
 
 				$('.rs_div').show();
 
-				document.location.href = "/adprovider/dashboard";
+				// document.location.href = "/adprovider/dashboard";
 				
 			})
 			.error(function(jqXHR){

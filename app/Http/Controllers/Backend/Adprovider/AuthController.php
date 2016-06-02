@@ -22,6 +22,8 @@ use Auth;
 
 use Redirect;
 
+use Mail;
+
 class AuthController extends Controller
 {
 
@@ -38,6 +40,10 @@ class AuthController extends Controller
 
 		$adprovider->password = Hash::make($request->password);
 
+		$token = str_random(60); // random token generation
+
+		$adprovider->remember_token = $token;
+
 		if($adprovider->save())
 		{
 
@@ -47,10 +53,46 @@ class AuthController extends Controller
 
 			$profile->membership_id = 1;
 
-			$profile->save();
+			// saving the profile after registering the adprovider
+			if($profile->save()){
+
+				// sending confirmation email for newly registered adprovider
+				Mail::send('Backend.Adprovider.profile.confirm_registration', ['adprovider' => $adprovider], function ($message) use ($adprovider) {
+
+					$message->to($adprovider->email, $adprovider->email)->subject('Account Confirmation');
+				});
+			}
+
+		}
+
+	}
+
+	// registration confirmation by email verification
+	public function confirmRegistration(Request $request)
+	{
+		$token = $request->token_email;
+
+		$email = $request->email;
+
+		// return $token;
+
+		$find_adprovider_with_matched_email_token = Adprovider::whereemail($email)->whereremember_token($token)->firstOrFail();
+
+		// return $find_adprovider_with_matched_email_token;
+
+		if($find_adprovider_with_matched_email_token->status == 1){
+
+			echo "You are already a confirmed user.Please login...";
+		}
+		else{
+
+			$find_adprovider_with_matched_email_token->status = 1;
+
+			$find_adprovider_with_matched_email_token->save();
+
+			echo "Email verification successful.Please login...";
 
 			return redirect('/adprovider/login');
-
 		}
 
 	}

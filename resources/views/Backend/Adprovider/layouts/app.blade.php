@@ -12,7 +12,7 @@
 
     <meta name="csrf-token" content="{!! csrf_token() !!}">
 
-    <title>Login Admin | OfferBD</title>
+    @yield('title')
 
     <!-- js -->
 

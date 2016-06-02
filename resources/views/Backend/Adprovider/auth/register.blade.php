@@ -18,7 +18,7 @@
 
 <div class="registrationForm">
 
-    {!! Form::open(['method' => 'POST', 'url' => '/adprovider/registration' , 'name'=> 'registrationForm', 'data-remote' => 'data-remote', 'data-remote-success' => 'Registration Successful']) !!}
+    {!! Form::open(['method' => 'POST', 'url' => '/adprovider/registration' , 'name'=> 'registrationForm', 'data-remote' => 'data-remote', 'data-remote-success' => 'Please confirm your mail to complete the registration.']) !!}
 
     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
        {!! Form::email('email', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Enter Email']) !!}
