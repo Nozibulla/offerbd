@@ -12,7 +12,7 @@ use App\Http\Requests\PasswordResetRequest;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Admin;
+use App\Models\Adprovider;
 
 use App\Models\Passwordreset;
 
@@ -26,15 +26,11 @@ use Hash;
 
 class PasswordController extends Controller
 {
-	public function __construct()
-	{
-    	//$this->middleware('adminAccess');
-	}
 
     // showing the password reset email page
 	public function getEmail()
 	{
-		return view('Backend.Admin.auth.passwords.email');
+		return view('Backend.Adprovider.auth.passwords.email');
 	}
 
     // sending an email
@@ -43,7 +39,7 @@ class PasswordController extends Controller
 		$reset_email = $request->email;
 
 		// checking whether the email is registered or not
-		$check_user = Admin::whereemail($reset_email)->firstOrFail();
+		$check_user = Adprovider::whereemail($reset_email)->firstOrFail();
 
 		$profile_info = $check_user->profile;
 
@@ -55,15 +51,15 @@ class PasswordController extends Controller
 
 		// checking the user has already reset password for once or not
 
-		$find_admin = Passwordreset::whereemail($reset_email)->first();
+		$find_adprovider = Passwordreset::whereemail($reset_email)->first();
 
-		if ($find_admin) {
+		if ($find_adprovider) {
 
-			// admin already reset password for at least once.so updating the token and timestamps
+			// adprovider already reset password for at least once.so updating the token and timestamps
 
-			$find_admin->token = $token;
+			$find_adprovider->token = $token;
 
-			$find_admin->save();
+			$find_adprovider->save();
 			
 		}
 		else{
@@ -81,7 +77,7 @@ class PasswordController extends Controller
 		}
 
 		// sending password reset link 
-		Mail::send('Backend.Admin.auth.emails.password', ['profile_info' => $profile_info], function ($message) use ($profile_info) {
+		Mail::send('Backend.Adprovider.auth.emails.password', ['profile_info' => $profile_info], function ($message) use ($profile_info) {
 
 			$message->to($profile_info->reset_email, $profile_info->first_name." ".$profile_info->last_name)->subject('Password Reset');
 		});
@@ -93,11 +89,11 @@ class PasswordController extends Controller
 		$token = $request->token;
 
 		// checking whether the token is valid or not and the token is generated before 1 hour
-		$find_admin_with_token_matched = Passwordreset::wheretoken($token)->where('updated_at', '>', Carbon::now()->subHours(1))->first();
+		$find_adproviders_with_token_matched = Passwordreset::wheretoken($token)->where('updated_at', '>', Carbon::now()->subHours(1))->first();
 
-		if ($find_admin_with_token_matched) {
+		if ($find_adproviders_with_token_matched) {
 			
-			return view('Backend.Admin.auth.passwords.reset',compact('token'));
+			return view('Backend.Adprovider.auth.passwords.reset',compact('token'));
 		}
 		else{
 
@@ -114,7 +110,7 @@ class PasswordController extends Controller
 
 		$new_password = Hash::make($request->password);
 
-		$find_admin = Admin::whereemail($email)->firstOrFail();
+		$find_admin = Adprovider::whereemail($email)->firstOrFail();
 
 		$find_admin->password = $new_password;
 

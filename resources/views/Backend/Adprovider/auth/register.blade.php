@@ -43,7 +43,7 @@
 
 </div>
 
-<p class="registration"><a href="/adprovider/login">Login</a></p>
+<p class="registration"><a href="{{ url('/adprovider/login') }}">Login</a></p>
 
 </div>
 

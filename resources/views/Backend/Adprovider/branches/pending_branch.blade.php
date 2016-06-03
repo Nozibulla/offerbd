@@ -52,7 +52,7 @@
 					<tr>
 						<td>{{ $key+1 }}</td>
 						<td>
-							<a href="/adprovider/branch/details/{{$branch->id}}" title="click to see the detail page" target="_blank">{{ $branch->branch_name }}</a>
+							<a href="{{ url('/adprovider/branch/details', $branch->id) }}" title="click to see the detail page" target="_blank">{{ $branch->branch_name }}</a>
 						</td>
 					
 						<td>{{ ($branch->status == 0) ? "pending" : "Approved" }}</td>

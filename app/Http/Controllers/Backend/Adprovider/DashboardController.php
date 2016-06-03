@@ -18,6 +18,6 @@ class DashboardController extends Controller
 
 	public function showDashboard()
 	{
-		return view('Backend.Adprovider.dashboard');
+		return view('Backend.Adprovider.others.dashboard');
 	}
 }

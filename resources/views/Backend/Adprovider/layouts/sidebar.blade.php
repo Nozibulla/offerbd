@@ -13,7 +13,7 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="/adprovider/dashboard">
+                <a href="{{ url('/adprovider/dashboard') }}">
                     <i class="fa fa-dashboard fa-fw"></i> 
                     Dashboard
                 </a>
@@ -79,7 +79,7 @@
                 <!-- < /.nav-second-level > -->
             </li>
             <li>
-                <a href="#">
+                <a href="{{ url('#') }}">
                     <i class="fa fa-sitemap fa-fw"></i> 
                     Branches
                     <span class="fa arrow"></span>
@@ -98,7 +98,7 @@
                 <!-- < /.nav-second-level > -->
             </li>
             <li>
-                <a href="#">
+                <a href="{{ url('#') }}">
                     <i class="fa fa-sitemap fa-fw"></i> 
                     Brands
                     <span class="fa arrow"></span>
@@ -116,11 +116,11 @@
                 </ul>
                 <!-- < /.nav-second-level > -->
             </li>
-            <li>
+            <!-- <li>
                 <a href="{{ url('/adprovider/subscriptions/list') }}">
                     Subscriptions
                 </a>
-            </li>
+            </li> -->
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

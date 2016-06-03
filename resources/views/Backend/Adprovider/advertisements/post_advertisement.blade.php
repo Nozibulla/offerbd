@@ -48,7 +48,7 @@
 					{!! Form::select('brand_id', $brands, null, ['id' => 'brand_id', 'class' => 'form-control', 'required' => 'required','placeholder' => (count($brands)>0) ? 'Select Brand' : 'No Brand available']) !!}
 					<p class="help-block">
 						@if (!count($brands))
-						<a href="/admin/brands/add-brand" title="add brand first">Add Brand First</a>
+						<a href="{{ url('/admin/brands/add-brand') }}" title="add brand first">Add Brand First</a>
 						@endif
 					</p>
 					<small class="text-danger brand_id">{{ $errors->first('brand_id') }}</small>
@@ -59,7 +59,7 @@
 					{!! Form::select('branch_id', $branchs, null, ['id' => 'branch_id', 'class' => 'form-control', 'required' => 'required','placeholder' => (count($branchs)>0) ? 'Select Branch' : 'No Branch available']) !!}
 					<p class="help-block">
 						@if (!count($branchs))
-						<a href="/admin/branch/add-branch" title="add branch first">Add Branch First</a>
+						<a href="{{ url('/admin/branch/add-branch') }}" title="add branch first">Add Branch First</a>
 						@endif
 					</p>
 					<small class="text-danger branch_id">{{ $errors->first('branch_id') }}</small>
@@ -70,7 +70,7 @@
 					{!! Form::select('product_id', $products, null, ['id' => 'product_id', 'class' => 'form-control', 'required' => 'required','placeholder' => (count($products)>0) ? 'Select Product' : 'No Product available']) !!}
 					<p class="help-block">
 						@if (!count($products))
-						<a href="/admin/products/add-product" title="add product first">Add Product First</a>
+						<a href="{{ url('/admin/products/add-product') }}" title="add product first">Add Product First</a>
 						@endif
 					</p>
 					<small class="text-danger product_id">{{ $errors->first('product_id') }}</small>

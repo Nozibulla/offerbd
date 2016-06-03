@@ -80,7 +80,7 @@
 			<!-- checking the admin has set the profile info -->
 			@if((empty($admin_profile->first_name) || empty($admin_profile->last_name)) && (Request::path() != 'admin/profile/show' && Request::path() != 'admin/profile/setting'))
 
-			@include('Backend.modals.set_profile_warning')
+			@include('Backend.modals.set_admin_profile_warning')
 
 			@endif
 			<!-- end of admin profile info checking -->

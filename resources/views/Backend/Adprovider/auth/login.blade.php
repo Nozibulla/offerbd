@@ -14,11 +14,12 @@
  <div class="alert alert-danger error_div" style="display:none">
      <strong class="match_error"></strong>
  </div>
+ <!-- end of matching error -->
  <!-- successful login message -->
  <div class="alert alert-success ls_div" style="display:none">
      <strong class="login_successful"></strong>
  </div>
-
+<!-- end of success message -->
  <div class="loginForm">
 
  {!! Form::open(['method' => 'POST', 'url' => '/adprovider/login' , 'name'=> 'loginForm', 'data-remote' => 'data-remote', 'data-remote-success' => 'Successfully logged in']) !!}
@@ -33,7 +34,7 @@
        <small class="text-danger req_password">{{ $errors->first('password') }}</small>
    </div>
 
-   <p><a href="/adprovider/password/email">Forgot your password?</a></p>
+   <p><a href="{{ url('/adprovider/password/email') }}">Forgot your password?</a></p>
 
    <div id="lower">
 
@@ -49,7 +50,7 @@
 
 </div>
 
-<p class="registration"><a href="/adprovider/registration">Registration</a></p>
+<p class="registration"><a href="{{ url('/adprovider/registration') }}">Registration</a></p>
 
 </div>
 
