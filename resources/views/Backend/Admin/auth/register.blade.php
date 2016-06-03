@@ -14,7 +14,7 @@
    <div class="alert alert-success rs_div" style="display:none">
        <strong class="reg_successful"></strong>
    </div>
-   <!-- end of message -->
+   <!-- end of success message -->
 
    <div class="registrationForm">
 
@@ -43,7 +43,7 @@
 
 </div>
 
-<p class="registration"><a href="/admin/login">Login</a></p>
+<p class="registration"><a href="{{ url('/admin/login') }}">Login</a></p>
 
 </div>
 

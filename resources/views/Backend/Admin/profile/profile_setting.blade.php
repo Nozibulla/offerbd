@@ -49,28 +49,28 @@
 			<hr>
 			<div class="profile_com profile_first_name">First Name:
 
-				<a href="#" id="first_name" data-pk={{Auth::guard('admin')->user()->id }}>{{ ($profile_info->first_name) ? $profile_info->first_name : "Set First Name" }}
+				<a href="{{ url('#') }}" id="first_name" data-pk={{Auth::guard('admin')->user()->id }}>{{ ($profile_info->first_name) ? $profile_info->first_name : "Set First Name" }}
 				</a>
 
 			</div>
 
 			<div class="profile_com profile_last_name">Last Name:
 
-				<a href="#" id="last_name" data-pk={{Auth::guard('admin')->user()->id }}>{{ ($profile_info->last_name) ? $profile_info->last_name : "Set Last Name" }}
+				<a href="{{ url('#') }}" id="last_name" data-pk={{Auth::guard('admin')->user()->id }}>{{ ($profile_info->last_name) ? $profile_info->last_name : "Set Last Name" }}
 				</a>
 				
 			</div>
 
 			<div class="profile_com profile_mobile">Mobile:
 
-				<a href="#" id="mobile" data-pk={{Auth::guard('admin')->user()->id }}>{{ ($profile_info->mobile) ? $profile_info->mobile : "Set Mobile Number" }}
+				<a href="{{ url('#') }}" id="mobile" data-pk={{Auth::guard('admin')->user()->id }}>{{ ($profile_info->mobile) ? $profile_info->mobile : "Set Mobile Number" }}
 				</a>
 
 			</div>
 
 			<div class="profile_com profile_address">Address:
 
-				<a href="#" id="address" data-pk={{Auth::guard('admin')->user()->id }}>{{ ($profile_info->address) ? $profile_info->address : "Set Address" }}
+				<a href="{{ url('#') }}" id="address" data-pk={{Auth::guard('admin')->user()->id }}>{{ ($profile_info->address) ? $profile_info->address : "Set Address" }}
 				</a>
 
 			</div>

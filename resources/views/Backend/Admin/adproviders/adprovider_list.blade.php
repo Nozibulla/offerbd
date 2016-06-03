@@ -52,7 +52,7 @@
 				<tr>
 					<td>{{ $key+1 }}</td>
 					<td>
-						<a href="{{ url('/admin/adprovider-list/details/{{$adprovider->id}}') }}" title="click to see the detail page" target="_blank">
+						<a href="{{ url('/admin/adprovider-list/details', $adprovider->id) }}" title="click to see the detail page" target="_blank">
 							<!-- checking whether name is set or not -->
 							{{ (!empty($adprovider_info->first_name) || !empty($adprovider_info->last_name)) ? $adprovider_info->first_name." ".$adprovider_info->last_name : "Mr. X" }}
 						</a>

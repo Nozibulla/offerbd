@@ -53,7 +53,7 @@
 						<td>{{ $key+1 }}</td>
 						<td>
 							@if ($admin->id != auth()->guard('admin')->user()->id)
-							<a href="{{ url('/admin/admin-list/details/{{$admin->id}}') }}" title="click to see the detail page" target="_blank">
+							<a href="{{ url('/admin/admin-list/details', $admin->id) }}" title="click to see the detail page" target="_blank">
 								<!-- checking whether name is set or not -->
 								{{ (!empty($adminInfo->first_name) || !empty($adminInfo->last_name)) ? $adminInfo->first_name." ".$adminInfo->last_name : "See Profile" }}
 							</a>

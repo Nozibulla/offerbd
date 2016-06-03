@@ -57,13 +57,13 @@
 				<tr>
 					<td>{{ $key+1 }}</td>
 					<td>
-						<a href="/admin/branch/details/{{$branch->id}}" title="click to see the detail page" target="_blank">{{ $branch->branch_name }}</a>
+						<a href="{{ url('/admin/branch/details', $branch->id) }}" title="click to see the detail page" target="_blank">{{ $branch->branch_name }}</a>
 					</td>
 
 					@if(is_null($branch->profile->admin_id))
 
 					<td class="approve_branch">
-						<a href="#" title="click to approve" id="{{$branch->id}}">
+						<a href="{{ url('#') }}" title="click to approve" id="{{$branch->id}}">
 							<i class="glyphicon glyphicon-ok"></i>
 						</a>
 					</td>
@@ -74,7 +74,7 @@
 
 					@endif
 					<td class="remove_branch">
-						<a href="#" title="click to delete" id="{{$branch->id}}">
+						<a href="{{ url('#') }}" title="click to delete" id="{{$branch->id}}">
 							<i class="glyphicon glyphicon-remove"></i>
 						</a>						
 					</td>
@@ -82,7 +82,7 @@
 
 						<!-- checking whether this is your addition or not -->
 						@if (is_null($branch->profile->admin_id) && ($branch->profile->admin_id != auth()->guard('admin')->user()->id))
-						<a href="/profile/members/{{ $branch->profile->id }}">
+						<a href="{{ url('/profile/members', $branch->profile->id) }}">
 							{{ $branch->profile->first_name." ". $branch->profile->last_name}}
 						</a>
 

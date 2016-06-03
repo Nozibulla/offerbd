@@ -54,7 +54,7 @@
 				<tr>
 					<td>{{ $key+1 }}</td>
 					<td>
-						<a href="{{ url('/admin/brands/details/'.$brand->id.')' }}" title="click to see the detail page" target="_blank">{{ $brand->brand_name }}</a>
+						<a href="{{ url('/admin/brands/details', $brand->id) }}" title="click to see the detail page" target="_blank">{{ $brand->brand_name }}</a>
 					</td>
 					<td class="remove_brand">
 						<a href="#" title="click to delete" id="{{$brand->id}}">
@@ -64,7 +64,7 @@
 					<td>
 						<!-- checking whether this is your addition or not -->
 						@if (is_null($brand->profile->admin_id) && ($brand->profile->admin_id != auth()->guard('admin')->user()->id))
-						<a href="/profile/members/{{ $brand->profile->id }}">
+						<a href="{{ url('/profile/members', $brand->profile->id) }}">
 							{{ $brand->profile->first_name." ".$brand->profile->last_name }}
 						</a>
 						@else
