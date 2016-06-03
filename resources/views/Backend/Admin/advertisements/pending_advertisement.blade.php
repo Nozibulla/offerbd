@@ -57,7 +57,7 @@
 				<tr>
 					<td>{{ $key+1 }}</td>
 					<td>
-						<a href="/admin/advertisements/details/{{$advertisement->id}}" title="click to see the detail page" target="_blank">
+						<a href="{{ url('/admin/advertisements/details/{{$advertisement->id}}') }}" title="click to see the detail page" target="_blank">
 							<img src="{{ asset($advertisement->ad_image) }}" alt="adno{{$advertisement->id}}">
 						</a>
 					</td>

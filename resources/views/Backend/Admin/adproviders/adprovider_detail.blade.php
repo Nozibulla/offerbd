@@ -21,7 +21,7 @@
 		<div class="col-lg-12">
 
 			<h1 class="page-header">
-				Profile of <strong>{{ $profile_info->first_name." ".$profile_info->last_name }}</strong>
+				Profile of <strong>{{ ($profile_info->first_name && $profile_info->last_name) ? $profile_info->first_name." ".$profile_info->last_name : "Mr. X" }}</strong>
 			</h1>
 
 		</div>

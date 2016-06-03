@@ -61,7 +61,7 @@
 					<td>{{ $key+1 }}</td>
 					<td>
 						@if ($admin->id != auth()->guard('admin')->user()->id)
-						<a href="/admin/admin-list/details/{{$admin->id}}" title="click to see the detail page" target="_blank">
+						<a href="{{ url('/admin/admin-list/details/{{$admin->id}}') }}" title="click to see the detail page" target="_blank">
 							<!-- checking whether name is set or not -->
 							{{ (!empty($adminInfo->first_name) || !empty($adminInfo->last_name)) ? $adminInfo->first_name." ".$adminInfo->last_name : "See Profile" }}
 						</a>
@@ -70,7 +70,9 @@
 
 						<!-- printing my name -->
 						{{ $adminInfo->first_name." ".$adminInfo->last_name }} (you)
+
 						@endif
+
 					</td>
 					<td>
 						@foreach ($admin->role as $roleKey => $role)
@@ -81,6 +83,7 @@
 						@endforeach
 					</td>
 					<td>{{ ($admin->status == 1) ? "Active" : "Pending" }}</td>
+
 					<!-- disabling the delete option if admin is an owner -->
 					@if (!$admin->hasRole('owner'))
 					<td class="remove_admin">		
@@ -89,7 +92,7 @@
 						</a>
 					</td>
 					<td class="change_privilege">
-						<a href="#" title="click to change the privilege" id="{{$admin->id}}">change</a>
+						<a href=" {{ url('#') }} " title="click to change the privilege" id="{{$admin->id}}">change</a>
 					</td>
 					@else
 					<td>---</td>

@@ -74,6 +74,7 @@
 
 		<div id="wrapper">
 
+			<!-- fetching the logged in user info from the profile table -->
 			@define $admin_profile = auth()->guard('admin')->user()->profile
 
 			<!-- checking the admin has set the profile info -->
@@ -86,11 +87,13 @@
 			
 			<!-- adding flash message -->
 			@include('Shared._partials.flash')
+			<!-- flash message addition end -->
 
 			<!-- showing the ajax loader -->
 			<div class="overlay" style="display: none">
 				<img src="{{ asset('images/offerbd.gif') }}" class="img-responsive" alt="offerbd loader">
 			</div>
+			<!-- end of ajax loader -->
 
 			<!-- Navigation -->
 			<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -109,8 +112,10 @@
 
 					</button>
 
-					<a class="navbar-brand" href="/admin/dashboard">
-						{{ (auth()->guard('admin')->user()->profile->first_name && auth()->guard('admin')->user()->profile->last_name) ? auth()->guard('admin')->user()->profile->first_name ." ". auth()->guard('admin')->user()->profile->last_name : "Mr. X" }} | offerBD
+					<a class="navbar-brand" href="{{ url('/admin/dashboard') }}">
+						<!-- set Mr X as default name if no name is found -->
+						{{ ($admin_profile->first_name && $admin_profile->last_name) ? $admin_profile->first_name." ". $admin_profile->last_name : "Mr. X" }} | offerBD
+						<!-- default name set complete -->
 					</a>
 
 				</div>
@@ -120,7 +125,7 @@
 
 					<li class="dropdown">
 
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="{{ url('#') }}">
 
 							<i class="fa fa-envelope fa-fw"></i>  
 
@@ -132,7 +137,7 @@
 
 							<li>
 
-								<a href="#">
+								<a href=" {{ url('#') }} ">
 
 									<div>
 
@@ -162,7 +167,7 @@
 
 					<li class="dropdown">
 
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="{{ url('#') }}">
 
 							<i class="fa fa-tasks fa-fw"></i> 
 
@@ -174,7 +179,7 @@
 
 							<li>
 
-								<a href="#">
+								<a href="{{ url('#') }}">
 
 									<div>
 
@@ -206,7 +211,7 @@
 
 							<li>
 
-								<a class="text-center" href="#">
+								<a class="text-center" href="{{ url('#') }}">
 
 									<strong>See All Tasks</strong>
 
@@ -224,7 +229,7 @@
 
 					<li class="dropdown">
 
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="{{ url('#') }}">
 
 							<i class="fa fa-bell fa-fw"></i>
 
@@ -236,7 +241,7 @@
 
 							<li>
 
-								<a href="#">
+								<a href="{{ url('#') }}">
 
 									<div>
 
@@ -256,7 +261,7 @@
 
 							<li>
 
-								<a class="text-center" href="#">
+								<a class="text-center" href="{{ url('#') }}">
 
 									<strong>See All Alerts</strong>
 
@@ -276,7 +281,7 @@
 
 					<li class="dropdown">
 
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="{{ url('#') }}">
 
 							<i class="fa fa-user fa-fw"></i>  
 
@@ -298,7 +303,7 @@
 
 							<li>
 
-								<a href="/admin/profile/show">
+								<a href="{{ url('/admin/profile/show') }}">
 
 									<i class="fa fa-user fa-fw"></i> 
 
@@ -310,7 +315,7 @@
 
 							<li>
 
-								<a href="/admin/profile/setting">
+								<a href="{{ url('/admin/profile/setting') }}">
 
 									<i class="fa fa-gear fa-fw"></i> 
 
@@ -324,7 +329,7 @@
 
 							<li>
 
-								<a href="/admin/logout">
+								<a href="{{ url('/admin/logout') }}">
 
 									<i class="fa fa-sign-out fa-fw"></i> 
 
