@@ -110,11 +110,11 @@ class PasswordController extends Controller
 
 		$new_password = Hash::make($request->password);
 
-		$find_admin = Adprovider::whereemail($email)->firstOrFail();
+		$find_adprovider = Adprovider::whereemail($email)->firstOrFail();
 
-		$find_admin->password = $new_password;
+		$find_adprovider->password = $new_password;
 
-		$find_admin->save();
+		$find_adprovider->save();
 
 	}
 
