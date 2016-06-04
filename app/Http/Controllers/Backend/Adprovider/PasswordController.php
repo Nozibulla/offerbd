@@ -106,15 +106,22 @@ class PasswordController extends Controller
 	// resetting password process
 	public function postReset(PasswordResetRequest $request)
 	{
-		$email = $request->email;
+		$email = $request->link_email;
 
 		$new_password = Hash::make($request->password);
 
-		$find_adprovider = Adprovider::whereemail($email)->firstOrFail();
+		$post_email = $request->email;
 
-		$find_adprovider->password = $new_password;
+		$find_adprovider = Adprovider::whereemail($post_email)->firstOrFail();
 
-		$find_adprovider->save();
+		// checking the email holder is the right adprovider or not
+		//if ($find_adprovider) {
+
+			$find_adprovider->password = $new_password;
+
+			$find_adprovider->save();
+
+		//}
 
 	}
 

@@ -187,14 +187,14 @@ Route::group(['middleware' => 'adProvider'], function () {
 	Route::post('/adprovider/registration','Backend\adprovider\AuthController@postRegister');
 
 	// registration confirm through email verification
-	Route::get('/adprovider/registration/confirm/{token_email}', 'Backend\Adprovider\AuthController@confirmRegistration'); 
+	Route::get('/adprovider/registration/confirm/{token}/{email}', 'Backend\Adprovider\AuthController@confirmRegistration'); 
 	Route::get('/adprovider/logout','Backend\adprovider\AuthController@getLogout');
 
 	// password resets
 	Route::get('/adprovider/password/email', 'Backend\Adprovider\PasswordController@getEmail');
 	Route::post('/adprovider/password/email', 'Backend\Adprovider\PasswordController@postEmail');
 	// Password reset routes...
-	Route::get('/adprovider/password/reset/{token}/{email}', 'Backend\Adprovider\PasswordController@getReset');
+	Route::get('/adprovider/password/reset/{token}/{link_email}', 'Backend\Adprovider\PasswordController@getReset');
 	Route::post('/adprovider/password/reset', 'Backend\Adprovider\PasswordController@postReset');
 
 	Route::get('/adprovider/dashboard','Backend\Adprovider\DashboardController@showDashboard');

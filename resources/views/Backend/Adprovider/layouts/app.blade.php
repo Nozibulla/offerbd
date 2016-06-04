@@ -58,6 +58,10 @@
 
     <body id="app-layout">
 
+        <!-- adding flash message -->
+        @include('Shared._partials.flash')
+        <!-- end of flash message -->
+
         <!-- setting the overlay for loading image -->
         <div class="overlay" style="display: none">
            <img src="{{ asset('images/offerbd.gif') }}" class="img-responsive" alt="offerbd loader">

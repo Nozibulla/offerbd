@@ -70,22 +70,32 @@ class AuthController extends Controller
 	// registration confirmation by email verification
 	public function confirmRegistration(Request $request)
 	{
-		$token = $request->token_email;
+		$token = $request->token;
 
 		$email = $request->email;
 
 		// return $token;
 
-		$find_adprovider_with_matched_email_token = Adprovider::whereemail($email)->whereremember_token($token)->firstOrFail();
+		$find_adprovider_with_matched_email_token = Adprovider::whereemail($email)->whereremember_token($token)->first();
+
+		// checking whether the token is valid or not
+		if (!$find_adprovider_with_matched_email_token) {
+				
+				return "This link is dead";
+		}
 
 		// return $find_adprovider_with_matched_email_token;
 
 		if($find_adprovider_with_matched_email_token->status == 1){
 
 			echo "You are already a confirmed user.Please login...";
+
+			return redirect('/adprovider/login');
+			
 		}
 		else{
 
+			// updating the status
 			$find_adprovider_with_matched_email_token->status = 1;
 
 			$find_adprovider_with_matched_email_token->save();
@@ -117,19 +127,26 @@ class AuthController extends Controller
 
 		if(auth()->guard('adProvider')->attempt($adprovider,$remember)){
 
-			// return redirect()->intended('/adprovider/dashboard');
-
 			// successfully logged in
 
-			return 1;
+			// email verified and login successful
+			if (auth()->guard('adProvider')->user()->status == 1) {
+				
+				return 1;
+
+			} else {
+
+				// email not verified yet
+				auth()->guard('adProvider')->logout(); // logging out
+
+				return 2;
+			}
 
 		}
 		else
 		{
-			// return Redirect::back()->withErrors(['msg'=>'The credentials doesn\'t match'])->withInput();
-
+			// credentials doesn't match
 			return 0;
-
 		}
 		
 	}
