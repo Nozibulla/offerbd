@@ -78,7 +78,7 @@ $( document ).ajaxStop(function(event, jqxhr, ajaxOptions, errorThrown) {
 	$(".overlay").hide();
 });
 
-
+// global ajax success function
 $(document).ajaxSuccess(function(event, jqxhr, ajaxOptions, errorThrown){
 
 	var contentType   = jqxhr.getResponseHeader("Content-Type");
@@ -89,6 +89,7 @@ $(document).ajaxSuccess(function(event, jqxhr, ajaxOptions, errorThrown){
 
 });
 
+// global ajax error function
 $(document).ajaxError(function(event, jqxhr, ajaxOptions, errorThrown) {
 
 	var contentType   = jqxhr.getResponseHeader("Content-Type");
@@ -2029,6 +2030,12 @@ $(document).ready(function(){
 
 			var form,url,method,data,message,currentPageUrl,formData,errors,advertisement,advertisement_id;
 
+			// showing the discount type
+			$(".post_advertisement").on('change','.addAdvertisementForm #discount_type',this.showSpecificDiscount);
+
+			// showing the div for different free things
+			$(".post_advertisement").on('change','.addAdvertisementForm .x_buy_y_free input[type=radio]',this.showDifferentFreeProductArea);
+
 			// posting new advertisement
 			$(".post_advertisement").on('submit','.addAdvertisementForm form[data-remote]',this.postAdvertisement);
 
@@ -2051,6 +2058,60 @@ $(document).ready(function(){
 			// save Advertisement after editing
 			$(".advertisement_detail").on('submit','#editAdvertisementModal form[data-remote]',this.saveAdvertisementAfterEdit);
 
+
+		},
+
+		// showing specific discount
+		showSpecificDiscount: function(){
+
+			var selected_discount_type = $(this).val();
+
+			if (selected_discount_type) {
+
+				// finding all the div having class 'common' in the discount_area div & adding the 'hide' class to all div
+				var all_div_in_discount_area = $(".discount_area").find(".common");
+
+				all_div_in_discount_area.each(function(index, element){
+
+					$(element).addClass('hide');
+
+				});
+			// end of 'hide' class addition
+
+			// removing the 'hide' class for the selected category
+			$("." + selected_discount_type).removeClass('hide');
+		}
+		else{
+
+			// finding all the div having class 'common' in the discount_area div & adding the 'hide' class to all div
+			var all_div_in_discount_area = $(".discount_area").find(".common").not(".free_different");
+
+			all_div_in_discount_area.each(function(index, element){
+
+				$(element).addClass('hide');
+
+			});
+			// end of 'hide' class addition
+
+		}
+
+	},
+
+		// showing the div for different free things
+		showDifferentFreeProductArea: function(){
+
+			var selected_free_product_type = $("input[name='free_product_type']:checked").val();
+
+			// alert(selected_free_product_type);
+			// checking the radio button selection
+			if (selected_free_product_type == "free_different") {
+
+				$('.free_different').removeClass('hide');
+
+			} else {
+
+				$('.free_different').addClass('hide');
+			}
 
 		},
 

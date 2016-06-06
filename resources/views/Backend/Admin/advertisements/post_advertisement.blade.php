@@ -100,62 +100,69 @@
 
 				<!-- end of discount type -->
 
-				<!-- percentage (%) discount -->
-				<div class="form-group{{ $errors->has('discount') ? ' has-error' : '' }} hide">
-					{!! Form::label('discount', 'Discount (%) *') !!}
-					{!! Form::selectRange('discount', 1, 100, null, ['id' => 'discount', 'class' => 'form-control', 'required' => 'required', 'placeholder' => 'Select discount']) !!}
-					<small class="text-danger discount">{{ $errors->first('discount') }}</small>
-				</div>
-				<!-- end of percentage (%) discount -->
-				<!-- fixed money discount -->
-				<div class="form-group{{ $errors->has('fixed_money_discount') ? ' has-error' : '' }}">
-					{!! Form::label('fixed_money_discount', 'Discount (BDT) *') !!}
-					{!! Form::number('fixed_money_discount', null, ['class' => 'form-control', 'required' => 'required', 'min' => 0, 'step' => 1, 'placeholder' => 'Ex.: 100']) !!}
-					<small class="text-danger">{{ $errors->first('fixed_money_discount') }}</small>
-				</div>
-				<!-- end of fixed money discount -->
-				<!-- y free with x discount -->
-				<!-- how many product buy -->
-				<div class="form-group{{ $errors->has('product_no') ? ' has-error' : '' }}">
-					{!! Form::label('product_no', 'Product No *') !!}
-					{!! Form::selectRange('product_no', 1, 100, null, ['id' => 'product_no', 'class' => 'form-control', 'required' => 'required', 'placeholder' => ' How many product?']) !!}
-					<small class="text-danger">{{ $errors->first('product_no') }}</small>
-				</div>
-				<!-- how many product free -->
-				<div class="form-group{{ $errors->has('free_product_no') ? ' has-error' : '' }}">
-					{!! Form::label('free_product_no', 'Free Product No *') !!}
-					{!! Form::selectRange('free_product_no', 1, 100, null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => ' How many free product?']) !!}
-					<small class="text-danger">{{ $errors->first('free_product_no') }}</small>
-				</div>
-				<!-- free product type -->
-				<div class="radio{{ $errors->has('free_product_type') ? ' has-error' : '' }}">
-					<!-- free same product -->
-					<label for="free_product_type">
-						{!! Form::radio('free_product_type', null,  null, ['id' => 'free_same']) !!} Same Product Free
-					</label>
-					<!-- free for different product -->
-					<label for="free_product_type">
-						{!! Form::radio('free_product_type', null,  null, ['id' => 'free_different']) !!} Different Product Free
-					</label>
-					<small class="text-danger">{{ $errors->first('free_product_type') }}</small>
-				</div>
-				<!-- free different product name -->
-				<div class="form-group{{ $errors->has('free_different_product_name') ? ' has-error' : '' }}">
-					{!! Form::label('free_different_product_name', 'What Free *') !!}
-					{!! Form::text('free_different_product_name', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Name of free product']) !!}
-					<p class="help-block">Ex.: bowel, jug, container...</p>
-					<small class="text-danger">{{ $errors->first('free_different_product_name') }}</small>
-				</div>
-				<!-- end of y free with x discount -->
+				<!-- discount area -->
 
-				<div class="form-group{{ $errors->has('actual_price') ? ' has-error' : '' }}">
-					{!! Form::label('actual_price', 'Actual price (BDT) *') !!}
-					{!! Form::number('actual_price', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => '1250', 'min' => 0, 'step' => 1]) !!}
-					<p class="help-block">ex. 500,1190,1250 ... etc</p>
-					<small class="text-danger actual_price">{{ $errors->first('actual_price') }}</small>
-				</div>
+				<div class="discount_area">
 
-				
+					<!-- percentage (%) discount -->
+					<div class="common form-group{{ $errors->has('discount') ? ' has-error' : '' }} hide percentage">
+						{!! Form::label('discount', 'Discount (%) *') !!}
+						{!! Form::selectRange('discount', 1, 100, null, ['id' => 'discount', 'class' => 'form-control', 'required' => 'required', 'placeholder' => 'Select discount']) !!}
+						<small class="text-danger discount">{{ $errors->first('discount') }}</small>
+					</div>
+					<!-- end of percentage (%) discount -->
+					<!-- fixed money discount -->
+					<div class="common form-group{{ $errors->has('fixed_money_discount') ? ' has-error' : '' }} hide fixed_money">
+						{!! Form::label('fixed_money_discount', 'Discount (BDT) *') !!}
+						{!! Form::number('fixed_money_discount', null, ['class' => 'form-control', 'required' => 'required', 'min' => 0, 'step' => 1, 'placeholder' => '100']) !!}
+						<small class="text-danger">{{ $errors->first('fixed_money_discount') }}</small>
+					</div>
+					<!-- end of fixed money discount -->
+					<!-- y free with x discount -->
+					<div class="common x_buy_y_free hide free">
+						<!-- how many product buy -->
+						<div class="form-group{{ $errors->has('product_no') ? ' has-error' : '' }}">
+							{!! Form::label('product_no', 'Product Number *') !!}
+							{!! Form::selectRange('product_no', 1, 100, null, ['id' => 'product_no', 'class' => 'form-control', 'required' => 'required', 'placeholder' => ' How many product to buy?']) !!}
+							<small class="text-danger">{{ $errors->first('product_no') }}</small>
+						</div>
+						<!-- how many product free -->
+						<div class="form-group{{ $errors->has('free_product_no') ? ' has-error' : '' }}">
+							{!! Form::label('free_product_no', 'Free Product Number *') !!}
+							{!! Form::selectRange('free_product_no', 1, 100, null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => ' How many free product?']) !!}
+							<small class="text-danger">{{ $errors->first('free_product_no') }}</small>
+						</div>
+						<!-- free product type -->
+						<div class="radio{{ $errors->has('free_product_type') ? ' has-error' : '' }}">
+							<!-- free same product -->
+							<label for="free_product_type">
+								{!! Form::radio('free_product_type', 'free_same',  null, ['id' => 'free_same']) !!} Same Product Free
+							</label>
+							<!-- free for different product -->
+							<label for="free_product_type">
+								{!! Form::radio('free_product_type', 'free_different',  null, ['id' => 'free_different']) !!} Different Product Free
+							</label>
+							<small class="text-danger">{{ $errors->first('free_product_type') }}</small>
+						</div>
+						<!-- free different product name -->
+						<div class="common form-group{{ $errors->has('free_different_product_name') ? ' has-error' : '' }} hide free_different">
+							{!! Form::label('free_different_product_name', 'What Free *') !!}
+							{!! Form::text('free_different_product_name', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Name of free product']) !!}
+							<p class="help-block">Ex.: bowel, jug, container...</p>
+							<small class="text-danger">{{ $errors->first('free_different_product_name') }}</small>
+						</div>
+					</div>
+					<!-- end of y free with x discount -->
+
+					<div class="form-group{{ $errors->has('actual_price') ? ' has-error' : '' }}">
+						{!! Form::label('actual_price', 'Actual price (BDT) *') !!}
+						{!! Form::number('actual_price', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => '1250', 'min' => 0, 'step' => 1]) !!}
+						<p class="help-block">ex. 500,1190,1250 ... etc</p>
+						<small class="text-danger actual_price">{{ $errors->first('actual_price') }}</small>
+					</div>
+
+				</div>
+				<!-- end of discount area -->
 
 			</div>
 
