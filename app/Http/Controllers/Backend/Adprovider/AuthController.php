@@ -29,6 +29,12 @@ class AuthController extends Controller
 
 	public function getRegister()
 	{
+		// redirecting the logged in user to dashboard page
+		if (auth()->guard('adProvider')->check()) {
+			
+			return redirect('/adprovider/dashboard');
+		}
+		// returning the registration page
 		return view('Backend.Adprovider.auth.register');
 	}
 
@@ -109,6 +115,12 @@ class AuthController extends Controller
 
 	public function getLogin()
 	{
+		// redirecting the logged in user to dashboard page
+		if (auth()->guard('adProvider')->check()) {
+			
+			return redirect('/adprovider/dashboard');
+		}
+		// returning the registration page
 		return view('Backend.Adprovider.auth.login');
 	}
 

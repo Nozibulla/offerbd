@@ -2066,6 +2066,8 @@ $(document).ready(function(){
 
 			var selected_discount_type = $(this).val();
 
+
+
 			if (selected_discount_type) {
 
 				// finding all the div having class 'common' in the discount_area div & adding the 'hide' class to all div
@@ -2177,8 +2179,8 @@ $(document).ready(function(){
 					if (errors.product_id) {
 						$(".product_id").html(errors.product_id).parent("div").addClass('has-error');
 					}
-					if (errors.discount) {
-						$(".discount").html(errors.discount).parent("div").addClass('has-error');
+					if (errors.discount_type) {
+						$(".discount_type").html(errors.discount_type).parent("div").addClass('has-error');
 					}
 					if (errors.actual_price) {
 						$(".actual_price").html(errors.actual_price).parent("div").addClass('has-error');

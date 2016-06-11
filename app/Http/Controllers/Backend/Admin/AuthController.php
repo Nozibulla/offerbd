@@ -29,6 +29,12 @@ class AuthController extends Controller
 
 	public function getRegister()
 	{
+		// redirecting the logged in user to dashboard page
+		if (auth()->guard('admin')->check()) {
+			
+			return redirect('/admin/dashboard');
+		}
+		// returning the registration page
 		return view('Backend.Admin.auth.register');
 	}
 
@@ -58,6 +64,12 @@ class AuthController extends Controller
 
 	public function getLogin()
 	{
+		// redirecting the logged in user to dashboard page
+		if (auth()->guard('admin')->check()) {
+			
+			return redirect('/admin/dashboard');
+		}
+		// returning the logged in user to login page
 		return view('Backend.Admin.auth.login');
 	}
 

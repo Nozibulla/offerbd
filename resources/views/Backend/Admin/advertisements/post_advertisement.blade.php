@@ -95,7 +95,7 @@
 				<div class="form-group{{ $errors->has('discount_type') ? ' has-error' : '' }}">
 					{!! Form::label('discount_type', 'Type of Discount *') !!}
 					{!! Form::select('discount_type', $discount_type_array, null, ['id' => 'discount_type', 'class' => 'form-control', 'required' => 'required', 'placeholder' => 'Select One']) !!}
-					<small class="text-danger">{{ $errors->first('discount_type') }}</small>
+					<small class="text-danger ">{{ $errors->first('discount_type') }}</small>
 				</div>
 
 				<!-- end of discount type -->
@@ -105,26 +105,26 @@
 				<div class="discount_area">
 
 					<!-- percentage (%) discount -->
-					<div class="common form-group{{ $errors->has('discount') ? ' has-error' : '' }} hide percentage">
-						{!! Form::label('discount', 'Discount (%) *') !!}
-						{!! Form::selectRange('discount', 1, 100, null, ['id' => 'discount', 'class' => 'form-control', 'required' => 'required', 'placeholder' => 'Select discount']) !!}
-						<small class="text-danger discount">{{ $errors->first('discount') }}</small>
+					<div class="common form-group{{ $errors->has('percent_discount') ? ' has-error' : '' }} hide percentage">
+						{!! Form::label('percent_discount', 'Discount (%) *') !!}
+						{!! Form::selectRange('percent_discount', 1, 100, null, ['id' => 'percent_discount', 'class' => 'form-control', 'required' => 'required', 'placeholder' => 'Select percent_discount']) !!}
+						<small class="text-danger percent_discount">{{ $errors->first('percent_discount') }}</small>
 					</div>
 					<!-- end of percentage (%) discount -->
 					<!-- fixed money discount -->
 					<div class="common form-group{{ $errors->has('fixed_money_discount') ? ' has-error' : '' }} hide fixed_money">
 						{!! Form::label('fixed_money_discount', 'Discount (BDT) *') !!}
-						{!! Form::number('fixed_money_discount', null, ['class' => 'form-control', 'required' => 'required', 'min' => 0, 'step' => 1, 'placeholder' => '100']) !!}
+						{!! Form::number('fixed_money_discount', null, ['class' => 'form-control', 'required' => 'required', 'min' => 1, 'step' => 1, 'placeholder' => '100']) !!}
 						<small class="text-danger">{{ $errors->first('fixed_money_discount') }}</small>
 					</div>
 					<!-- end of fixed money discount -->
 					<!-- y free with x discount -->
 					<div class="common x_buy_y_free hide free">
 						<!-- how many product buy -->
-						<div class="form-group{{ $errors->has('product_no') ? ' has-error' : '' }}">
-							{!! Form::label('product_no', 'Product Number *') !!}
-							{!! Form::selectRange('product_no', 1, 100, null, ['id' => 'product_no', 'class' => 'form-control', 'required' => 'required', 'placeholder' => ' How many product to buy?']) !!}
-							<small class="text-danger">{{ $errors->first('product_no') }}</small>
+						<div class="form-group{{ $errors->has('buy_product_no') ? ' has-error' : '' }}">
+							{!! Form::label('buy_product_no', 'Product Number *') !!}
+							{!! Form::selectRange('buy_product_no', 1, 100, null, ['id' => 'buy_product_no', 'class' => 'form-control', 'required' => 'required', 'placeholder' => ' How many product to buy?']) !!}
+							<small class="text-danger">{{ $errors->first('buy_product_no') }}</small>
 						</div>
 						<!-- how many product free -->
 						<div class="form-group{{ $errors->has('free_product_no') ? ' has-error' : '' }}">

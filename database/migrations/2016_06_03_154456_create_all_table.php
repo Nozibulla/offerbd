@@ -217,11 +217,21 @@ class CreateAllTable extends Migration
 
             $table->string('sponsored_amount')->default(0);
 
-            $table->string('discount');
+            $table->string('discount_type');
 
-            $table->string('actual_price');
+            $table->integer('percent_discount')->nullable();
 
-            $table->string('present_price');
+            $table->integer('fixed_money_discount')->nullable();
+
+            $table->integer('buy_product_no')->nullable();
+
+            $table->integer('free_product_no')->nullable();
+
+            $table->string('free_product_type')->nullable();
+
+            $table->integer('actual_price');
+
+            $table->integer('present_price');
 
             $table->date('expire_date');
 

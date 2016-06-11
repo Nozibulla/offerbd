@@ -56,7 +56,7 @@ Route::group(['middleware' => 'admin'], function () {
 	// dashboard options
 	Route::get('/admin/dashboard','Backend\Admin\DashboardController@showDashboard');
 
-	//admin profile options
+	// admin profile options
 	Route::get('/admin/profile/show','Backend\Admin\ProfileController@showProfile');
 
 	//updating info

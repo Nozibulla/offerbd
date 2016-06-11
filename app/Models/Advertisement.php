@@ -8,7 +8,7 @@ class Advertisement extends Model
 {
     protected $table = "advertisements";
 
-    protected $fillable = [ 'ad_image', 'brand_id', 'branch_id', 'product_id', 'profile_id', 'discount', 'actual_price', 'present_price', 'expire_date'];
+    protected $fillable = [ 'ad_image', 'brand_id', 'branch_id', 'product_id', 'profile_id', 'discount_type', 'percent_discount', 'fixed_money_discount', 'buy_product_no', 'free_product_no', 'free_product_type', 'actual_price', 'present_price', 'expire_date'];
 
     // relationship
     public function profile()

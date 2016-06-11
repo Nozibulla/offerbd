@@ -34,7 +34,7 @@
      <small class="text-danger req_password">{{ $errors->first('password') }}</small>
    </div>
 
-   <p><a href="/{{ url('admin/password/email') }}" target="_blank">Forgot your password?</a></p>
+   <p><a href="{{ url('/admin/password/email') }}" target="_blank">Forgot your password?</a></p>
 
    <div id="lower">
 
