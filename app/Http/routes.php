@@ -156,11 +156,11 @@ Route::group(['middleware' => 'admin'], function () {
  */
 Route::group(['middleware' => 'adProvider'], function () {
 
-	Route::get('/adprovider/login','Backend\adprovider\AuthController@getLogin');
-	Route::post('/adprovider/login','Backend\adprovider\AuthController@postLogin');
-	Route::get('/adprovider/registration','Backend\adprovider\AuthController@getRegister');
-	Route::post('/adprovider/registration','Backend\adprovider\AuthController@postRegister');
-	Route::get('/adprovider/logout','Backend\adprovider\AuthController@getLogout');
+	Route::get('/adprovider/login','Backend\Adprovider\AuthController@getLogin');
+	Route::post('/adprovider/login','Backend\Adprovider\AuthController@postLogin');
+	Route::get('/adprovider/registration','Backend\Adprovider\AuthController@getRegister');
+	Route::post('/adprovider/registration','Backend\Adprovider\AuthController@postRegister');
+	Route::get('/adprovider/logout','Backend\Adprovider\AuthController@getLogout');
 
 	Route::get('/adprovider/dashboard','Backend\Adprovider\DashboardController@showDashboard');
 
@@ -215,4 +215,4 @@ Route::group(['middleware' => 'web'], function () {
 
 });
 
-$profile_id = auth()->guard('admin')->user()->profile->id;
+// $profile_id = auth()->guard('admin')->user()->profile->id;
