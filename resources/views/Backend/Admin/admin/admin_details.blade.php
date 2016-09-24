@@ -82,7 +82,7 @@
 
 		</div>
 
-		{{-- checking the current user is an owner or not & the viewing profile has the owner privilege or not--}}
+		<!-- checking the current user is an owner or not & the viewing profile has the owner privilege or not-->
 		@if ((auth()->guard('admin')->user()->hasRole('owner')) && (!$profile->admin->hasRole('owner')))
 
 		<div class="row">

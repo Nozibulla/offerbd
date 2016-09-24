@@ -43,20 +43,22 @@ class BranchController extends Controller
 
     	$branch->profile_id = $profile_id;
 
+    	$branch->status = 1; // by default approved for admin addition
+
     	$branch->save();
 
     }
 
     public function pendingBranchList()
 	{
-		$pending_branchs = Branch::wherestatus(0)->get();
+		$pending_branchs = Branch::wherestatus(0)->paginate(10);
 
 		return view('Backend.Admin.branches.pending_branch',compact('pending_branchs'));
 	}
 
 	public function approvedBranchList()
 	{
-		$approved_branchs = Branch::wherestatus(1)->get();
+		$approved_branchs = Branch::wherestatus(1)->paginate(10);
 
 		return view('Backend.Admin.branches.approved_branch',compact('approved_branchs'));
 	}

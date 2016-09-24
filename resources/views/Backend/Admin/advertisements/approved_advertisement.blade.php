@@ -54,7 +54,7 @@
 				<tr>
 					<td>{{ $key+1 }}</td>
 					<td>
-						<a href="/admin/advertisements/details/{{$advertisement->id}}" title="click to see the detail page" target="_blank">
+						<a href="{{ url('/admin/advertisements/details', $advertisement->id) }}" title="click to see the detail page" target="_blank">
 							<img src="{{ asset($advertisement->ad_image) }}" alt="adno{{$advertisement->id}}">
 						</a>
 					</td>
@@ -66,7 +66,7 @@
 					<td>
 						<!-- checking whether this is your addition or not -->
 						@if (is_null($advertisement->profile->admin_id) && ($advertisement->profile->admin_id != auth()->guard('admin')->user()->id))
-						<a href="/profile/members/{{ $advertisement->profile->id }}">
+						<a href="{{ url('/profile/members', $advertisement->profile->id) }}">
 							{{ $advertisement->profile->first_name." ".$advertisement->profile->last_name }}
 						</a>
 						@else

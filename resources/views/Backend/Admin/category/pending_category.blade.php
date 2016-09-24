@@ -57,13 +57,13 @@
 				<tr>
 					<td>{{ $key+1 }}</td>
 					<td>
-						<a href="/admin/category/details/{{$category->id}}" title="click to see the detail page" target="_blank">{{ $category->category_name }}</a>
+						<a href="{{ url('/admin/category/details', $category->id) }}" title="click to see the detail page" target="_blank">{{ $category->category_name }}</a>
 					</td>
 
 					@if(is_null($category->profile->admin_id))
 
 					<td class="approve_category">
-						<a href="#" title="click to approve" id="{{$category->id}}">
+						<a href="{{ url('#)') }} " title="click to approve" id="{{$category->id}}">
 							<i class="glyphicon glyphicon-ok"></i>
 						</a>
 					</td>
@@ -75,14 +75,14 @@
 					@endif
 					
 					<td class="remove_category">
-						<a href="#" title="click to delete" id="{{$category->id}}">
+						<a href="{{ url('#)') }} " title="click to delete" id="{{$category->id}}">
 							<i class="glyphicon glyphicon-remove"></i>
 						</a>						
 					</td>
 					<td>
 						<!-- checking whether this is your addition or not -->
 						@if (is_null($category->profile->admin_id) && ($category->profile->admin_id != auth()->guard('admin')->user()->id))
-						<a href="/profile/members/{{ $category->profile->id }}">
+						<a href="{{ url('/profile/members', $category->profile->id) }}">
 							{{ $category->profile->first_name." ".$category->profile->last_name }}
 						</a>
 						@else

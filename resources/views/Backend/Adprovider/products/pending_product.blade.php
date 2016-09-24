@@ -52,7 +52,7 @@
 				<tr>
 					<td>{{ $key+1 }}</td>
 					<td>
-						<a href="/adprovider/products/details/{{ $product->id }}" title="click to see the detail page" target="_blank">{{ $product->product_name }}</a>
+						<a href="{{ url('/adprovider/products/details', $product->id) }}" title="click to see the detail page" target="_blank">{{ $product->product_name }}</a>
 					</td>
 					<td> {{ ($product->status == 0) ? "Pending" : "Approved" }} </td>
 

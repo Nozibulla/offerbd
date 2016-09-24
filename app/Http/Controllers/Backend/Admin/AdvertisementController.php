@@ -64,15 +64,50 @@ class AdvertisementController extends Controller
 
 			$advertisement->profile_id = $profile_id;
 
-			$advertisement->discount = $request->discount;
+			$advertisement->discount_type = $request->discount_type;
+
+			// storing the percentage discount
+			if ($request->discount_type == "percentage") {
+				
+				$advertisement->percent_discount = $request->percent_discount;
+				// caculating present price
+				$present_price = $request->actual_price - ($request->actual_price*$request->percent_discount)/100;
+			}
+			// storing the fixed_money discount
+			if ($request->discount_type == "fixed_money") {
+				
+				$advertisement->fixed_money_discount = $request->fixed_money_discount;
+				// caculating present price
+				$present_price = $request->actual_price - $request->fixed_money_discount;
+			}
+
+			// storing the X buy Y free discount
+			if ($request->discount_type == "free") {
+				
+				$advertisement->buy_product_no = $request->buy_product_no;
+
+				$advertisement->free_product_no = $request->free_product_no;
+
+				// caculating present price
+				$present_price = $request->actual_price;
+
+			}
+
+			// free product type
+			$free_product_type = $request->free_product_type;
+
+			if ($free_product_type == "free_different") {
+				
+				$advertisement->free_product_type = $request->free_different_product_name;
+			}
 
 			$advertisement->actual_price = $request->actual_price;
-
-			$present_price = $request->actual_price - ($request->actual_price*$request->discount)/100;
 
 			$advertisement->present_price = $present_price;
 
 			$advertisement->expire_date = $request->expire_date;
+
+			$advertisement->status = 1; // by default approved for admin addition
 
 			$advertisement->save();
 
@@ -156,23 +191,23 @@ class AdvertisementController extends Controller
 
 			// $find_advertisement->ad_image = $destinationPath;
 
-			$find_advertisement->brand_id = $request->brand_id;
+		$find_advertisement->brand_id = $request->brand_id;
 
-			$find_advertisement->branch_id = $request->branch_id;
+		$find_advertisement->branch_id = $request->branch_id;
 
-			$find_advertisement->product_id = $request->product_id;
+		$find_advertisement->product_id = $request->product_id;
 
-			$find_advertisement->discount = $request->discount;
+		$find_advertisement->discount = $request->discount;
 
-			$find_advertisement->actual_price = $request->actual_price;
+		$find_advertisement->actual_price = $request->actual_price;
 
-			$present_price = $request->actual_price - ($request->actual_price*$request->discount)/100;
+		$present_price = $request->actual_price - ($request->actual_price*$request->discount)/100;
 
-			$find_advertisement->present_price = $present_price;
+		$find_advertisement->present_price = $present_price;
 
-			$find_advertisement->expire_date = $request->expire_date;
+		$find_advertisement->expire_date = $request->expire_date;
 
-			$find_advertisement->save();
+		$find_advertisement->save();
 
 		// }
 	}

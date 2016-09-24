@@ -22,11 +22,19 @@ use Auth;
 
 use Redirect;
 
+use URL;
+
 class AuthController extends Controller
 {
 
 	public function getRegister()
 	{
+		// redirecting the logged in user to dashboard page
+		if (auth()->guard('admin')->check()) {
+			
+			return redirect('/admin/dashboard');
+		}
+		// returning the registration page
 		return view('Backend.Admin.auth.register');
 	}
 
@@ -38,23 +46,30 @@ class AuthController extends Controller
 
 		$admin->password = Hash::make($request->password);
 
-		$admin->save();
+		if($admin->save()){
 
-		$profile = new Profile;
+			$profile = new Profile;
 
-		$profile->admin_id = $admin->id;
+			$profile->admin_id = $admin->id;
 
-		$profile->save();
+			$profile->membership_id = 1;
+
+			$profile->save();
 
 		//"administrator" access by default to newly registered user
+			$admin->role()->attach(2);
+		}
 
-		$admin->role()->attach(2);
-
-		return redirect('/admin/login');
 	}
 
 	public function getLogin()
 	{
+		// redirecting the logged in user to dashboard page
+		if (auth()->guard('admin')->check()) {
+			
+			return redirect('/admin/dashboard');
+		}
+		// returning the logged in user to login page
 		return view('Backend.Admin.auth.login');
 	}
 
@@ -73,12 +88,20 @@ class AuthController extends Controller
 
 		if(auth()->guard('admin')->attempt($admin,$remember)){
 
-			// return redirect('/admin/dashboard');
-			return redirect()->intended('/admin/dashboard');
-		}
+			// return redirect()->intended('/admin/dashboard');
 
-		return Redirect::back()->withErrors(['msg'=>'The credentials doesn\'t match'])->withInput();
-		;
+			// successfully logged in
+
+			return 1;
+
+		}
+		else
+		{
+			// return Redirect::back()->withErrors(['msg'=>'The credentials doesn\'t match'])->withInput();
+
+			return 0;
+
+		}
 		
 	}
 

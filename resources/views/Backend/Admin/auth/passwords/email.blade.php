@@ -1,54 +1,41 @@
 @extends('Backend.Admin.layouts.app')
 
+@section('title')
+
+<title>Reset Password | offerbd</title>
+
+@stop
+
 @section('content')
 
-<div id="container">
+<div id="container" class="password_reset_email">
 
- @if ($errors->has('msg'))
+	<!-- successful registration message -->
+	<div class="alert alert-success send_email_div" style="display:none">
+		<strong class="se_successful"></strong>
+	</div>
+	<!-- end of message -->
 
- <div class="alert alert-danger">
+	<div class="sendEmailForm">
 
-     <strong>{{ $errors->first('msg') }}</strong>
+		{!! Form::open(['method' => 'POST', 'url' => '/admin/password/email' , 'name'=> 'sendEmailForm', 'data-remote' => 'data-remote', 'data-remote-success' => 'Email sent successfully']) !!}
 
- </div>
+		<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
 
- @endif
+			{!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Enter Email', 'required' => 'required']) !!}
+			<small class="text-danger req_email">{{ $errors->first('email') }}</small>
 
- @if (session('status'))
+		</div>
 
- <div class="alert alert-success">
+		<div id="lower">
 
-    {{ session('status') }}
+			{!! Form::submit('Send Link', ['class' => 'btn btn-info pull-right']) !!}
 
-</div>
+		</div>
 
-@endif
+		{!! Form::close() !!}
 
-{!! Form::open(['method' => 'POST', 'url' => '/admin/password/email' , 'name'=> 'password-reset']) !!}
-
-<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-
-    {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Enter Email']) !!}
-
-    @if ($errors->has('email'))
-
-    <span class="help-block">
-
-        <strong>{{ $errors->first('email') }}</strong>
-
-    </span>
-
-    @endif
-
-</div>
-
-<div id="lower">
-
-    {!! Form::submit('Send Password Reset Link', ['class' => 'btn btn-info pull-right']) !!}
-
-</div>
-
-{!! Form::close() !!}
+	</div>
 
 </div>
 

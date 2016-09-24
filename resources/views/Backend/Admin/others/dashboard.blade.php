@@ -1,4 +1,10 @@
-@extends('Backend.Admin.layouts.master') 
+@extends('Backend.Admin.layouts.master')
+
+@section('title')
+
+<title>Dashboard | offerbd</title>
+
+@stop 
 
 @section('sidebar')
 
@@ -28,7 +34,7 @@
 
     @foreach (auth()->guard('admin')->user()->role as $role)
 
-    	{{ $role->role_name }}/
+    {{ $role->role_name }}/
 
     @endforeach
 

@@ -1,4 +1,10 @@
-@extends('Backend.Adprovider.layouts.master') 
+@extends('Backend.Adprovider.layouts.master')
+
+@section('title')
+
+<title>Dashboard | offerbd</title>
+
+@stop  
 
 @section('sidebar')
 

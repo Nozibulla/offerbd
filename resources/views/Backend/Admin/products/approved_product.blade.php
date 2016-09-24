@@ -54,17 +54,17 @@
 				<tr>
 					<td>{{ $key+1 }}</td>
 					<td>
-						<a href="/admin/products/details/{{ $product->id }}" title="click to see the detail page" target="_blank">{{ $product->product_name }}</a>
+						<a href="{{ url('/admin/products/details', $product->id) }}" title="click to see the detail page" target="_blank">{{ $product->product_name }}</a>
 					</td>
 					<td class="remove_product">
-						<a href="#" title="click to delete" id="{{ $product->id }}">
+						<a href="{{ url('#') }}" title="click to delete" id="{{ $product->id }}">
 							<i class="glyphicon glyphicon-remove"></i>
 						</a>						
 					</td>
 					<td>
 						<!-- checking whether this is your addition or not -->
 						@if (is_null($product->profile->admin_id) && ($product->profile->admin_id != auth()->guard('admin')->user()->id))
-						<a href="/profile/members/{{ $product->profile->id }}">
+						<a href="{{ url('/profile/members', $product->profile->id) }}">
 							{{ $product->profile->first_name." ".$product->profile->last_name }}
 						</a>
 						@else
@@ -78,6 +78,8 @@
 
 			</tbody>
 		</table>
+
+		{!! $approved_products->links() !!}
 
 		@else
 

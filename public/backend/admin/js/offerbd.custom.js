@@ -66,12 +66,19 @@ $(document).ready(function(){
 
 });
 
-
+// starting the ajax request
 $( document ).ajaxStart(function(event, jqxhr, ajaxOptions, errorThrown) {
 
+	$(".overlay").show();
 });
 
+// end of ajax request
+$( document ).ajaxStop(function(event, jqxhr, ajaxOptions, errorThrown) {
 
+	$(".overlay").hide();
+});
+
+// global ajax success function
 $(document).ajaxSuccess(function(event, jqxhr, ajaxOptions, errorThrown){
 
 	var contentType   = jqxhr.getResponseHeader("Content-Type");
@@ -82,6 +89,7 @@ $(document).ajaxSuccess(function(event, jqxhr, ajaxOptions, errorThrown){
 
 });
 
+// global ajax error function
 $(document).ajaxError(function(event, jqxhr, ajaxOptions, errorThrown) {
 
 	var contentType   = jqxhr.getResponseHeader("Content-Type");
@@ -118,6 +126,17 @@ $(document).ready(function(){
 	$("#approveBrandModal, #removeBrandModal, #editBrandModal, #addBrandModal, #approveBranchModal, #removeBranchModal, #editBranchModal, #addBranchModal, #approveCategoryModal, #removeCategoryModal, #editCategoryModal, #addCategoryModal, #approveAdminModal, #removeAdminModal, #changePrivilegeModal, #approveProductModal, #removeProductModal, #editProductModal, #approveAdvertisementModal, #removeAdvertisementModal, #editAdvertisementModal, #addAdvertisementModal").modal({
 
 		show: false,
+
+		backdrop: 'static',
+
+		keyboard: false
+
+	});
+
+	// showing the set profile warning modal
+	$("#setProfile").modal({
+
+		show: true,
 
 		backdrop: 'static',
 
@@ -190,8 +209,6 @@ $(document).ready(function(){
 				url : formData.url,
 
 				data: formData.data,
-
-				//dataType: 'json',
 
 			})
 			.success(function(msg){
@@ -1999,6 +2016,542 @@ $(document).ready(function(){
 	$(function(){
 
 		productManager.init();
+
+	});
+
+})(jQuery);
+
+// creating advertisement manager
+(function($){
+
+	var adviertisementManager = {
+
+		init: function(){
+
+			var form,url,method,data,message,currentPageUrl,formData,errors,advertisement,advertisement_id;
+
+			// showing the discount type
+			$(".post_advertisement").on('change','.addAdvertisementForm #discount_type',this.showSpecificDiscount);
+
+			// showing the div for different free things
+			$(".post_advertisement").on('change','.addAdvertisementForm .x_buy_y_free input[type=radio]',this.showDifferentFreeProductArea);
+
+			// posting new advertisement
+			$(".post_advertisement").on('submit','.addAdvertisementForm form[data-remote]',this.postAdvertisement);
+
+			// approve pending advertisement
+			$(".pending_advertisements").on('click','.advertisements_table .approve_advertisement a',this.showApproveAdvertisementModal);
+			$(".pending_advertisements").on('click','#approveAdvertisementModal #approveAdvertisementYes',this.approveAdvertisement);
+
+			// delete pending advertisement
+			$(".pending_advertisements").on('click','.advertisements_table .remove_advertisement a',this.showRemoveAdvertisementModal);
+			$(".pending_advertisements").on('click','#removeAdvertisementModal #removeAdvertisementYes',this.removeAdvertisement);
+
+			// deleting the approved product
+			$(".approved_advertisements").on('click','.advertisements_table .remove_advertisement a',this.showRemoveApprovedAdvertisementModal);
+			$(".approved_advertisements").on('click','#removeAdvertisementModal #removeAdvertisementYes',this.removeAdvertisement);
+			// deleting approved product from the product detail page
+			$(".advertisement_detail").on('click','#removeAdvertisementModal #removeAdvertisementYes',this.removeApprovedAdvertisementFromDetail);
+
+			// approving a product from the product detail page
+			$(".advertisement_detail").on('click','#approveAdvertisementModal #approveAdvertisementYes',this.approveAdvertisementFromDetail);
+			// save Advertisement after editing
+			$(".advertisement_detail").on('submit','#editAdvertisementModal form[data-remote]',this.saveAdvertisementAfterEdit);
+
+
+		},
+
+		// showing specific discount
+		showSpecificDiscount: function(){
+
+			var selected_discount_type = $(this).val();
+
+
+
+			if (selected_discount_type) {
+
+				// finding all the div having class 'common' in the discount_area div & adding the 'hide' class to all div
+				var all_div_in_discount_area = $(".discount_area").find(".common");
+
+				all_div_in_discount_area.each(function(index, element){
+
+					$(element).addClass('hide');
+
+				});
+			// end of 'hide' class addition
+
+			// removing the 'hide' class for the selected category
+			$("." + selected_discount_type).removeClass('hide');
+		}
+		else{
+
+			// finding all the div having class 'common' in the discount_area div & adding the 'hide' class to all div
+			var all_div_in_discount_area = $(".discount_area").find(".common").not(".free_different");
+
+			all_div_in_discount_area.each(function(index, element){
+
+				$(element).addClass('hide');
+
+			});
+			// end of 'hide' class addition
+
+		}
+
+	},
+
+		// showing the div for different free things
+		showDifferentFreeProductArea: function(){
+
+			var selected_free_product_type = $("input[name='free_product_type']:checked").val();
+
+			// alert(selected_free_product_type);
+			// checking the radio button selection
+			if (selected_free_product_type == "free_different") {
+
+				$('.free_different').removeClass('hide');
+
+			} else {
+
+				$('.free_different').addClass('hide');
+			}
+
+		},
+
+		// posting new advertisement
+		postAdvertisement: function(event){
+
+			event.preventDefault();
+
+			$('small').html("");
+
+			$('.addAdvertisementForm div').removeClass('has-error');
+
+			$('.addAdvertisementForm').nextAll('small').removeClass('has-error');
+
+			form = $(this);
+
+			method = form.find('input[name="_method"]').val() || 'POST';
+
+			url = form.prop('action');
+
+			formData = new FormData(this);
+			
+			$.ajax({
+
+				type : method,
+
+				url  : url,
+
+				contentType: false,
+
+				processData: false,
+
+				data : formData,
+
+			})
+			.success(function(){
+
+				form.trigger('reset');
+
+				message = form.data('remote-success');
+
+				$('.bb-alert').find('span').html(message);
+
+				$('.bb-alert').show().delay(3000).fadeOut();
+
+
+			})
+			.error(function(jqXHR){
+
+				if (jqXHR.status == 422) {
+
+					errors = jqXHR.responseJSON;
+
+					if (errors.ad_image) {
+						$(".ad_image").html(errors.ad_image).parent("div").addClass('has-error');
+					}
+					if (errors.brand_id) {
+						$(".brand_id").html(errors.brand_id).parent("div").addClass('has-error');
+					}
+					if (errors.branch_id) {
+						$(".branch_id").html(errors.branch_id).parent("div").addClass('has-error');
+					}
+					if (errors.product_id) {
+						$(".product_id").html(errors.product_id).parent("div").addClass('has-error');
+					}
+					if (errors.discount_type) {
+						$(".discount_type").html(errors.discount_type).parent("div").addClass('has-error');
+					}
+					if (errors.actual_price) {
+						$(".actual_price").html(errors.actual_price).parent("div").addClass('has-error');
+					}
+					if (errors.expire_date) {
+						$(".expire_date").html(errors.expire_date).parent("div").addClass('has-error');
+					}
+
+				}
+				else{
+
+					$('.bb-alert').show().delay(3000).fadeOut();
+
+				}
+
+			});
+
+		},
+
+		// approving a pending advertisement
+		showApproveAdvertisementModal : function(event){
+
+			event.preventDefault();
+
+			advertisement = $(this);
+
+			advertisement_id = (this.id);
+
+			$("#approveAdvertisementModal").modal('show');
+
+			// adding the advertisement id to the modal hidden input field 
+			$("#approveAdvertisementModal #advertisement_id").val(advertisement_id);
+
+		},
+
+		approveAdvertisement : function(){
+
+			advertisement_id = $("#advertisement_id").val();
+
+			$("#approveAdvertisementModal").modal('hide');
+
+			$.ajax({
+
+				type : "POST",
+
+				url : "/approveadvertisement",
+
+				data : {advertisement_id:advertisement_id},
+
+				headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+
+			})
+			.success(function(jqXHR){
+
+				$('.bb-alert').find('span').html("Advertisement Approved Successfully");
+
+				$('.bb-alert').show().delay(3000).fadeOut();
+
+				currentPageUrl = window.location.href;
+
+				$('.advertisements_table').load(currentPageUrl+' .advertisements_table');
+
+			})
+			.error(function(jqXHR){
+
+			});		
+
+		},
+
+		// removing a pending product modal
+		showRemoveAdvertisementModal : function(event){
+
+			event.preventDefault();
+
+			advertisement = $(this);
+
+			advertisement_id = (this.id);
+
+			$("#removeAdvertisementModal").modal('show');
+
+			// adding the advertisement id to the modal hidden input field 
+			$("#removeAdvertisementModal #advertisement_id").val(advertisement_id);
+
+		},
+
+		// removing a pending advertisement
+		removeAdvertisement : function(){
+
+			advertisement_id = $("#removeAdvertisementModal #advertisement_id").val();
+
+			$("#removeAdvertisementModal").modal('hide');
+
+			$.ajax({
+
+				type : "POST",
+
+				url : "/removeadvertisement",
+
+				data : {advertisement_id:advertisement_id},
+
+				headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+
+			})
+			.success(function(jqXHR){
+
+				$('.bb-alert').find('span').html("Advertisement Removed Successfully");
+
+				$('.bb-alert').show().delay(3000).fadeOut();
+
+				currentPageUrl = window.location.href;
+
+				$('.advertisements_table').load(currentPageUrl+' .advertisements_table');
+
+			})
+			.error(function(jqXHR){
+
+			});		
+
+		},
+
+		// removing a advertisement modal
+		showRemoveApprovedAdvertisementModal : function(event){
+
+			event.preventDefault();
+
+			advertisement = $(this);
+
+			advertisement_id = (this.id);
+
+			$("#removeAdvertisementModal").modal('show');
+
+			// adding the advertisement id to the modal hidden input field 
+			$("#advertisement_id").val(advertisement_id);
+
+		},
+
+		// approving a advertisement from the advertisement detail page
+		approveAdvertisementFromDetail : function(){
+
+			advertisement_id = $("#advertisement_id").val();
+
+			$("#approveAdvertisementModal").modal('hide');
+
+			$.ajax({
+
+				type : "POST",
+
+				url : "/approveadvertisement",
+
+				data : {advertisement_id:advertisement_id},
+
+				headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+
+			})
+			.success(function(jqXHR){
+
+				$('.bb-alert').find('span').html("Advertisement Approved Successfully");
+
+				$('.bb-alert').show().delay(3000).fadeOut();
+
+				currentPageUrl = window.location.href;
+
+				$('.advertisement_detail').load(currentPageUrl+' .single_advertisement');
+
+			})
+			.error(function(jqXHR){
+
+			});		
+
+		},
+
+		// deleting a advertisement from the advertisement detail page
+		removeApprovedAdvertisementFromDetail : function(){
+
+			advertisement_id = $("#advertisement_id").val();
+
+			$("#removeProductModal").modal('hide');
+
+			$.ajax({
+
+				type : "POST",
+
+				url : "/removeadvertisement",
+
+				data : {advertisement_id:advertisement_id},
+
+				headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+
+			})
+			.success(function(jqXHR){
+
+				$('.bb-alert').find('span').html("Advertisement Removed Successfully");
+
+				$('.bb-alert').show().delay(3000).fadeOut();
+
+				currentPageUrl = window.location.href;
+
+				document.location.href = "/admin/advertisements/approved-ad";
+
+			})
+			.error(function(jqXHR){
+
+			});		
+
+		},
+
+		// saving Advertisement after editing
+		saveAdvertisementAfterEdit : function(event){
+
+			event.preventDefault();
+
+			$('small').html("");
+
+			$('#editAdvertisementModal div').removeClass('has-error');
+
+			$('#editAdvertisementModal').nextAll('small').removeClass('has-error');
+
+			form = $(this);
+
+			method = form.find('input[name="_method"]').val() || 'POST';
+
+			url = form.prop('action');
+
+			formData = new FormData(this);
+			
+			$.ajax({
+
+				type : method,
+
+				url  : url,
+
+				contentType: false,
+
+				processData: false,
+
+				data : formData,
+
+			})
+			.success(function(){
+
+				form.trigger('reset');
+
+				$("#editAdvertisementModal").modal('hide');				
+
+				message = form.data('remote-success');
+
+				$('.bb-alert').find('span').html(message);
+
+				$('.bb-alert').show().delay(3000).fadeOut();
+
+				currentPageUrl = window.location.href;
+
+				$('.advertisement_detail').load(currentPageUrl+' .single_advertisement');
+			})
+			.error(function(jqXHR){
+
+				if (jqXHR.status == 422) {
+
+					errors = jqXHR.responseJSON;
+
+					if (errors.ad_image) {
+						$(".ad_image").html(errors.ad_image).parent("div").addClass('has-error');
+					}
+					if (errors.brand_id) {
+						$(".brand_id").html(errors.brand_id).parent("div").addClass('has-error');
+					}
+					if (errors.branch_id) {
+						$(".branch_id").html(errors.branch_id).parent("div").addClass('has-error');
+					}
+					if (errors.product_id) {
+						$(".product_id").html(errors.product_id).parent("div").addClass('has-error');
+					}
+					if (errors.discount) {
+						$(".discount").html(errors.discount).parent("div").addClass('has-error');
+					}
+					if (errors.actual_price) {
+						$(".actual_price").html(errors.actual_price).parent("div").addClass('has-error');
+					}
+					if (errors.expire_date) {
+						$(".expire_date").html(errors.expire_date).parent("div").addClass('has-error');
+					}
+
+				}
+				else{
+
+					$('.bb-alert').show().delay(3000).fadeOut();
+
+				}
+
+			});
+
+		},
+
+	};
+
+	$(function(){
+
+		adviertisementManager.init();
+	});
+
+})(jQuery);
+
+// profile manager
+(function($){
+
+	var profileManager = {
+
+		init: function(){
+
+			var form,url,method,data,message,currentPageUrl,formData,errors;
+
+			// saving the profile picture of admin/owner
+			$(".profile").on('submit','.profile_right form[data-remote]',this.saveProfilePicture);
+
+		},
+
+		// saving the profile picture
+		saveProfilePicture: function(event){
+
+			event.preventDefault();
+
+			form = $(this);
+
+			method = form.find('input[name="_method"]').val() || 'POST';
+
+			url = form.prop('action');
+
+			formData = new FormData(this);
+			
+			$.ajax({
+
+				type : method,
+
+				url  : url,
+
+				contentType: false,
+
+				processData: false,
+
+				data : formData,
+
+			})
+			.success(function(){
+
+				form.trigger('reset');
+
+				message = form.data('remote-success');
+
+				$('.bb-alert').find('span').html(message);
+
+				$('.bb-alert').show().delay(3000).fadeOut();
+
+				currentPageUrl = window.location.href;
+
+				$('.profile_right').load(currentPageUrl+' .profile_image');
+
+
+			})
+			.error(function(jqXHR){
+
+				alert("error");
+
+			});
+
+		},
+
+	};
+
+	$(function(){
+
+		profileManager.init();
 
 	});
 

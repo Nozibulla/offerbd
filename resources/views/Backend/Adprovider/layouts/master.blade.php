@@ -29,13 +29,13 @@
     <script src="{{ asset('shared/js/bootstrap.min.js') }}"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="{{ asset('backend/admin/js/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('backend/adprovider/js/metisMenu.min.js') }}"></script>
 
     <!-- inline editing -->
     <script src="{{ asset('shared/inline-edit/js/bootstrap-editable.js') }}" type="text/javascript"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="{{ asset('backend/admin/js/custom.js') }}"></script>
+    <script src="{{ asset('backend/adprovider/js/custom.js') }}"></script>
 
     <script src="{{ asset('backend/adprovider/js/offerbd.custom.js') }}"></script>
 
@@ -69,8 +69,26 @@
     <body>
 
         <div id="wrapper">
+            <!-- finding the logged in adprovider profile -->
+            @define $adprovider_profile = auth()->guard('adProvider')->user()->profile
 
-        @include('Shared._partials.flash')
+            <!-- checking the admin has set the profile info -->
+            @if((empty($adprovider_profile->first_name) || empty($adprovider_profile->last_name)) && (Request::path() != 'adprovider/profile/show' && Request::path() != 'adprovider/profile/setting'))
+
+            @include('Backend.modals.set_adprovider_profile_warning')
+
+            @endif
+            <!-- end of admin profile info checking -->
+            
+            <!-- adding flash message -->
+            @include('Shared._partials.flash')
+            <!-- end of flash message -->
+
+            <!-- showing the ajax loader -->
+            <div class="overlay" style="display: none">
+                <img src="{{ asset('images/offerbd.gif') }}" class="img-responsive" alt="offerbd loader">
+            </div>
+            <!-- end of ajax loader -->
 
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -89,7 +107,11 @@
 
                     </button>
 
-                    <a class="navbar-brand" href="index.html">{{ auth()->guard('adProvider')->user()->email }} | offerBD</a>
+                    <a class="navbar-brand" href="{{ url('/adprovider/dashboard') }}">
+                        <!-- set Mr X as default name if no name is found -->
+                        {{ ($adprovider_profile->first_name && $adprovider_profile->last_name) ? $adprovider_profile->first_name." ". $adprovider_profile->last_name : "Mr. X" }} | offerBD
+                        <!-- default name set complete -->
+                    </a>
 
                 </div>
                 <!-- /.navbar-header -->
@@ -110,7 +132,7 @@
 
                             <li>
 
-                                <a href="#">
+                                <a href="{{ url('#') }}">
 
                                     <div>
 
@@ -152,7 +174,7 @@
 
                             <li>
 
-                                <a href="#">
+                                <a href="{{ url('#') }}">
 
                                     <div>
 
@@ -184,7 +206,7 @@
 
                             <li>
 
-                                <a class="text-center" href="#">
+                                <a class="text-center" href="{{ url('#') }}">
 
                                     <strong>See All Tasks</strong>
 
@@ -202,7 +224,7 @@
 
                     <li class="dropdown">
 
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url('#') }}">
 
                             <i class="fa fa-bell fa-fw"></i>
 
@@ -214,7 +236,7 @@
 
                             <li>
 
-                                <a href="#">
+                                <a href="{{ url('#') }}">
 
                                     <div>
 
@@ -234,7 +256,7 @@
 
                             <li>
 
-                                <a class="text-center" href="#">
+                                <a class="text-center" href="{{ url('#') }}">
 
                                     <strong>See All Alerts</strong>
 
@@ -254,7 +276,7 @@
 
                     <li class="dropdown">
 
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url('#') }}">
 
                             <i class="fa fa-user fa-fw"></i>  
 
@@ -276,7 +298,7 @@
 
                             <li>
 
-                                <a href="/adprovider/profile">
+                                <a href="{{ url('/adprovider/profile/show') }}">
 
                                     <i class="fa fa-user fa-fw"></i> 
 
@@ -288,7 +310,7 @@
 
                             <li>
 
-                                <a href="/adprovider/settings">
+                                <a href="{{ url('/adprovider/profile/setting') }}">
 
                                     <i class="fa fa-gear fa-fw"></i> 
 
@@ -302,7 +324,7 @@
                             
                             <li>
 
-                                <a href="/adprovider/logout">
+                                <a href="{{ url('/adprovider/logout') }}">
 
                                     <i class="fa fa-sign-out fa-fw"></i> 
 

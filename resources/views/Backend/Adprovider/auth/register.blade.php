@@ -1,78 +1,49 @@
 @extends('Backend.Adprovider.layouts.app')
 
+@section('title')
+
+<title>Registration | offerbd</title>
+
+@stop
+
 @section('content')
 
-<div id="container">
+<div id="container" class="adprovider_registration">
 
- @if ($errors->has('msg'))
-
- <div class="alert alert-danger"><strong>{{ $errors->first('msg') }}</strong></div>
-
- @endif
-
- {!! Form::open(['method' => 'POST', 'url' => '/adprovider/registration' , 'name'=> 'registration']) !!}
-
- <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-
-    {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Enter Email']) !!}
-
-    @if ($errors->has('email'))
-
-    <span class="help-block">
-
-        <strong>{{ $errors->first('email') }}</strong>
-
-    </span>
-
-    @endif
-
+ <!-- successful registration message -->
+ <div class="alert alert-success rs_div" style="display:none">
+   <strong class="reg_successful"></strong>
 </div>
+<!-- end of message -->
 
-<div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+<div class="registrationForm">
 
-    {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password','required']) !!}
+    {!! Form::open(['method' => 'POST', 'url' => '/adprovider/registration' , 'name'=> 'registrationForm', 'data-remote' => 'data-remote', 'data-remote-success' => 'Please confirm your mail to complete the registration.']) !!}
 
-    @if ($errors->has('password'))
+    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+       {!! Form::email('email', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Enter Email']) !!}
+       <small class="text-danger req_email">{{ $errors->first('email') }}</small>
+   </div>
 
-    <span class="help-block">
+   <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+       {!! Form::password('password', ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Password']) !!}
+       <small class="text-danger req_password">{{ $errors->first('password') }}</small>
+   </div>
 
-        <strong>{{ $errors->first('password') }}</strong>
-
-    </span>
-
-    @endif
-
-</div>
-
-<div class="form-group{{ $errors->has('confirm_password') ? ' has-error' : '' }}">
-
-    {!! Form::password('confirm_password', ['class' => 'form-control', 'placeholder' => 'Confirm Password','required']) !!}
-
-    @if ($errors->has('confirm_password'))
-
-    <span class="help-block">
-
-        <strong>{{ $errors->first('confirm_password') }}</strong>
-
-    </span>
-
-    @endif
-
+   <div class="form-group{{ $errors->has('confirm_password') ? ' has-error' : '' }}">
+    {!! Form::password('confirm_password', ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Confirm Password']) !!}
+    <small class="text-danger req_confirm_password">{{ $errors->first('confirm_password') }}</small>
 </div>
 
 <div id="lower">
-
-    {!! Form::submit('Sign Up', ['class' => 'btn btn-info pull-right','ng-disabled'=>'registration.$invalid']) !!}
-
+    {!! Form::submit('Sign Up', ['class' => 'btn btn-info pull-right']) !!}
 </div>
 
 {!! Form::close() !!}
 
-<p class="registration">
+</div>
 
-    <a href="/adprovider/login">Login</a>
-
-</p>
+<p class="registration"><a href="{{ url('/adprovider/login') }}">Login</a></p>
 
 </div>
 

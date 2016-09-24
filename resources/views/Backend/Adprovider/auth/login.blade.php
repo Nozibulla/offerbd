@@ -1,70 +1,56 @@
 @extends('Backend.Adprovider.layouts.app')
 
+@section('title')
+
+<title>Login | offerbd</title>
+
+@stop
+
 @section('content')
 
-<div id="container">
+<div id="container" class="adprovider_login">
 
-   @if ($errors->has('msg'))
+ <!-- displaying the credentials doesn't match error -->
+ <div class="alert alert-danger error_div" style="display:none">
+     <strong class="match_error"></strong>
+ </div>
+ <!-- end of matching error -->
+ <!-- successful login message -->
+ <div class="alert alert-success ls_div" style="display:none">
+     <strong class="login_successful"></strong>
+ </div>
+<!-- end of success message -->
+ <div class="loginForm">
 
-   <div class="alert alert-danger"><strong>{{ $errors->first('msg') }}</strong></div>
-
-   @endif
-
-   {!! Form::open(['method' => 'POST', 'url' => '/adprovider/login' , 'name'=> 'login']) !!}
+ {!! Form::open(['method' => 'POST', 'url' => '/adprovider/login' , 'name'=> 'loginForm', 'data-remote' => 'data-remote', 'data-remote-success' => 'Successfully logged in']) !!}
 
    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+       {!! Form::email('email', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Enter Email']) !!}
+       <small class="text-danger req_email">{{ $errors->first('email') }}</small>
+   </div>
 
-    {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Enter Email']) !!}
+   <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+       {!! Form::password('password', ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Password']) !!}
+       <small class="text-danger req_password">{{ $errors->first('password') }}</small>
+   </div>
 
-    @if ($errors->has('email'))
+   <p><a href="{{ url('/adprovider/password/email') }}">Forgot your password?</a></p>
 
-    <span class="help-block">
+   <div id="lower">
 
-        <strong>{{ $errors->first('email') }}</strong>
+       <input type="checkbox" name="remember"/>
 
-    </span>
+       <label class="check">Keep me logged in</label>
 
-    @endif
+       {!! Form::submit('Sign In', ['class' => 'btn btn-info pull-right']) !!}
 
-</div>
+   </div>
 
-<div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-
-    {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password','required']) !!}
-
-    @if ($errors->has('password'))
-
-    <span class="help-block">
-
-        <strong>{{ $errors->first('password') }}</strong>
-
-    </span>
-
-    @endif
+   {!! Form::close() !!}
 
 </div>
 
-<p><a href="#">Forgot your password?</a>
-
-    <div id="lower">
-
-        <input type="checkbox" name="remember">
-
-        <label class="check" for="remember">Keep me logged in</label>
-
-        <!-- <i class="fa fa-btn fa-sign-in"></i> -->
-
-        {!! Form::submit('Sign In', ['class' => 'btn btn-info pull-right']) !!}
-
-    </div>
-
-    {!! Form::close() !!}
-
-    <p class="registration">
-
-        <a href="/adprovider/registration">Registration</a>
-
-    </p>
+<p class="registration"><a href="{{ url('/adprovider/registration') }}">Registration</a></p>
 
 </div>
 

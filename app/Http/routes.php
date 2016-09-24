@@ -32,6 +32,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::pattern('branch_id', '[0-9]+');
 	Route::pattern('category_id', '[0-9]+');
 	Route::pattern('advertisement_id', '[0-9]+');
+	Route::pattern('adprovider_id', '[0-9]+');
 
 	//login options
 	Route::get('/admin/login','Backend\Admin\AuthController@getLogin');
@@ -45,14 +46,24 @@ Route::group(['middleware' => 'admin'], function () {
 	//logout options
 	Route::get('/admin/logout','Backend\Admin\AuthController@getLogout');
 
+	// password resets
+	Route::get('/admin/password/email', 'Backend\Admin\PasswordController@getEmail');
+	Route::post('/admin/password/email', 'Backend\Admin\PasswordController@postEmail');
+	// Password reset routes...
+	Route::get('/admin/password/reset/{token}', 'Backend\Admin\PasswordController@getReset');
+	Route::post('/admin/password/reset', 'Backend\Admin\PasswordController@postReset');
+
 	// dashboard options
 	Route::get('/admin/dashboard','Backend\Admin\DashboardController@showDashboard');
 
-	//admin profile options
-	Route::get('/admin/profile','Backend\Admin\ProfileController@showProfile');
+	// admin profile options
+	Route::get('/admin/profile/show','Backend\Admin\ProfileController@showProfile');
 
 	//updating info
 	Route::post('/saveprofileinfo','Backend\Admin\ProfileController@updateProfileInfo');
+	Route::get('/admin/profile/setting', 'Backend\Admin\ProfileController@profileSetting');
+	// saving admin profile picture
+	Route::post('/admin/saveimage','Backend\Admin\ProfileController@setProfilePicture');
 
 	// admin menu items (only accessed by "owner")
 	Route::get('/admin/approved-admin','Backend\Admin\AdminController@approvedAdminList');
@@ -146,8 +157,13 @@ Route::group(['middleware' => 'admin'], function () {
 	// save advertisement after editing
 	Route::post('/saveeditedadvertisement','Backend\Admin\AdvertisementController@saveEditedAdvertisement');
 
+	// see all the adproviders from admin panel
+	Route::get('/admin/adproviders/list', 'Backend\Admin\DashboardController@adproviderList');
+	Route::get('/admin/adprovider-list/details/{adprovider_id}', 'Backend\Admin\DashboardController@showAdproviderDetail');
+
 	// subscriptions list
 	Route::get('/admin/subscriptions/list', 'Backend\Admin\SubscriptionController@subscriptionList');
+
 });
 
 
@@ -156,18 +172,43 @@ Route::group(['middleware' => 'admin'], function () {
  */
 Route::group(['middleware' => 'adProvider'], function () {
 
-	Route::get('/adprovider/login','Backend\Adprovider\AuthController@getLogin');
-	Route::post('/adprovider/login','Backend\Adprovider\AuthController@postLogin');
-	Route::get('/adprovider/registration','Backend\Adprovider\AuthController@getRegister');
-	Route::post('/adprovider/registration','Backend\Adprovider\AuthController@postRegister');
-	Route::get('/adprovider/logout','Backend\Adprovider\AuthController@getLogout');
+
+	//creating a pattern for id (integer type)
+	Route::pattern('id', '[0-9]+');
+	Route::pattern('adprovider_id', '[0-9]+');
+	Route::pattern('brand_id', '[0-9]+');
+	Route::pattern('profile_id', '[0-9]+');
+	Route::pattern('branch_id', '[0-9]+');
+	Route::pattern('category_id', '[0-9]+');
+	Route::pattern('advertisement_id', '[0-9]+');
+
+	Route::get('/adprovider/login','Backend\adprovider\AuthController@getLogin');
+	Route::post('/adprovider/login','Backend\adprovider\AuthController@postLogin');
+	Route::get('/adprovider/registration','Backend\adprovider\AuthController@getRegister');
+	Route::post('/adprovider/registration','Backend\adprovider\AuthController@postRegister');
+
+	// registration confirm through email verification
+	Route::get('/adprovider/registration/confirm/{token}/{email}', 'Backend\Adprovider\AuthController@confirmRegistration'); 
+	Route::get('/adprovider/logout','Backend\adprovider\AuthController@getLogout');
+
+	// password resets
+	Route::get('/adprovider/password/email', 'Backend\Adprovider\PasswordController@getEmail');
+	Route::post('/adprovider/password/email', 'Backend\Adprovider\PasswordController@postEmail');
+	// Password reset routes...
+	Route::get('/adprovider/password/reset/{token}/{link_email}', 'Backend\Adprovider\PasswordController@getReset');
+	Route::post('/adprovider/password/reset', 'Backend\Adprovider\PasswordController@postReset');
 
 	Route::get('/adprovider/dashboard','Backend\Adprovider\DashboardController@showDashboard');
 
-	Route::get('/adprovider/profile', 'Backend\Adprovider\ProfileController@showProfile');
+	Route::get('/adprovider/profile/show', 'Backend\Adprovider\ProfileController@showProfile');
+	Route::get('/adprovider/profile/setting', 'Backend\Adprovider\ProfileController@profileSetting');
 
 	//updating info
 	Route::post('/SAdPI','Backend\Adprovider\ProfileController@updateProfileInfo');
+
+	// saving adprovider profile picture
+	Route::post('/adprovider/saveimage','Backend\Adprovider\ProfileController@setProfilePicture');
+
 
 	// brands options
 	Route::get('/adprovider/brands/add-brand', 'Backend\Adprovider\APBrandController@addBrand');
@@ -213,6 +254,10 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::get('/','Frontend\DashboardController@index');
 
+<<<<<<< HEAD
 });
 
 // $profile_id = auth()->guard('admin')->user()->profile->id;
+=======
+});
+>>>>>>> 556aa54e3d3d78179e38902b6eb7539bb728f1e2

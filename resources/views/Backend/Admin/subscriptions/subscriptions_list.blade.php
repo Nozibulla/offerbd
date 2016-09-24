@@ -1,5 +1,11 @@
 @extends('Backend.Admin.layouts.master')
 
+@section('title')
+
+<title>Subscribers | offerbd</title>
+
+@stop
+
 @section('sidebar')
 
 @include ('Backend.Admin.layouts.sidebar')
@@ -46,8 +52,8 @@
 					<tr>
 						<td>{{ $key+1 }}</td>
 						<td> {{ $subscriber->mobile_no }} </td>
-						<td> <a href="#" title="click to edit" id=" {{ $subscriber->id }} ">Edit</a> </td>
-						<td> <a href="#" title="click to delete" id=" {{ $subscriber->id }} ">Delete</a> </td>
+						<td> <a href="{{ url('#') }}" title="click to edit" id=" {{ $subscriber->id }} ">Edit</a> </td>
+						<td> <a href="{{ url('#') }}" title="click to delete" id=" {{ $subscriber->id }} ">Delete</a> </td>
 					</tr>
 
 				@endforeach

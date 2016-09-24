@@ -29,4 +29,16 @@ class AdminLoginRequest extends Request
             'password'=>'required|min:3'
         ];
     }
+
+    // custom messages
+    public function messages()
+    {
+        return [
+
+            'email.required' => 'Email is required',
+            'email.email' => 'Enter a valid email.',
+            'password.required' => 'Password is required.',
+            // 'password.min:3' => 'Password is too short.',
+        ];
+    }
 }

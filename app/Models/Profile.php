@@ -60,6 +60,12 @@ class Profile extends Model
 		return $this->hasMany('App\Models\Advertisement');
 	}
 
+	// membership table
+	public function membership()
+	{
+		return $this->belongsTo('App\Models\Membership');
+	}
+
 	// relationship with adprovider
 	public function adprovider()
 	{

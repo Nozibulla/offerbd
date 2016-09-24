@@ -22,7 +22,7 @@ class CategoryController extends Controller
     // adding a new category page
     public function addNewCategory()
     {
-    	$categorys = Category::get();
+    	$categorys = Category::paginate(10);
 
     	return view('Backend.Admin.category.add_category',compact('categorys'));
     }
@@ -37,6 +37,8 @@ class CategoryController extends Controller
     	$category->category_name = $request->category_name;
 
     	$category->profile_id = $profile_id;
+
+        $category->status = 1;
 
     	$category->save();
     }
